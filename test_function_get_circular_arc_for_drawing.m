@@ -12,7 +12,8 @@ r=5
 theta_for_arc=90;
 line_thickness=4;
 
-get_circular_arc_for_drawing( x_bot,y_bot,dir_bot,       r, theta_for_arc, line_thickness,     board )
+board=get_circular_arc_for_drawing( x_bot,y_bot,dir_bot,       r, theta_for_arc, line_thickness,     board );
+flipud(board); %flip board so it corresponds with cartesian coordinates
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 % board=zeros(20);
