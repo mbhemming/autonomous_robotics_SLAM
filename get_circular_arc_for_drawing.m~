@@ -1,4 +1,4 @@
-function [ output_args ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness, board )
+function [ board ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness, board )
 %GET_CIRCULAR_ARC_FOR_DRAWING Summary of this function goes here
 %   Detailed explanation goes here
 %theta_sweep is the total sweep angle for the sensor between the most
@@ -23,11 +23,17 @@ if mod(line_thickness,2) ~= 0
 end
 
 
+
 lower_theta=dir-theta_for_arc/2;
 dummy=9999;
 x_curr=dummy;
 y_curr=dummy;
+%ii=1;
 for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each angle
+    
+    %log(ii)=curr_theta;
+    %ii=ii+1;
+    
     lower_radius=int32(r-radius_res*line_thickness/2);
     upper_radius=int32(r+radius_res*line_thickness/2);
     for curr_radius=lower_radius:line_thickness:upper_radius
@@ -39,13 +45,17 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
         x_of_the_hit_square=int32(x_curr);
         y_of_the_hit_square=int32(y_curr);
         
-        board_size=size(board);
-        if  ( x_curr > board_size(1,2) )   |     ( y_curr > board_size(1,2)
+        if(  is_point_outside_the_board( board, x_of_the_hit_square, y_of_the_hit_square )==1 )
+            %do nothing
+        else
+            %update grid
+            board(x_of_the_hit_square,y_of_the_hit_square)=1;
             
         end
         
-        %update grid
-        board(x_of_the_hit_square,y_of_the_hit_square)=1;
+        
     end
 end
+
+last=1;
 

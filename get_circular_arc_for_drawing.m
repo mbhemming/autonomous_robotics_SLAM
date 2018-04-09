@@ -23,17 +23,23 @@ if mod(line_thickness,2) ~= 0
 end
 
 
+
 lower_theta=dir-theta_for_arc/2;
 dummy=9999;
 x_curr=dummy;
 y_curr=dummy;
+%ii=1;
 for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each angle
+    
+    %log(ii)=curr_theta;
+    %ii=ii+1;
+    
     lower_radius=int32(r-radius_res*line_thickness/2);
     upper_radius=int32(r+radius_res*line_thickness/2);
     for curr_radius=lower_radius:line_thickness:upper_radius
         %get the point on the arc
-        x_curr=x+curr_radius*cos(to_degrees(  double(curr_theta)  ));    %must convert theta to a double to avoid an error
-        y_curr=y+curr_radius*sin(to_degrees(     double(curr_theta)       ));
+        x_curr=x+curr_radius*cos(to_radians(double(curr_theta) ) );    %must convert theta to a double to avoid an error
+        y_curr=y+curr_radius*sin(to_radians(double(curr_theta)    )   );
         
         %find what square to declare is on the arc
         x_of_the_hit_square=int32(x_curr);
@@ -44,9 +50,12 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
         else
             %update grid
             board(x_of_the_hit_square,y_of_the_hit_square)=1;
+            
         end
         
         
     end
 end
+
+last=1;
 
