@@ -36,21 +36,18 @@ while 1==1
         sensor_readings(i)=readDistance(mysonicsensor);
     end
     
-    radii=[dummy]; 
     %scotts code to get set of radii
     
     %break_point=dummy_value;  %set breakpoint here and manually type in the robots state
-    breakpoint=1;
     
     %x_bot=10;
     %y_bot=10;
     %dir_bot=45;
     for i=1:num_radii
-        radius=radii(i);
-        board=get_circular_arc_for_drawing( x_bot,y_bot,dir_bot,       radius, arc_theta, thickness_of_arc_to_draw,     board );
+        radiu=radii(i);
+        board=get_circular_arc_for_drawing( x_bot,y_bot,dir_bot,       r, theta_for_arc, line_thickness,     board );
     end
 
-    %breakpoint: look at board at this point
-    breakpoint=1;
+
     
 end
