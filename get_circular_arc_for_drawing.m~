@@ -18,7 +18,7 @@ radius_res=0.01;  %used to draw points for the thickness of the bands
 %x= int32(x);
 %y= int32(y);
 
-[n_squares_on_y_in_board,n_squares_on_x_in_board] = size(board);
+[n_board
 
 if mod(line_thickness,2) ~= 0
    error('choose a thickness that is divisible by 2 to avoid error'); 
@@ -44,14 +44,14 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
         y_curr=y+curr_radius*sin(to_radians(double(curr_theta)    )   );
         
         %find what square to declare is on the arc
-        x_of_the_hit_square=int32(x_curr*n_squares_on_x_in_board);
-        y_of_the_hit_square=int32(y_curr*n_squares_on_y_in_board);
+        x_of_the_hit_square=int32(x_curr*);
+        y_of_the_hit_square=int32(y_curr);
         
         if(  is_point_outside_the_board( board, x_of_the_hit_square, y_of_the_hit_square )==1 )
             %do nothing
         else
             %update grid
-            board(x_of_the_hit_square,y_of_the_hit_square)=board(x_of_the_hit_square,y_of_the_hit_square)+1;
+            board(x_of_the_hit_square,y_of_the_hit_square)=1;
             
         end
         

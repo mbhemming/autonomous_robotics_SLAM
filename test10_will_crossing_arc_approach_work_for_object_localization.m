@@ -1,20 +1,23 @@
 
-% clear all;
-% 
-% mylego = legoev3('USB');
-% 
-% mysonicsensor = sonicSensor(mylego);
+clear all;
+
+mylego = legoev3('USB');
+
+mysonicsensor = sonicSensor(mylego);
 
 %set up%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+x_robot=0.5;
+y_robot=0;
+dir_robot=90;
 
 num_sensor_readings_for_a_given_robots_state=100;
 tolerance_for_grouping_distance_as_the_same=.5;  %how close the measurment must be to be a hit
 thickness_of_arc_to_draw=4;  %seems logical
 arc_theta=60;  %the total sweep of the cone
 
-length_of_side_on_occupency_grid;
-length_of_enviroment=
-width_of_enviroment=
+length_of_side_on_occupency_grid=.02;
+length_of_enviroment=1;     %***these are in the robots units. We can make them in inches later
+width_of_enviroment=1;
 
 %%%%%%***ad the sensor's position in relation to the robots centre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,8 +39,8 @@ while 1==1
         sensor_readings(i)=readDistance(mysonicsensor);
     end
     
-    radii=[dummy]; 
-    %scotts code to get set of radii
+    %Get the radii for the arcs
+    radii=get_radii_of_prospective_objects( sensor_readings );
     
     %break_point=dummy_value;  %set breakpoint here and manually type in the robots state
     breakpoint=1;
@@ -45,11 +48,14 @@ while 1==1
     %x_bot=10;
     %y_bot=10;
     %dir_bot=45;
+    num_radii=1;     %%%%%***change later to make generic
     for i=1:num_radii
         radius=radii(i);
-        board=get_circular_arc_for_drawing( x_bot,y_bot,dir_bot,       radius, arc_theta, thickness_of_arc_to_draw,     board );
+        board=get_circular_arc_for_drawing( x_robot,y_robot,dir_robot,       radius, arc_theta, thickness_of_arc_to_draw,     board );
     end
 
+    sum(sum(board))
+    
     %breakpoint: look at board at this point
     breakpoint=1;
     
