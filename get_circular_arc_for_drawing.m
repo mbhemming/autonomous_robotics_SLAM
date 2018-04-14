@@ -1,4 +1,4 @@
-function [ board ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness, board )
+function [ board_out ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness, board )
 %GET_CIRCULAR_ARC_FOR_DRAWING Summary of this function goes here
 %   Detailed explanation goes here
 %theta_sweep is the total sweep angle for the sensor between the most
@@ -19,6 +19,7 @@ radius_res=0.01;  %used to draw points for the thickness of the bands
 %y= int32(y);
 
 [n_squares_on_y_in_board,n_squares_on_x_in_board] = size(board);
+board_based_on_what_sensor_sees=zeros(n_squares_on_y_in_board,n_squares_on_x_in_board);
 
 if mod(line_thickness,2) ~= 0
    error('choose a thickness that is divisible by 2 to avoid error'); 
@@ -51,7 +52,7 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
             %do nothing
         else
             %update grid
-            board(x_of_the_hit_square,y_of_the_hit_square)=board(x_of_the_hit_square,y_of_the_hit_square)+1;
+            board_based_on_what_sensor_sees(x_of_the_hit_square,y_of_the_hit_square)=1;
             
         end
         
@@ -59,5 +60,5 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
     end
 end
 
-last=1;
+board_out=board+board_based_on_what_sensor_sees;
 

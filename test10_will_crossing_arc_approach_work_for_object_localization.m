@@ -6,9 +6,7 @@ mylego = legoev3('USB');
 mysonicsensor = sonicSensor(mylego);
 
 %set up%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-x_robot=0.5;
-y_robot=0;
-dir_robot=90;
+
 
 num_sensor_readings_for_a_given_robots_state=100;
 tolerance_for_grouping_distance_as_the_same=.5;  %how close the measurment must be to be a hit
@@ -42,6 +40,9 @@ while 1==1
     %Get the radii for the arcs
     radii=get_radii_of_prospective_objects( sensor_readings );
     
+    %test to see if the radii(sensor return) is actually a return from a
+    %wall************************
+    
     %break_point=dummy_value;  %set breakpoint here and manually type in the robots state
     breakpoint=1;
     
@@ -51,7 +52,7 @@ while 1==1
     num_radii=1;     %%%%%***change later to make generic
     for i=1:num_radii
         radius=radii(i);
-        board=get_circular_arc_for_drawing( x_robot,y_robot,dir_robot,       radius, arc_theta, thickness_of_arc_to_draw,     board );
+        board=get_circular_arc_for_drawing( x,y,d,       radius, arc_theta, thickness_of_arc_to_draw,     board );
     end
 
     sum(sum(board))
