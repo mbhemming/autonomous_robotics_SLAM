@@ -1,7 +1,8 @@
 function [ quad ] = get_quadrant( dir )
 %GET_QUADRANT Summary of this function goes here
 %   Detailed explanation goes here
-     if (dir_robot < 0)  |  (dir_robot > 360)
+    
+     if (dir < 0)  |  (dir > 360)
        error('the function expects angles between 0 and 360'); 
     end
 
