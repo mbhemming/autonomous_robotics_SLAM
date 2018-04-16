@@ -18,23 +18,11 @@ intersect_right=0;
 
 
 %determine which wall the bot hits & which location%%%%%%%%%%%%%%%%%%%%
-intersect_bottom_x_coord=do_lines_intersect_within_a_range(  x_robot, y_robot, x_on_bots_trejectory, y_on_bots_trejectory,    0.001,0.001,x_length_of_board,0.001 );
-intersect_top_x_coord=do_lines_intersect_within_a_range(  x_robot, y_robot, x_on_bots_trejectory, y_on_bots_trejectory,    0.001,y_length_of_board,x_length_of_board,y_length_of_board );
-intersect_left_x_coord=do_lines_intersect_within_a_range(  x_robot, y_robot, x_on_bots_trejectory, y_on_bots_trejectory,    0.001,0.001,0.001,y_length_of_board );
-intersect_right_x_coord=do_lines_intersect_within_a_range(  x_robot, y_robot, x_on_bots_trejectory, y_on_bots_trejectory,    x_length_of_board,0.001,x_length_of_board,y_length_of_board );
+dir_x_component=x_on_bots_trejectory-x_robot;
+dir_y_component=y_on_bots_trejectory-y_robot;
 
-if intersect_bottom_x_coord ~= 9999
-    intersect_bottom=1;
-end
-if intersect_top_x_coord ~= 9999
-    intersect_top=1;
-end
-if intersect_left_x_coord ~= 9999
-    intersect_left=1;
-end
-if intersect_right_x_coord ~= 9999
-    intersect_right=1;
-end
+[ intersect_left, intersect_right, intersect_bottom, intersect_top ] = which_wall_will_the_robots_direction_collide_with(x_robot,y_robot,    dir_x_component, dir_y_component,   x_length_of_board,y_length_of_board  )
+
 
 %test
 if (intersect_bottom + intersect_top + intersect_left + intersect_right) ~= 1
@@ -61,7 +49,7 @@ elseif intersect_right | intersect_left
     altitude=min(x_robot,x_length_of_board-x_robot);
     
     
-    theta_hold = atan2_in_degrees_as_magnitude( delta_y_bots_path, delta_x_bots_path )
+    theta_hold = atan_in_degrees_as_magnitude( delta_y_bots_path, delta_x_bots_path )
     theta_wrt_altitude= theta_hold;
     
 else

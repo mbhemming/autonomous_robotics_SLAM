@@ -4,7 +4,7 @@ function [ out ] = did_sensor_detect_a_wall( x_robot, y_robot, dir_robot,       
     
     %get the altitude and angle with respect to that way
     [ altitude, theta_wrt_altitude] = determine_the_altitude_and_theta_to_the_wall( x_robot, y_robot, dir_robot,    board, length_of_grid_square_in_feet );
-    
+    altitude = convert_EV3_units_to_inches( altitude ) / 12;
     
     
     %&&&any code to throw out values too close to a corner

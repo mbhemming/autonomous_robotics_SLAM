@@ -18,7 +18,7 @@ function_row_is_theta_col_is_altitude= [0.1700	0.1734	0.1752	0.1950	0.3245	2.550
                                        1.2229   e_v     e_v     e_v     e_v     e_v];
                                       
 col=   int32(   ( roundn(theta,10)/10 ) +1   );
-row=   int32(round(altitude/0.5))+ 1;
+row=   int32(round(altitude/0.5));
 
 out = function_row_is_theta_col_is_altitude(row,col);
 

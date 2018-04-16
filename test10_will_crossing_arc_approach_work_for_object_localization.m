@@ -13,11 +13,11 @@ tolerance_for_grouping_distance_as_the_same=.5;  %how close the measurment must 
 thickness_of_arc_to_draw=4;  %seems logical
 arc_theta=60;  %the total sweep of the cone
 
-length_of_side_on_occupency_grid=conver_inches_to_EV3_units(0.25);
-length_of_enviroment=conver_inches_to_EV3_units(69.25);     %***these are in the robots units. We can make them in inches later
-width_of_enviroment=conver_inches_to_EV3_units(80.25);
+length_of_side_on_occupency_grid=convert_inches_to_EV3_units(0.25);
+length_of_enviroment=convert_inches_to_EV3_units(69.25);     %***these are in the robots units. We can make them in inches later
+width_of_enviroment=convert_inches_to_EV3_units(80.25);
 
-tolerance_to_call_distances_the_same=conver_inches_to_EV3_units(6);  
+tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(6);  
 
 %%%%%%***ad the sensor's position in relation to the robots centre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,16 +29,16 @@ robot_state_x_y_direction=[dummy_value dummy_value dummy_value];  %initializing 
 sensor_readings=zeros(num_sensor_readings_for_a_given_robots_state,1);
 i=1;
 
-x=0.15;
-y=0.15;
-d=90;
+ x=12*1;
+ y=42.5;
+d=180;
 
 while 1==1
     
     %break_point=dummy_value;  %set breakpoint here and manually type in the robots state
     breakpoint=1;
-    x_robot=x;
-    y_robot=y;
+    x_robot=convert_inches_to_EV3_units( x );
+    y_robot=convert_inches_to_EV3_units( y );
     dir_robot=d;
     
     %make sure the vector is still 1x3
@@ -57,6 +57,7 @@ while 1==1
     
     %Get the radii for the arcs
     radii_of_sensored_object=get_radii_of_prospective_objects( sensor_readings );
+    %radii_of_sensored_object=convert_inches_to_EV3_units( x ) + .5;
     
     %test to see if the radii(sensor return) is actually a return from a
     %wall
@@ -66,7 +67,7 @@ while 1==1
     
     
     
-    if did_sensor_find_wall == 0) & (radii_of_sensored_object < 1.2)
+    if (did_sensor_find_wall == 0) & (radii_of_sensored_object < 1.2)
         %x_bot=10;
         %y_bot=10;
         %dir_bot=45;
