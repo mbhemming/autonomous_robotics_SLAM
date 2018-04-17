@@ -52,7 +52,7 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
             %do nothing
         else
             %update grid
-            board_based_on_what_sensor_sees(x_of_the_hit_square,y_of_the_hit_square)=1;
+            board_based_on_what_sensor_sees(y_of_the_hit_square,x_of_the_hit_square)=1;
             
         end
         

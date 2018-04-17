@@ -20,7 +20,7 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
 
     %test for and intersection with the top
     x_intersect= (y_board_top_corner_EV3-b_robot_path)/m_robot_path;
-    if (0 <= x_intersect) & (x_intersect <= x_board_top_corner_EV3)
+    if (x_min_search <= x_intersect) & (x_intersect <= x_max_search)
        intersect_top=1; 
     else
         intersect_top=0;
@@ -28,7 +28,7 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     
     %test for intersection with the bottom
     x_intersect= (0-b_robot_path)/m_robot_path;
-    if (0 <= x_intersect) & (x_intersect <= x_board_top_corner_EV3)
+    if (x_min_search <= x_intersect) & (x_intersect <= x_max_search)
        intersect_top=1; 
     else
         intersect_bottom=0;
@@ -36,8 +36,16 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     
     %test for intersection with the left
     y_intersect=  b_robot_path;
-    if (0 <= y_intersect) & (y_intersect <= y_board_top_corner_EV3)
+    if (y_min_search <= y_intersect) & (y_intersect <= y_max_search)
        intersect_left=1; 
+    else
+        intersect_left=0;
+    end
+    
+    %test for intersection with the right
+    y_intersect= m_robot_path * x_board_top_corner_EV3  +   b_robot_path;
+    if (y_min_search <= y_intersect) & (y_intersect <= y_max_search)
+       intersect_right=1; 
     else
         intersect_right=0;
     end
