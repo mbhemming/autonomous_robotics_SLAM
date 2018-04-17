@@ -1,6 +1,9 @@
 function [ x_min_search,y_min_search,   x_max_search,y_max_search ] = get_dimensions_a_trejectory_could_hit_wall2( x_robot,y_robot,    dir_x_component, dir_y_component,   x_board_top_corner,y_board_top_corner )
 %GET_DIMENSIONS_A_TREJECTORY_COULD_HIT_WALL Summary of this function goes here
 %   Detailed explanation goes here
+    
+    x_board_top_corner=convert_inches_to_EV3_units(x_board_top_corner);
+    y_board_top_corner=convert_inches_to_EV3_units(y_board_top_corner);
 
     if dir_x_component > 0
         x_min_search=x_robot;

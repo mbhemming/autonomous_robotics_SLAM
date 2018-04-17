@@ -42,5 +42,13 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
         intersect_right=0;
     end
     
+    %test for intersection with the right
+    y_intersect=  b_robot_path;
+    if (0 <= y_intersect) & (y_intersect <= y_board_top_corner_EV3)
+       intersect_left=1; 
+    else
+        intersect_right=0;
+    end
+    
 end
 

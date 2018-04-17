@@ -1,9 +1,9 @@
 
 clear all;
 
-mylego = legoev3('USB');
-
-mysonicsensor = sonicSensor(mylego);
+% mylego = legoev3('USB');
+% 
+% mysonicsensor = sonicSensor(mylego);
 
 %set up%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -14,14 +14,16 @@ thickness_of_arc_to_draw=4;  %seems logical
 arc_theta=60;  %the total sweep of the cone
 
 length_of_side_on_occupency_grid=convert_inches_to_EV3_units(0.25);
-length_of_enviroment=convert_inches_to_EV3_units(69.25);     %***these are in the robots units. We can make them in inches later
-width_of_enviroment=convert_inches_to_EV3_units(80.25);
 
-tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(6);  
+%make these in quater of an inch inrements
+length_of_enviroment_Y=convert_inches_to_EV3_units(69.75);     %***these are in the robots units. We can make them in inches later
+width_of_enviroment_X=convert_inches_to_EV3_units(81.5);
+
+tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(4);  
 
 %%%%%%***ad the sensor's position in relation to the robots centre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-board=zeros(    int32(length_of_enviroment/length_of_side_on_occupency_grid)    );
+board=zeros(    int32(length_of_enviroment_Y/length_of_side_on_occupency_grid),  int32(width_of_enviroment_X/length_of_side_on_occupency_grid)  );
 
 dummy_value=9999;
 robot_state_x_y_direction=[dummy_value dummy_value dummy_value];  %initializing this variable but it will be over-written
@@ -29,17 +31,22 @@ robot_state_x_y_direction=[dummy_value dummy_value dummy_value];  %initializing 
 sensor_readings=zeros(num_sensor_readings_for_a_given_robots_state,1);
 i=1;
 
- x=12*1;
- y=42.5;
-d=180;
+x=72;
+y=33.25;
+d=30;
+%   y=69.75-24;
+%  d=0;
+
+%x: 0
+%y: 33.25
 
 while 1==1
     
     %break_point=dummy_value;  %set breakpoint here and manually type in the robots state
     breakpoint=1;
-    x_robot=convert_inches_to_EV3_units( x );
-    y_robot=convert_inches_to_EV3_units( y );
-    dir_robot=d;
+    x_robot_EV3UNITS=convert_inches_to_EV3_units( x );
+    y_robot_EV3UNITS =convert_inches_to_EV3_units( y );
+    dir_robot_DEGREES=d;
     
     %make sure the vector is still 1x3
     %catch_error_vector_size( robot_state_x_y_direction,1,3 )
@@ -48,33 +55,31 @@ while 1==1
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%% vector of previously recorded sensor
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%% measuremnts
     %get n sensor readings 
-    for i=1:num_sensor_readings_for_a_given_robots_state
-        sensor_readings(i)=readDistance(mysonicsensor);
-    end
+    %
     %load('sensor_readings.mat');
     
     %%%****log the number of times we get more than one radius
     
     %Get the radii for the arcs
-    radii_of_sensored_object=get_radii_of_prospective_objects( sensor_readings );
-    %radii_of_sensored_object=convert_inches_to_EV3_units( x ) + .5;
+    %radii_of_sensored_object_EV3=get_radii_of_prospective_objects( sensor_readings );
+    radii_of_sensored_object_EV3=convert_inches_to_EV3_units( 12 * sin(30*3.14/180) ) ;
     
     %test to see if the radii(sensor return) is actually a return from a
     %wall
     did_sensor_find_wall=0; %reset on each loop
     grid_len_in_inches = convert_EV3_units_to_inches( length_of_side_on_occupency_grid )
-    did_sensor_find_wall=did_sensor_detect_a_wall( x_robot, y_robot, dir_robot,        radii_of_sensored_object, tolerance_to_call_distances_the_same,        board, grid_len_in_inches )
+    did_sensor_find_wall=did_sensor_detect_a_wall( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3, tolerance_to_call_distances_the_same,        board, grid_len_in_inches )
     
     
     
-    if (did_sensor_find_wall == 0) & (radii_of_sensored_object < 1.2)
+    if ( (did_sensor_find_wall == 0) | (did_sensor_find_wall ~= 99) ) & (radii_of_sensored_object_EV3 < 1.2)
         %x_bot=10;
         %y_bot=10;
         %dir_bot=45;
         num_radii=1;     %%%%%***change later to make generic
         for i=1:num_radii
-            radius=radii_of_sensored_object(i);
-            board=get_circular_arc_for_drawing( x_robot, y_robot, dir_robot,       radius, arc_theta, thickness_of_arc_to_draw,     board );
+            radius_EV3=radii_of_sensored_object_EV3(i);
+            board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
         end
     end
     

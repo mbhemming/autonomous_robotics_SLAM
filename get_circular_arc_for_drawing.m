@@ -1,4 +1,4 @@
-function [ board_out ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness, board )
+function [ board_out ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness,    board, grid_len_INCHES )
 %GET_CIRCULAR_ARC_FOR_DRAWING Summary of this function goes here
 %   Detailed explanation goes here
 %theta_sweep is the total sweep angle for the sensor between the most
@@ -45,8 +45,8 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
         y_curr=y+curr_radius*sin(to_radians(double(curr_theta)    )   );
         
         %find what square to declare is on the arc
-        x_of_the_hit_square=int32(x_curr*n_squares_on_x_in_board);
-        y_of_the_hit_square=int32(y_curr*n_squares_on_y_in_board);
+        x_of_the_hit_square=int32( x_curr/(  convert_inches_to_EV3_units(grid_len_INCHES))   );
+        y_of_the_hit_square=int32(y_curr/(  convert_inches_to_EV3_units(grid_len_INCHES)));
         
         if(  is_point_outside_the_board( board, x_of_the_hit_square, y_of_the_hit_square )==1 )
             %do nothing
