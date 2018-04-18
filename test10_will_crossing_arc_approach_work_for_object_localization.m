@@ -72,21 +72,33 @@ while 1==1
     did_sensor_find_wall=0; %reset on each loop
     grid_len_in_inches = convert_EV3_units_to_inches( length_of_side_on_occupency_grid )
     
-    did_sensor_find_wall=0;
-    %did_sensor_find_wall=did_sensor_detect_a_wall( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3, tolerance_to_call_distances_the_same,        board, grid_len_in_inches )
+    %%%%%%%%%%%%%deciding if we should draw out the sensed object
+    min_radius_to_draw_at=1.2;
     
-    
-    
-    if ( (did_sensor_find_wall == 0) | (did_sensor_find_wall ~= 99) ) & (radii_of_sensored_object_EV3 < 1.2)
-        %x_bot=10;
-        %y_bot=10;
-        %dir_bot=45;
-        num_radii=1;     %%%%%***change later to make generic
-        for i=1:num_radii
-            radius_EV3=radii_of_sensored_object_EV3(i);
-            board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
+    %if the sensed object(or possibly wall) is too far, then we won't draw
+    %if
+    if radii_of_sensored_object_EV3 < min_radius_to_draw_at
+        is_sensor_model_applicable= FUNCTION
+        if is_sensor_model_applicable==1
+            did_sensor_find_wall=did_sensor_detect_a_wall( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3, tolerance_to_call_distances_the_same,        board, grid_len_in_inches ) 
+            if ( (did_sensor_find_wall == 0)
+                radius_EV3=radii_of_sensored_object_EV3(i);
+                board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
+            end
+        else %if the sensor model isn't applicable then we use a heuristic to get the minimum distance we expect a wall to be
+            
         end
+        
+    
     end
+    
+    %did_sensor_find_wall=0;
+    
+    end
+    
+    
+    
+    
     
     
     
