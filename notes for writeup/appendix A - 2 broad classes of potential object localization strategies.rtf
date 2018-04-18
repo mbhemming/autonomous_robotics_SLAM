@@ -5,4 +5,25 @@
 \margl1440\margr1440\vieww19480\viewh14180\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs32 \cf0 ***We could exploit this by remembering the arcs that a potential object\'92s edge is on and leverage that information as we take more measurements in the future. Alternatively, we could }
+\f0\fs32 \cf0 ***We could exploit this by remembering the arcs that a potential object\'92s edge is on and leverage that information as we take more measurements in the future. Alternatively, we could \
+\
+option1: move to obstacle\
+	-cons\
+	-pros\
+option2: draw a bunch of arcs and filter later\
+	-cons\
+		-requires more use of ultrasonic sensor motor. This build error. If sensor is used to localize the robot later, then this localization may be compromised.\
+	-pros\
+\
+\
+\
+\
+/////\
+\
+1) go to the objects themselves and then follow them for high certainty\
+	-disadvantages\
+		-move moving and turning for more noise\
+2)move ind drawing out circular arcs and finding the points of interaction which would be object locations\
+	-biased towards hitting points in the centre. We can look into penalizing those locations\
+		-can keep an occupancy grid of how many times it was looked at (the cone)and normalize\
+	-advnatage: You can make use of multiple robot systems}

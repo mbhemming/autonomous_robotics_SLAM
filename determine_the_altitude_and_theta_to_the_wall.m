@@ -4,8 +4,7 @@ function [ altitude, theta_wrt_altitude] = determine_the_altitude_and_theta_to_t
 [n_squares_on_y_in_board,n_squares_on_x_in_board] = size(board);
 x_length_of_board_EV3=n_squares_on_x_in_board*convert_inches_to_EV3_units(length_of_grid_square_in_inches);
 y_length_of_board_EV3=n_squares_on_y_in_board*convert_inches_to_EV3_units(length_of_grid_square_in_inches);
-x_length_of_board_INCHES=n_squares_on_x_in_board*length_of_grid_square_in_inches;
-y_length_of_board_INCHES=n_squares_on_y_in_board*length_of_grid_square_in_inches;
+[  x_length_of_board_INCHES,y_length_of_board_INCHES  ] = get_board_dims_INCHES( board,length_of_grid_square_in_inches )
 
 %get second point on robots trejectory
 x_on_bots_trejectory=x_robot_EV3+3*cos( to_radians(dir_robot) );

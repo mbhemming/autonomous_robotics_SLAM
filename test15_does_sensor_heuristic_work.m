@@ -31,14 +31,9 @@ robot_state_x_y_direction=[dummy_value dummy_value dummy_value];  %initializing 
 sensor_readings=zeros(num_sensor_readings_for_a_given_robots_state,1);
 i=1;
 
-x=48;
-y=33.25;
-d=30;
-%   y=69.75-24;
-%  d=0;
-
-%x: 0
-%y: 33.25
+x=12;
+y=36;
+d=0;
 
 while 1==1
     
@@ -74,29 +69,11 @@ while 1==1
     
     %%%%%%%%%%%%%deciding if we should draw out the sensed object
     min_radius_to_draw_at=1.2;
-    if radii_of_sensored_object_EV3 < min_radius_to_draw_at
     
-    end
-    
-    %did_sensor_find_wall=0;
-    is_sensor_model_applicable= FUNCTION
-    if is_sensor_model_applicable==1
-        did_sensor_find_wall=did_sensor_detect_a_wall( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3, tolerance_to_call_distances_the_same,        board, grid_len_in_inches )
-        
-        if ( (did_sensor_find_wall == 0) | (did_sensor_find_wall ~= 99) ) & ()
-            radius_EV3=radii_of_sensored_object_EV3(i);
-            board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
-        end
-    end
-    end
-    
-    
-    
-    
-    
-    
-    
-    sum(sum(board))
+    %if the sensed object(or possibly wall) is too far, then we won't draw
+    %if
+     is_measurement_low_enough_that_we_are_sure_its_not_a_wall=is_measurement_low_enough_that_we_are_sure_its_not_a_wall_FUNCT(  x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3,        board, grid_len_in_inches )  
+ 
     
     %breakpoint: look at board at this point
     breakpoint=1;

@@ -81,12 +81,12 @@ while 1==1
         is_sensor_model_applicable= FUNCTION
         if is_sensor_model_applicable==1
             did_sensor_find_wall=did_sensor_detect_a_wall( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3, tolerance_to_call_distances_the_same,        board, grid_len_in_inches ) 
-            if ( (did_sensor_find_wall == 0)
+            if  (did_sensor_find_wall == 0)
                 radius_EV3=radii_of_sensored_object_EV3(i);
                 board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
             end
         else %if the sensor model isn't applicable then we use a heuristic to get the minimum distance we expect a wall to be
-            
+            is_measurement_low_enough_that_we_are_sure_its_not_a_wall=is_measurement_low_enough_that_we_are_sure_its_not_a_wall_FUNCT(  x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,        radii_of_sensored_object_EV3,        board, grid_len_in_inches ) ; 
         end
         
     
