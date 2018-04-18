@@ -3,7 +3,9 @@ clear all;
 
 mylego = legoev3('USB');
 
+
 mysonicsensor = sonicSensor(mylego);
+motorRotate = motor(mylego,'C');
 
 %set up%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -19,7 +21,7 @@ length_of_side_on_occupency_grid=convert_inches_to_EV3_units(0.25);
 length_of_enviroment_Y=convert_inches_to_EV3_units(69.75);     %***these are in the robots units. We can make them in inches later
 width_of_enviroment_X=convert_inches_to_EV3_units(81.5);
 
-tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(4);  
+tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(4);
 
 %%%%%%***ad the sensor's position in relation to the robots centre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,22 +33,28 @@ robot_state_x_y_direction=[dummy_value dummy_value dummy_value];  %initializing 
 sensor_readings=zeros(num_sensor_readings_for_a_given_robots_state,1);
 i=1;
 
-x=48;
-y=33.25;
-d=30;
+x=14;
+y=14;
+
 %   y=69.75-24;
-%  d=0;
+  d_before_sweep=225;
 
 %x: 0
 %y: 33.25
+sweep_angle_max = 50;
+angle_increment = 10;
+number_of_discrete_sensor_angles = (sweep_angle_max*2/angle_increment);
+resetRotation(motorRotate);
+rotation_initial=readRotation(motorRotate);
 
-while 1==1
+for j=1:number_of_discrete_sensor_angles
     
     %break_point=dummy_value;  %set breakpoint here and manually type in the robots state
     breakpoint=1;
     x_robot_EV3UNITS=convert_inches_to_EV3_units( x );
     y_robot_EV3UNITS =convert_inches_to_EV3_units( y );
-    dir_robot_DEGREES=d;
+    
+    dir_robot_DEGREES = d_before_sweep + angle_sweep(rotation_initial,sweep_angle_max, angle_increment,j,motorRotate,number_of_discrete_sensor_angles);
     
     %make sure the vector is still 1x3
     %catch_error_vector_size( robot_state_x_y_direction,1,3 )
@@ -54,7 +62,7 @@ while 1==1
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%either get senosr measuments or load a
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%% vector of previously recorded sensor
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%% measuremnts
-    %get n sensor readings 
+    %get n sensor readings
     for i=1:num_sensor_readings_for_a_given_robots_state
         sensor_readings(i)=readDistance(mysonicsensor);
     end
@@ -81,18 +89,21 @@ while 1==1
         %x_bot=10;
         %y_bot=10;
         %dir_bot=45;
-        num_radii=1;     %%%%%***change later to make generic
-        for i=1:num_radii
-            radius_EV3=radii_of_sensored_object_EV3(i);
-            board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
-        end
+        
+        
+        radius_EV3=radii_of_sensored_object_EV3(1);
+        board=get_circular_arc_for_drawing( x_robot_EV3UNITS, y_robot_EV3UNITS , dir_robot_DEGREES,       radius_EV3, arc_theta, thickness_of_arc_to_draw,     board,grid_len_in_inches );
+        
+        
+        
+        
+        
+        
+        sum(sum(board))
+        
+        %breakpoint: look at board at this point
+        breakpoint=1;
+        
     end
-    
-    
-    
-    sum(sum(board))
-    
-    %breakpoint: look at board at this point
-    breakpoint=1;
-    
 end
+breakpoint=1;
