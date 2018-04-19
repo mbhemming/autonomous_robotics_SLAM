@@ -13,17 +13,17 @@ tolerance_for_grouping_distance_as_the_same=.5;  %how close the measurment must 
 thickness_of_arc_to_draw=4;  %seems logical
 arc_theta=60;  %the total sweep of the cone
 
-length_of_side_on_occupency_grid=convert_inches_to_EV3_units(0.25);
+y_len_INCHES=69.75;
+x_len_INCHES=81.5;
+grid_square_len_INCHES=0.25; 
+board= init_board( y_len_INCHES,x_len_INCHES, grid_square_len_INCHES )
 
-%make these in quater of an inch inrements
-length_of_enviroment_Y=convert_inches_to_EV3_units(69.75);     %***these are in the robots units. We can make them in inches later
-width_of_enviroment_X=convert_inches_to_EV3_units(81.5);
 
 tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(4);  
 
 %%%%%%***ad the sensor's position in relation to the robots centre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-board=zeros(    int32(length_of_enviroment_Y/length_of_side_on_occupency_grid),  int32(width_of_enviroment_X/length_of_side_on_occupency_grid)  );
+
 
 dummy_value=9999;
 robot_state_x_y_direction=[dummy_value dummy_value dummy_value];  %initializing this variable but it will be over-written
