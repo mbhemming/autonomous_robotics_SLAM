@@ -29,7 +29,7 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     %test for intersection with the bottom
     x_intersect= (0-b_robot_path)/m_robot_path;
     if (x_min_search <= x_intersect) & (x_intersect <= x_max_search)
-       intersect_top=1; 
+       intersect_bottom=1; 
     else
         intersect_bottom=0;
     end
