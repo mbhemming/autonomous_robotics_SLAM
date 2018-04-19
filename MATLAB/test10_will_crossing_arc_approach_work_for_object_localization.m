@@ -93,15 +93,7 @@ while 1==1
     end
     
     %did_sensor_find_wall=0;
-    
-    end
-    
-    
-    
-    
-    
-    
-    
+       
     sum(sum(board))
     
     %breakpoint: look at board at this point
