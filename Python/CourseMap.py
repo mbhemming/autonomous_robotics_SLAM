@@ -18,7 +18,7 @@ class CourseMap:
 		row = math.floor(y)
 		col = math.floor(x)
 		self.occupancyGrid[row,col] = isOccupied
-		self.mapGrid[(row-1)*12:((row-1)*12)+12,(col-1)*12:((col-1)*12)+12] = isOccupied
+		"""self.mapGrid[(row-1)*12:((row-1)*12)+12,(col-1)*12:((col-1)*12)+12] = isOccupied"""
 		
 
 		
