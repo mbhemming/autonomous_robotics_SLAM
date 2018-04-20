@@ -17,6 +17,10 @@ assert us.connected, "Connect an UltrasonicSensor"
 # This goes from 0-1003 (1003 is 255 cm)
 us.mode = 'US-DIST-IN'
 
+motorUltraSonic = ev3.MediumMotor()
+assert motorUltraSonic.connected
+
+
 button = ev3.Button()
 
 current_x = 0
