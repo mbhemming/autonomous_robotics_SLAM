@@ -14,7 +14,7 @@ motorLeft.stop()
 ultraSonic = ev3.UltrasonicSensor() 
 assert us.connected, "Connect an UltrasonicSensor"
 # Put the US sensor into distance mode.
-# This goes from TODO
+# This goes from 0-1003 (1003 is 255 cm)
 us.mode = 'US-DIST-IN'
 
 button = ev3.Button()
