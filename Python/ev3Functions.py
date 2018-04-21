@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 import sys
-sys.path.insert(0, '/home/robot/Capstone/Python/Objects')
-sys.path.insert(0, '/home/robot/Capstone/Python/')
+sys.path.insert( 0, '/home/robot/Capstone/Python/Objects' ) 
+sys.path.insert( 0, '/home/robot/Capstone/Python/' )
 import ev3dev.ev3 as ev3
+import math
+from Point import Point
+from RobotPose import RobotPose
 from time import sleep
 from enum import Enum
+
 
 ######################ENUMS#######################
 class ROTATION(Enum):
@@ -101,8 +105,8 @@ def CalculateTheta( dest, pose ):
 	y1 = math.sin( math.radians( pose.Theta ) )
 
 	# calc vector to travel along.
-	x2 = dest.x - pose.x
-	y2 = dest.y - pose.y 
+	x2 = dest.x - pose.Pt.x
+	y2 = dest.y - pose.Pt.y 
 	
 	dot = x1 * x2 + y1 * y2      # dot product
 	det = x1 * y2 - y1 * x2      # determinant 
@@ -112,8 +116,8 @@ def CalculateTheta( dest, pose ):
 
 # Calculate the euclidean distance between pose.Pt and dest
 def CalculateDist( dest, pose ): 
-	dx = pose.x - dest.x
-	py = pose.y - dest.y
+	dx = pose.Pt.x - dest.x
+	dy = pose.Pt.y - dest.y
 	return math.hypot( dx, dy )
 	
 # Set the sensor angle to a theta relative to the forward facing position.
