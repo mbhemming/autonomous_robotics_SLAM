@@ -92,49 +92,38 @@ def StraightDistIN( dist, motorLeft, motorRight ):
 # Arguments:
 #     dest: destination point as Point object
 #     pose: robot pose as Pose object
-def calculate_theta( dest_x, dest_y, cur_theta, cur_x, cur_y ):
+# Returns:
+#     angle between pose.Theta and vector created from pose.Pt and dest
+def CalculateTheta( dest, pose ):
 	# formula found on math stack exchange
 	# calc current unit vector of robot using current theta
-	x1 = math.cos( math.radians( current_theta ) ) 
-	y1 = math.sin( math.radians( current_theta ) )
+	x1 = math.cos( math.radians( pose.Theta ) ) 
+	y1 = math.sin( math.radians( pose.Theta ) )
 
 	# calc vector to travel along.
-	x2 = dest_x - current_x
-	y2 = dest_y - current_y 
+	x2 = dest.x - pose.x
+	y2 = dest.y - pose.y 
 	
 	dot = x1 * x2 + y1 * y2      # dot product
-	det = x1 * y2 - y1 * x2      # determinant
-	return math.degrees( math.atan2( det, dot ) )  # atan2(y, x) or atan2(sin, cos )
+	det = x1 * y2 - y1 * x2      # determinant 
 
-def calculate_dist( dest_x, dest_y ): 
-	return math.sqrt( math.pow( current_x - dest_x, 2 ) + math.pow( current_y - dest_y, 2 ) )
+	# atan2(y, x) or atan2(sin, cos )
+	return math.degrees( math.atan2( det, dot ) ) 
+
+# Calculate the euclidean distance between pose.Pt and dest
+def CalculateDist( dest, pose ): 
+	dx = pose.x - dest.x
+	py = pose.y - dest.y
+	return math.hypot( dx, dy )
 	
-def set_sensor_angle( motor, angle, direction = ROTATION.CCW ):
+# Set the sensor angle to a theta relative to the forward facing position.
+def SetSensorAngle( motor, angle ):
+	motor.run_to_abs_pos( position_sp = angle * GEAR_RATIO, \
+						  speed_sp = ROTATION_SPEED )
 
-	if( direction.value == ROTATION.CW.value ):
-		angle = -angle
-	
-	motor.run_to_rel_pos( position_sp = angle * GEAR_RATIO, speed_sp = ROTATION_SPEED )
-
-def zero_sensor_rotation( motor ):
-	motor.run_to_abs_pos( position_sp = 0, speed_sp = 200 )
+# Return sensor to forward facing position and reset position_sp variable
+def ResetSensorAngle( motor ):
+	motor.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
 	motor.position_sp = 0
 	return 0
 
-def angle_sweep_for_sensor_readings( rotation_initial, sweep_angle_max, angle_increment, motorRotate, number_of_discrete_sensor_angles, j ):
-	#initialize delta_rotation
-	delta_rotation = 0;
-	
-	#Move sensor to furthest angle for sweep
-	if( j == 1 ):
-		new_pos = rotate_sensor( motor, angle_max )
-    
-	# Now that max angle has been reached begins sweeping through angles by angle increments 
-	if( j > 1 ):
-		new_pos = rotate_sensor( motor, angle_increment, ROTATION.CW )
-
-	# This step returns the sensor back to the forward (zero'd postion) 
-	if( j > number_of_discrete_sensor_angles ):
-		new_pos = zero_sensor_rotation( motor )
-	
-	return new_pos
