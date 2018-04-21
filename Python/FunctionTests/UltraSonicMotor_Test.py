@@ -9,6 +9,8 @@ from time import sleep
 motorUltraSonic = ev3.MediumMotor()
 assert motorUltraSonic.connected
 
+motorUltraSonic.position_sp = 0
+
 func.rotate_sensor( motorUltraSonic, 45 )
 
 motorUltraSonic.wait_until_not_moving()
@@ -19,8 +21,9 @@ func.rotate_sensor( motorUltraSonic, 90, func.ROTATION.CW )
 
 motorUltraSonic.wait_until_not_moving()
 
+
 sleep(2)
 
 func.rotate_sensor( motorUltraSonic, 45 )
-
 motorUltraSonic.wait_until_not_moving()
+
