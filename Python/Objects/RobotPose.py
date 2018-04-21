@@ -7,4 +7,4 @@ class RobotPose:
 		self.Theta = theta
 	
 	def __str__(self):
-        return "Pos: " + str( self.Pt ) + "\nTheta: " + str( self.Theta )
+		return "Pos: " + str( self.Pt ) + "\nTheta: " + str( self.Theta )
