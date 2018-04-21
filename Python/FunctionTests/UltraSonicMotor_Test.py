@@ -12,17 +12,27 @@ motorUltraSonic.position_sp = 0
 
 func.SetSensorAngle( motorUltraSonic, 45 )
 
-motorUltraSonic.wait_until_not_moving()
 
 sleep(2)
 
 func.SetSensorAngle( motorUltraSonic, -45 )
 
-motorUltraSonic.wait_until_not_moving()
 
 sleep(2)
 
 func.ResetSensorAngle( motorUltraSonic )
 
-motorUltraSonic.wait_until_not_moving()
+
+for j in range( 1, 15 ):
+
+	sleep(1)
+
+	func.SetSensorAngle( motorUltraSonic, j*2 )
+
+
+sleep(2)
+
+func.ResetSensorAngle( motorUltraSonic )
+
+
 
