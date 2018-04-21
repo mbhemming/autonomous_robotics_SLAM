@@ -1,7 +1,7 @@
 import math
 import numpy as np
-
-
+from ev3Functions import *
+from time import sleep
 
 def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
     angleIncrement, sensor, sensorMotor):
@@ -13,11 +13,11 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
 
     """
 
-    if angleIncrement < 5:
-        angleIncrement = 5
+    if angleIncrement < 3:
+        angleIncrement = 3
 
     # determines number of sensor increments to make
-    numSensorSteps = math.floor(maxSweepAngle*2/angleIncrement)
+    numSensorSteps = math.floor(float(maxSweepAngleDeg)*2/float(angleIncrement)) + 1
 
     angleBeforeSweep = 0
 
@@ -28,11 +28,13 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
         angles[j] = maxSweepAngleDeg-(j*angleIncrement)
         SetSensorAngle(sensorMotor, angles[j])
         sensorReadings = np.zeros(numSensorReadingsForThisState)
-
+        sensorMotor.wait_while('running')
         # Take some number of readings per pointing angle.
         goodReadings = 0
+        sleep(0.1)
         for i in range(0,numSensorReadingsForThisState):
             reading = sensor.value()/10 #in inches.
+            
             if reading < 100.3:
                 sensorReadings[goodReadings] = reading
                 goodReadings = goodReadings + 1
@@ -45,6 +47,6 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
             meanSensorReturns[j] = (np.mean(sensorReadings[0:goodReadings]))
 
     # return sensor to origin.
-    SetSensorAngle(sensorMotor, 0)
+    ResetSensorAngle(sensorMotor)
 
-    return column_stack(angles,meanSensorReturns)
+    return np.column_stack((angles,meanSensorReturns))
