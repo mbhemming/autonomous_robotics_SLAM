@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 import sys
-sys.path.insert( 0, '/home/robot/Capstone/Python/Objects' ) 
-sys.path.insert( 0, '/home/robot/Capstone/Python/' )
+sys.path.insert( 0, './Objects' ) 
 import ev3dev.ev3 as ev3
 import math
+from Robot import Robot
 from Point import Point
 from RobotPose import RobotPose
 from time import sleep
 from enum import Enum
-
 
 ######################ENUMS#######################
 class ROTATION(Enum):
@@ -53,17 +52,17 @@ def TurnOneWheelDeg( angle, motorLeft, motorRight, wheel ):
 		# *Sanity
 		print( "invalid wheel", file = sys.error )
 		
-# This function turns the robot to a specified angle using both wheels. 
-# This does not look at color values while turning.		
+# This function turns the robot to a specified number of degrees using both 
+# wheels.		
 def TurnTwoWheelDeg( angle, motorLeft, motorRight ):
 	# 2.1818 is the ratio of the wheel radius to the robot radius. 
 	# The formula is the arc length formula.
 	position = 2.1818 *  angle
 	
 	# run the motors.
-	motorRight.run_to_rel_pos( position_sp = -position, speed_sp = DRIVE_SPED, \
-							stop_action = "hold" )
-	motorLeft.run_to_rel_pos( position_sp = position, speed_sp = DRIVE_SPEED, \
+	motorRight.run_to_rel_pos( position_sp = -position, speed_sp = DRIVE_SPED,\
+							   stop_action = "hold" )
+	motorLeft.run_to_rel_pos( position_sp = position, speed_sp = DRIVE_SPEED,\
 						      stop_action = "hold" )
 
 # Travel straight for a distance measured in CM. 
@@ -115,19 +114,33 @@ def CalculateTheta( dest, pose ):
 	return math.degrees( math.atan2( det, dot ) ) 
 
 # Calculate the euclidean distance between pose.Pt and dest
-def CalculateDist( dest, pose ): 
-	dx = pose.Pt.x - dest.x
-	dy = pose.Pt.y - dest.y
+def CalculateDist( dst, src ): 
+	dx = src.x - dst.x
+	dy = src.y - dst.y
 	return math.hypot( dx, dy )
 	
 # Set the sensor angle to a theta relative to the forward facing position.
 def SetSensorAngle( motor, angle ):
+	motor.wait_until_not_moving()
 	motor.run_to_abs_pos( position_sp = angle * GEAR_RATIO, \
 						  speed_sp = ROTATION_SPEED )
 
 # Return sensor to forward facing position and reset position_sp variable
 def ResetSensorAngle( motor ):
+	motor.wait_until_not_moving()
 	motor.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
 	motor.position_sp = 0
 	return 0
 
+def DriveToPoint( bot, dest ):
+	# calculate new theta:
+	delta_theta = calculate_theta( dest, bot.Pose.Pt )
+	TurnTwoWheelDeg( delta_theta, bot.MLeft, bot.MRight ) 
+	
+	#	calculate delta d = sqrt(dX^2 + dY^2)
+	#	straight(d)
+	StraightDistIN( CalculateDist( dest, bot.Pose.Pt ) )
+	bot.Pose.Pt.x = dest.x 
+	bot.Pose.Pt.y = dest.y
+	bot.Pose.Theta += delta_theta
+	

@@ -6,13 +6,13 @@ import ev3Functions as func
 from Point import Point
 from RobotPose import RobotPose
 
-pose = RobotPose( Point( 2.5, 7 ), 30 )
+src = Point( 2.5, 7 )
 dest = Point( 0, 3 )
 
-print( func.CalculateDist( dest, pose ) )
+print( func.CalculateDist( dest, src ) )
 
-pose = RobotPose( Point( 7.93, 15.156 ), 30 )
+src = Point( 7.93, 15.156 )
 dest = Point( 18.436, 2.781 )
 
-print( func.CalculateDist( dest, pose ) )
+print( func.CalculateDist( dest, src ) )
 
