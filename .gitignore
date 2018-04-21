@@ -3,3 +3,6 @@
 ~*
 *.swp
 *__pycache__
+*.pyproj
+.vs
+
