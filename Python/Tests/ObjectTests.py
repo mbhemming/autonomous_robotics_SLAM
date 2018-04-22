@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append('./Objects' )
-sys.path.append('./Objects/Robot' )
+sys.path.append( '../Objects' )
+sys.path.append( '../Objects/Robot' )
 from Robot.Robot import Robot
 from Point import Point
 from Pose import Pose
@@ -48,6 +48,3 @@ r.ResetSensorAngle()
 print( "ROBOT TEST COMPLETE\n\n" )
 
 
-#bot = Robot( start )
-#print( bot )
-##################################################
