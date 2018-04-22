@@ -24,10 +24,6 @@ SPEED_CONSTANT_CM = 0.007958 # (cm/ms)
 SPEED_CONSTANT_IN = 0.00313307086 # (in/ms) 
 ##################################################
 
-def ResetMotorPositions( motor1, motor2 ):
-	motor1.position_sp = 0
-	motor2.position_sp = 0
-	
 # This function turns the robot to a specified angle using only 1 wheel. 
 # This does not look at color values while turning.
 def TurnOneWheelDeg( angle, motorLeft, motorRight, wheel ):
