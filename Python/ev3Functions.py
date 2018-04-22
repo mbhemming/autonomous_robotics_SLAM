@@ -138,15 +138,4 @@ def ResetSensorAngle( motor ):
 	motor.position_sp = 0
 	return 0
 
-def DriveToPoint( bot, dest ):
-	# calculate new theta:
-	delta_theta = CalculateTheta( dest, bot.Pose )
-	TurnTwoWheelDeg( delta_theta, bot.MLeft, bot.MRight ) 
-	
-	#	calculate delta d = sqrt(dX^2 + dY^2)
-	#	straight(d)
-	StraightDistIN( CalculateDist( dest, bot.Pose.Pt ), bot.MLeft, bot.MRight )
-	bot.Pose.Pt.x = dest.x 
-	bot.Pose.Pt.y = dest.y
-	bot.Pose.Theta += delta_theta
 	

@@ -37,21 +37,21 @@ sleep(0.5)
 ##################################################
 
 
-func.DriveToPoint(bot, Point(12,12))
-data = GatherSensorMeasurements(5, 180,15,sensorUltra,motorUltra)
-print(bot)
-print(data)
+bot.DriveToPoint( Point( 12, 12 ) )
+data = GatherSensorMeasurements( 5, 180, 15, sensorUltra, motorUltra )
+print( bot )
+print( data )
 
-func.DriveToPoint(bot,Point(-12,12))
-data = GatherSensorMeasurements(5,180,15,sensorUltra,motorUltra)
-print(bot)
-print(data)
+bot.DriveToPoint( Point( -12, 12 ) )
+data = GatherSensorMeasurements( 5, 180, 15, sensorUltra, motorUltra )
+print( bot )
+print( data ) 
 
 
-func.DriveToPoint(bot,Point(0,0))
-data = GatherSensorMeasurements(5,180,15,sensorUltra,motorUltra)
-print(bot)
-print(data)
+bot.DriveToPoint( Point( 0, 0 ) )
+data = GatherSensorMeasurements( 5, 180, 15, sensorUltra, motorUltra )
+print( bot )
+print( data )
 
 
 
