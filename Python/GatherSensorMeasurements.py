@@ -28,10 +28,10 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
         angles[j] = maxSweepAngleDeg-(j*angleIncrement)
         SetSensorAngle(sensorMotor, angles[j])
         sensorReadings = np.zeros(numSensorReadingsForThisState)
-        sensorMotor.wait_while('running')
+        sensorMotor.wait_until_not_moving(timeout=1000)
         # Take some number of readings per pointing angle.
         goodReadings = 0
-        sleep(0.1)
+#        sleep(0.1)
         for i in range(0,numSensorReadingsForThisState):
             reading = sensor.value()/10 #in inches.
             
@@ -41,7 +41,8 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
 
         # If we didnt get any 'in range' returns, flag this as inf.
         if goodReadings == 0:
-            meanSensorReturns[j] = np.inf
+            #meanSensorReturns[j] = np.inf
+			meanSensorReturns[j] = 100.3937007874 # Sensor range max value.
         else:
             # The mean is now calculated from the valid sensor measurements
             meanSensorReturns[j] = (np.mean(sensorReadings[0:goodReadings]))
