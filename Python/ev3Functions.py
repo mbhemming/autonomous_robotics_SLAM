@@ -8,7 +8,7 @@ from Point import Point
 from RobotPose import RobotPose
 from time import sleep
 from enum import Enum
-
+doprint = 0
 ######################ENUMS#######################
 class ROTATION(Enum):
 	CW = 1
@@ -21,7 +21,7 @@ ROTATION_SPEED = 200
 
 DRIVE_SPEED = 125
 SPEED_CONSTANT_CM = 0.007958 # (cm/ms) 
-SPEED_CONSTANT_IN = 0.02021332 # (in/ms) 
+SPEED_CONSTANT_IN = 0.00313307086 # (in/ms) 
 ##################################################
 
 def ResetMotorPositions( motor1, motor2 ):
@@ -60,19 +60,21 @@ def TurnTwoWheelDeg( angle, motorLeft, motorRight ):
 	position = 2.1818 *  angle
 	
 	# run the motors.
-	motorRight.run_to_rel_pos( position_sp = -position, speed_sp = DRIVE_SPED,\
+	motorRight.run_to_rel_pos( position_sp = position, speed_sp = DRIVE_SPEED,\
 							   stop_action = "hold" )
-	motorLeft.run_to_rel_pos( position_sp = position, speed_sp = DRIVE_SPEED,\
+	motorLeft.run_to_rel_pos( position_sp = -position, speed_sp = DRIVE_SPEED,\
 						      stop_action = "hold" )
+	motorRight.wait_until_not_moving(timeout=2000)
+	motorLeft.wait_until_not_moving(timeout=2000)
 
 # Travel straight for a distance measured in CM. 
 def StraightDistCM( dist, motorLeft, motorRight ):
 	dtMilli =  dist / ( SPEED_CONSTANT_CM )
-	motorLeft.run_timed( time_sp = dtMilli, speed_sp = DRIVE_SPEED )	
-	motorRight.run_timed( time_sp = dtMilli, speed_sp = DRIVE_SPEED )
+	motorLeft.run_to_rel_pos( position_sp = dist*20.83, speed_sp = DRIVE_SPEED , stop_action="hold")	
+	motorRight.run_to_rel_pos(position_sp = dist*20.83, speed_sp = DRIVE_SPEED, stop_action="hold" )
 
-	motorLeft.wait_while( 'running', dtMilli )
-	motorRight.wait_while( 'running', dtMilli )
+	motorLeft.wait_until_not_moving(timeout=dtMilli+500)
+	motorRight.wait_until_not_moving(timeout=dtMilli+500)
 	if( doprint == 1 ):
 		print( "Straight:" )
 		print( "  dist: " + str( dist ) )
@@ -81,11 +83,15 @@ def StraightDistCM( dist, motorLeft, motorRight ):
 # Travel straight for a distance measured in IN. 
 def StraightDistIN( dist, motorLeft, motorRight ):
 	dtMilli =  dist / ( SPEED_CONSTANT_IN )
-	motorLeft.run_timed( time_sp = dtMilli, speed_sp = DRIVE_SPEED )	
-	motorRight.run_timed( time_sp = dtMilli, speed_sp = DRIVE_SPEED )
+		
+	motorLeft.run_to_rel_pos( position_sp = dist*20.83*2.54, speed_sp = DRIVE_SPEED , stop_action="hold")
+	motorRight.run_to_rel_pos( position_sp = dist*20.83*2.54, speed_sp = DRIVE_SPEED, stop_action="hold")
+ 
+    
+	motorLeft.wait_until_not_moving(timeout=dtMilli+500)
+	motorRight.wait_until_not_moving(timeout=dtMilli+500)
+	
 
-	motorLeft.wait_while( 'running', dtMilli )
-	motorRight.wait_while( 'running', dtMilli )
 	if( doprint == 1 ):
 		print( "Straight:" )
 		print( "  dist: " + str( dist ) )
@@ -121,25 +127,25 @@ def CalculateDist( dst, src ):
 	
 # Set the sensor angle to a theta relative to the forward facing position.
 def SetSensorAngle( motor, angle ):
-	motor.wait_until_not_moving()
+	motor.wait_until_not_moving(timeout=1000)
 	motor.run_to_abs_pos( position_sp = angle * GEAR_RATIO, \
 						  speed_sp = ROTATION_SPEED )
 
 # Return sensor to forward facing position and reset position_sp variable
 def ResetSensorAngle( motor ):
-	motor.wait_until_not_moving()
+	motor.wait_until_not_moving(timeout=1000)
 	motor.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
 	motor.position_sp = 0
 	return 0
 
 def DriveToPoint( bot, dest ):
 	# calculate new theta:
-	delta_theta = calculate_theta( dest, bot.Pose.Pt )
+	delta_theta = CalculateTheta( dest, bot.Pose )
 	TurnTwoWheelDeg( delta_theta, bot.MLeft, bot.MRight ) 
 	
 	#	calculate delta d = sqrt(dX^2 + dY^2)
 	#	straight(d)
-	StraightDistIN( CalculateDist( dest, bot.Pose.Pt ) )
+	StraightDistIN( CalculateDist( dest, bot.Pose.Pt ), bot.MLeft, bot.MRight )
 	bot.Pose.Pt.x = dest.x 
 	bot.Pose.Pt.y = dest.y
 	bot.Pose.Theta += delta_theta

@@ -28,10 +28,10 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
         angles[j] = maxSweepAngleDeg-(j*angleIncrement)
         SetSensorAngle(sensorMotor, angles[j])
         sensorReadings = np.zeros(numSensorReadingsForThisState)
-        sensorMotor.wait_while('running')
+        sensorMotor.wait_until_not_moving(timeout=1000)
         # Take some number of readings per pointing angle.
         goodReadings = 0
-        sleep(0.1)
+#        sleep(0.1)
         for i in range(0,numSensorReadingsForThisState):
             reading = sensor.value()/10 #in inches.
             
