@@ -7,4 +7,4 @@
 55.06 mm tire diameter
 
 32.97mm sonar x offset
-23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset23.76mm + 2.48mm sonar y offset
+23.76mm + 2.48mm sonar y offset
