@@ -1,6 +1,3 @@
-import ev3dev.ev3 as ev3
-from Pose import Pose
-import math
 
 #####################GLOBALS######################
 DRIVE_SPEED = 125
@@ -35,15 +32,19 @@ class Driving:
             self.MLeft.run_to_rel_pos( position_sp = position, \
                                        speed_sp = DRIVE_SPEED, \
                                        stop_action = "hold" )
+            self.MLeft.wait_until_not_moving( timeout = 2000 )
         elif wheel == 'right':
             #turn CCW
             self.MLeft.stop( stop_action = "hold" )
             self.MRight.run_to_rel_pos( position_sp = position, \
                                         speed_sp = DRIVE_SPEED, \
                                         stop_action = "hold" )
+            self.MRight.wait_until_not_moving( timeout = 2000 )
         else:
             # *Sanity
             print( "invalid wheel", file = sys.error )
+
+
 
     # This function turns the robot to a specified number of degrees using both
     # wheels.
