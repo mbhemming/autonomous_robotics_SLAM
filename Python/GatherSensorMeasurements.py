@@ -41,7 +41,8 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
 
         # If we didnt get any 'in range' returns, flag this as inf.
         if goodReadings == 0:
-            meanSensorReturns[j] = np.inf
+            #meanSensorReturns[j] = np.inf
+			meanSensorReturns[j] = 100.3937007874 # Sensor range max value.
         else:
             # The mean is now calculated from the valid sensor measurements
             meanSensorReturns[j] = (np.mean(sensorReadings[0:goodReadings]))
