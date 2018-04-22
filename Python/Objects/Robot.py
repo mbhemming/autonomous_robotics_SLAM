@@ -48,3 +48,29 @@ class Robot:
 		self.Pose.Pt.x = dest.x
 		self.Pose.Pt.y = dest.y
 		self.Pose.Theta += delta_theta
+
+		# This function turns the robot to a specified angle using only 1 wheel.
+		# This does not look at color values while turning.
+		def TurnOneWheelDeg( angle, motorLeft, motorRight, wheel ):
+
+		# 2.1818 is the ratio of the wheel radius to the robot radius.
+	    # The formula is the arc length formula.
+    	position = 2.1818 * 2 * angle
+
+	    if wheel == 'left':
+    	    #turn CW
+        	motorRight.stop( stop_action = "hold" )
+	        motorLeft.run_to_rel_pos( position_sp = position, \
+                                  speed_sp = DRIVE_SPEED, \
+                                  stop_action = "hold" )
+    	elif wheel == 'right':
+        	#turn CCW
+	        motorLeft.stop( stop_action = "hold" )
+    	    motorRight.run_to_rel_pos( position_sp = position, \
+                                   speed_sp = DRIVE_SPEED, \
+                                   stop_action = "hold" )
+	    else:
+    	    # *Sanity
+        	print( "invalid wheel", file = sys.error )
+
+
