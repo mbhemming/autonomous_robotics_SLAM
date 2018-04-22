@@ -22,6 +22,7 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
     angleBeforeSweep = 0
 
     meanSensorReturns = np.zeros(numSensorSteps)
+    stddevs = np.zeros(numSensorSteps)
     angles = np.zeros(numSensorSteps)
     for j in range(0, numSensorSteps):
         # Start the sensor at range the sensor and assumes that it is at 0 degrees relative to the robot.
@@ -42,12 +43,18 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
         # If we didnt get any 'in range' returns, flag this as inf.
         if goodReadings == 0:
             #meanSensorReturns[j] = np.inf
-			meanSensorReturns[j] = 100.3937007874 # Sensor range max value.
+            #print("Nothing Detected")
+            meanSensorReturns[j] = 100.3937007874 # Sensor range max value.
+            stddevs[j] = 0.0
         else:
             # The mean is now calculated from the valid sensor measurements
             meanSensorReturns[j] = (np.mean(sensorReadings[0:goodReadings]))
+            stddevs[j] = np.std(sensorReadings[0:goodReadings])
+            #print( "Mean: "+ str(np.mean(sensorReadings[0:goodReadings])))
+            #print( "StdDev: " + str(np.std(sensorReadings[0:goodReadings])))
+            #print( str(goodReadings) + " good measurements")
 
     # return sensor to origin.
     ResetSensorAngle(sensorMotor)
 
-    return np.column_stack((angles,meanSensorReturns))
+    return np.column_stack((angles,meanSensorReturns,stddevs))
