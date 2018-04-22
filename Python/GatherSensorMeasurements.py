@@ -25,9 +25,9 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
 
     angleBeforeSweep = 0
     countReturns = 0
-    meanSensorReturns = np.zeros(numSensorSteps+floor(numSensorSteps/2))
-    stddevs = np.zeros(numSensorSteps+floor(numSensorSteps/2))
-    angles = np.zeros(numSensorSteps+floor(numSensorSteps/2))
+    meanSensorReturns = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
+    stddevs = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
+    angles = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
     for j in range(0, numSensorSteps):
         # Start the sensor at range the sensor and assumes that it is at 0 degrees relative to the robot.
         angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
@@ -56,7 +56,7 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
         # If we didnt get any 'in range' returns, flag this as inf.
         if goodReadings == 0:
             #meanSensorReturns[j] = np.inf
-            #print("Nothing Detected")
+            ##print("Nothing Detected")
             meanSensorReturns[countReturns] = 100.3937007874 # Sensor range max value.
             stddevs[countReturns] = 0.0
             countReturns = countReturns + 1
@@ -64,18 +64,18 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
             # The mean is now calculated from the valid sensor measurements
             #meanSensorReturns[j] = (np.mean(sensorReadings[0:goodReadings]))
             #stddevs[j] = np.std(sensorReadings[0:goodReadings])
-            #print( "Mean: "+ str(np.mean(sensorReadings[0:goodReadings])))
-            #print( "StdDev: " + str(np.std(sensorReadings[0:goodReadings])))
-            print( str(goodReadings) + " good measurements")
+            ##print( "Mean: "+ str(np.mean(sensorReadings[0:goodReadings])))
+            ##print( "StdDev: " + str(np.std(sensorReadings[0:goodReadings])))
+            #print( str(goodReadings) + " good measurements")
             ranges = DecomposeSensorReadings( sensorReadings[0:goodReadings] , 3)
             for det in ranges:
-                print("Detection: " + str(det))
+                #print("Detection: " + str(det))
                 angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
                 meanSensorReturns[countReturns] = np.mean(det)
                 stddevs[countReturns] = np.std(det)
                 countReturns = countReturns + 1
                 if meanSensorReturns.size <= countReturns:
-                    print("Resizing")
+                    #print("Resizing")
                     meanSensorReturns.resize(countReturns + 10)
                     stddevs.resize(countReturns + 10)
                     angles.resize(countReturns + 10)
