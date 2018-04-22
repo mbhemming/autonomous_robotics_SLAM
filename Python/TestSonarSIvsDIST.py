@@ -7,7 +7,7 @@ import ev3Functions as func
 from Robot import Robot
 from Point import Point
 from RobotPose import RobotPose
-
+from time import sleep
 
 ##################INITIALIZATION##################
 start = RobotPose( Point( 0, 0 ), 90 )
@@ -16,15 +16,10 @@ bot = Robot( start )
 print( bot )
 ##################################################
 
-print( "Continuous" )
-for i in range( 0, 100 ):
-	print( bot.SUltra.value() )
-
-print( "\n\nDiscrete" )
-for i in range( 0, 100 ):
-	bot.SUltra.mode = 'US-SI-IN'
-	print( bot.SUltra.value() )
-
-
-
-
+print( "Continuous " + bot.SUltra.mode )
+for i in range( 0, 1000 ):
+    bot.SUltra.mode = 'US-DIST-IN'
+    print( bot.SUltra.value() )
+    bot.SUltra.mode = 'US-LISTEN'
+    if( bot.SUltra.value() ):
+        print( "!!!!!!!!!!" )

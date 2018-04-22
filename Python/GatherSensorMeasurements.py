@@ -7,8 +7,10 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
     angleIncrement, sensor, sensorMotor):
     """
     ** X&Y cord need to be in fine resolution map co-ordinates.
-    This function will scan the ultrasonic sensor through a sweep angle = 2*max_sweep_angle gathering data points at each point. 
-    The function then returns an temp array that is used for the global board. In this function values of 
+    This function will scan the ultrasonic sensor through a sweep angle\
+    = 2*max_sweep_angle gathering data points at each point. 
+    The function then returns an temp array that is used for the global board.\
+    In this function values of 
     [sonarAngleDegrees ,  meanSensorReturns] this is a table of two columns.
 
     """
@@ -34,6 +36,10 @@ def GatherSensorMeasurements(numSensorReadingsForThisState, maxSweepAngleDeg, \
         goodReadings = 0
 #        sleep(0.1)
         for i in range(0,numSensorReadingsForThisState):
+            sensor.mode = 'US-LISTEN'
+            while( sensor.value() ):
+                sleep(0.01)
+            sensor.mode = 'US-DIST-IN'
             reading = sensor.value()/10 #in inches.
             
             if reading < 100.3:
