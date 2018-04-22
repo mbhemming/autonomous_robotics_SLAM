@@ -16,7 +16,7 @@ arc_theta=60;  %the total sweep of the cone
 y_len_INCHES=69.75;
 x_len_INCHES=81.5;
 grid_square_len_INCHES=0.25; 
-board= init_board( y_len_INCHES,x_len_INCHES, grid_square_len_INCHES )
+board= init_board( y_len_INCHES,x_len_INCHES, grid_square_len_INCHES );
 
 
 tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(4);  
