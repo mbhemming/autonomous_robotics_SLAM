@@ -9,7 +9,7 @@ width_of_enviroment_X=convert_inches_to_EV3_units(x_len_INCHES);
 length_of_side_on_occupency_grid=convert_inches_to_EV3_units(grid_square_len_INCHES);
 
 
-board=zeros(    int32(length_of_enviroment_Y/length_of_side_on_occupency_grid),  int32(width_of_enviroment_X/length_of_side_on_occupency_grid)  );
+board=zeros(    int32(width_of_enviroment_X/length_of_side_on_occupency_grid),  int32(length_of_enviroment_Y/length_of_side_on_occupency_grid)  );
 
 
 
