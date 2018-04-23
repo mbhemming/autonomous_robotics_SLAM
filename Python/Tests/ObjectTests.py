@@ -83,16 +83,16 @@ if( TEST_OCC_GRID or TEST_ALL ):
     o.UpdateProb( 5, 15, 110 )
     print( "  " + str( o.Grid[ 5, 15 ] ) )
 
-    print( "IncProb > max" ) 
-    o.IncProb( 5, 15 )
+    print( "IncProbCell > max" ) 
+    o.IncProbCell( 5, 15 )
     print( "  " + str( o.Grid[ 5, 15 ] ) )
 
     print( "UpdateProb < min" ) 
     o.UpdateProb( 5, 15, -10 )
     print( "  " + str( o.Grid[ 5, 15 ] ) )
 
-    print( "DecProb < min" ) 
-    o.DecProb( 5, 15 )
+    print( "DecProbCell < min" ) 
+    o.DecProbCell( 5, 15 )
     print( "  " + str( o.Grid[ 5, 15 ] ) )
 
     print( "UpdateProb = max" ) 
@@ -108,11 +108,11 @@ if( TEST_OCC_GRID or TEST_ALL ):
     print( "  " + str( o.Grid[ 5, 15 ] ) )
 
     print( "IncProb" ) 
-    o.IncProb( 5, 15 )
+    o.IncProbCell( 5, 15 )
     print( "  " + str( o.Grid[ 5, 15 ] ) )
 
     print( "DecProb" ) 
-    o.DecProb( 5, 15 )
+    o.DecProbCell( 5, 15 )
     print( "  " + str( o.Grid[ 5, 15 ] ) )
   
     print( "CellToPoint" )
