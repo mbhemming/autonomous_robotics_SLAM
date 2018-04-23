@@ -1,10 +1,8 @@
-import sys
-sys.path.append( '../../Stats/' )
 import math
 import numpy as np
-#from ev3Functions import *
+from OccupancyGrid.OccupancyGrid import OccupancyGrid
 from Stats.SonarStatisticsFunctions import DecomposeSensorReadings
-
+from Robot.Pose import Pose
 #####################GLOBALS######################
 GEAR_RATIO = 40/8
 ROTATION_SPEED = 200
@@ -26,7 +24,7 @@ class Ultrasonic:
         return 0
 
     def GatherSensorMeasurements( self, numSensorReadingsForThisState,\
-                                  maxSweepAngleDeg, angleIncrement ):
+                                  maxSweepAngleDeg, angleIncrement , grid):
         """
         ** X&Y cord need to be in fine resolution map co-ordinates.
         This function will scan the ultrasonic sensor through a sweep angle\
@@ -90,6 +88,8 @@ class Ultrasonic:
                     #print("Detection: " + str(det))
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
                     meanSensorReturns[countReturns] = np.mean(det)
+                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement))
+                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
                     stddevs[countReturns] = np.std(det)
                     countReturns = countReturns + 1
                     if meanSensorReturns.size <= countReturns:
@@ -97,9 +97,11 @@ class Ultrasonic:
                         meanSensorReturns.resize(countReturns + 10)
                         stddevs.resize(countReturns + 10)
                         angles.resize(countReturns + 10)
+
+
         # return sensor to origin.
         self.ResetSensorAngle()
-
+		
         return np.column_stack( ( angles[ 0:countReturns ],\
                                   meanSensorReturns[ 0:countReturns ],\
                                   stddevs[ 0:countReturns ] ) )

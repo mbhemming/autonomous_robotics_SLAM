@@ -1,11 +1,8 @@
-import sys
-sys.path.append('../')
-
 import ev3dev.ev3 as ev3
 import math
-from Pose import Pose
-from _Driving import Driving
-from _Ultrasonic import Ultrasonic
+from Robot.Pose import Pose
+from Robot._Driving import Driving
+from Robot._Ultrasonic import Ultrasonic
 
 #####################GLOBALS######################
 GEAR_RATIO = 40/8

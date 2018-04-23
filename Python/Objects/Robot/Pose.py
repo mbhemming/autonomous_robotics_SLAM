@@ -1,7 +1,7 @@
 import sys
 sys.path.append( '../' )
 
-from Point import Point 
+from Objects.Point import Point 
     
 class Pose( Point ):
     

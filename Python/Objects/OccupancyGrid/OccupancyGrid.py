@@ -1,9 +1,6 @@
-import sys
-sys.path.append( '../' )
-
 import numpy as np
-from Point import Point
-from _OccupancyGrid import _OccupancyGrid
+from Robot.Pose import Pose
+from OccupancyGrid._OccupancyGrid import _OccupancyGrid
         
 class OccupancyGrid( _OccupancyGrid ):
     MAX_PROB = 100
