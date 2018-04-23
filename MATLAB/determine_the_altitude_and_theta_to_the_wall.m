@@ -1,6 +1,7 @@
 function [ altitude, theta_wrt_altitude] = determine_the_altitude_and_theta_to_the_wall( x_robot_EV3, y_robot_EV3, dir_robot,    board, length_of_grid_square_in_inches )
 %GEOMETRICALLY_WHICH_WALL_DO_WE_EXPECT_TO_HIT Summary of this function goes here
 %   Detailed explanation goes here
+test_line=1;
 [n_squares_on_y_in_board,n_squares_on_x_in_board] = size(board);
 x_length_of_board_EV3=n_squares_on_x_in_board*convert_inches_to_EV3_units(length_of_grid_square_in_inches);
 y_length_of_board_EV3=n_squares_on_y_in_board*convert_inches_to_EV3_units(length_of_grid_square_in_inches);
@@ -21,6 +22,10 @@ intersect_right=0;
 %determine which wall the bot hits & which location%%%%%%%%%%%%%%%%%%%%
 dir_x_component=x_on_bots_trejectory-x_robot_EV3;
 dir_y_component=y_on_bots_trejectory-y_robot_EV3;
+
+if abs(dir_robot+5) <0.001
+   breakpoint=1; 
+end
 
 [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = which_wall_will_the_robots_direction_collide_with(x_robot_EV3,y_robot_EV3,    dir_x_component, dir_y_component,   x_length_of_board_INCHES,y_length_of_board_INCHES  )
 
