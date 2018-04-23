@@ -68,6 +68,8 @@ if( TEST_ROBOT or TEST_ALL ):
     r.SetSensorAngle( 35 )
     print( "ResetSensorAngle" )
     r.ResetSensorAngle()
+    print( "GatherSensorMeasurements" )
+    r.GatherSensorMeasurements( 50, 180, 5 )
     print( "ROBOT TEST COMPLETE\n\n" )
 
 # OCCUPANCY GRID
@@ -120,6 +122,8 @@ if( TEST_OCC_GRID or TEST_ALL ):
     print( "PointToCell" )
     c = o.PointToCell( Point( 34.1, 23.2 ) )
     print( " " + str( c ) )
+
+
     print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
 
 print( "*********************************" )
