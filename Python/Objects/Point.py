@@ -7,5 +7,3 @@ class Point:
 	def __str__( self ):
 		return "( " + str( self.x ) + ", " + str( self.y ) + " )"
 
-    def ToCell( self ):
-        return ( int( pt.y / 3 ), int( pt.x / 3 ) )

@@ -1,10 +1,9 @@
 import sys
 sys.path.append( '../' )
 
-import math
 import numpy as np
 from Point import Point
-		
+        
 class OccupancyGrid:
     MAX_PROB = 100
     MIN_PROB = 0
@@ -17,8 +16,12 @@ class OccupancyGrid:
         self.Grid[ 0, : ] = self.MAX_PROB
         self.Grid[ :, 0 ] = self.MAX_PROB
         self.Grid[ rows - 1, : ] = self.MAX_PROB
-        self.Grid[ :, cols - 1 ] = self.MAX_PRO
-		
+        self.Grid[ :, cols - 1 ] = self.MAX_PROB
+        
+    def Specs( self ):
+        return "Rows: " + str( self.Rows ) + "\nCols: " + str( self.Cols ) +\
+               "\nCell Width: " + str( self.CellWidth )
+
     def UpdateProb( self, row, col, prob ):
         if( prob > self.MAX_PROB ):
             prob = self.MAX_PROB
@@ -26,7 +29,7 @@ class OccupancyGrid:
         if( prob < self.MIN_PROB ):
             prob = self.MIN_PROB
 
-		self.Grid[ row, col ] = prob
+        self.Grid[ row, col ] = prob
 
     def IncProb( self, row, col ):
         self.Grid[ row, col ] += 1
@@ -38,10 +41,10 @@ class OccupancyGrid:
 
         if( self.Grid[ row, col ] < self.MIN_PROB ):
             self.Grid[ row, col ] = self.MIN_PROB
-	
-    def CellToPoint( r, c ):
+    
+    def CellToPoint( self, r, c ):
         return Point( self.CellWidth * ( c + 0.5 ), self.CellWidth * ( r + 0.5 ) )
 
-    def PointToCell( pt ):
+    def PointToCell( self, pt ):
         return ( int( pt.y / 3 ), int( pt.x / 3 ) )
 
