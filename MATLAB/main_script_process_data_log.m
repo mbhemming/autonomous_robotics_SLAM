@@ -113,8 +113,10 @@ data((     (data(:,does_heuristic_apply_col ) == 1) &  (data(:,is_measurement_lo
 %%%%%%%%%%%%    modify the weight of the reading based on heuristics
 
 %modify weight based on how far the measurement is away
-%data(:,weight_col)=  data(:,weight_col)* ( (sensor_reading_max_allowed - data(:,sensor_col))  / sensor_reading_max_allowed);
-
+[n_rows n_cols] = size(data);
+for i=1:n_rows
+    data(i,weight_col)=  data(i,weight_col)* ( (sensor_reading_max_allowed - data(i,sensor_col))  / sensor_reading_max_allowed);
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
