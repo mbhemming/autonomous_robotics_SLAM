@@ -12,7 +12,7 @@ function [ out ] = is_measurement_low_enough_that_we_are_sure_its_not_a_wall_FUN
      catch_error_vector_size( min_distance_we_expect_a_wall_to_be,1,1 )
     
     %output
-    if radii_of_sensored_object_EV3 < 0.75 * min_distance_we_expect_a_wall_to_be
+    if radii_of_sensored_object_EV3 < 1 * min_distance_we_expect_a_wall_to_be
        out = 1; 
     else
         out = 0;
