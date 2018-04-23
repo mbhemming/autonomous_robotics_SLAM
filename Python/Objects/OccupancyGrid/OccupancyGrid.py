@@ -3,8 +3,9 @@ sys.path.append( '../' )
 
 import numpy as np
 from Point import Point
+from _OccupancyGrid import _OccupancyGrid
         
-class OccupancyGrid:
+class OccupancyGrid( _OccupancyGrid ):
     MAX_PROB = 100
     MIN_PROB = 0
 
@@ -54,7 +55,7 @@ class OccupancyGrid:
         return Point( self.CellWidth * ( c + 0.5 ), self.CellWidth * ( r + 0.5 ) )
 
     def PointToCell( self, pt ):
-        return ( int( pt.y / 3 ), int( pt.x / 3 ) )
+        return ( int( pt.y / self.CellWidth ), int( pt.x / self.CellWidth ) )
    
     def IsWall( self, row = 0, col = 0 ):
         return row == 0 or row == self.Rows - 1 or col == 0 or col == self.Cols - 1
