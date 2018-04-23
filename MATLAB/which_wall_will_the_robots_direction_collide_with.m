@@ -18,9 +18,11 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     x_board_top_corner_EV3=convert_inches_to_EV3_units( x_board_top_corner_INCHES );
     y_board_top_corner_EV3=convert_inches_to_EV3_units( y_board_top_corner_INCHES );
 
+    
+    
     %test for and intersection with the top
     x_intersect= (y_board_top_corner_EV3-b_robot_path)/m_robot_path;
-    if (x_min_search <= x_intersect) & (x_intersect <= x_max_search)
+    if (x_min_search <= x_intersect) & (x_intersect <= x_max_search) & (dir_y_component > 0)
        intersect_top=1; 
     else
         intersect_top=0;
@@ -28,7 +30,7 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     
     %test for intersection with the bottom
     x_intersect= (0-b_robot_path)/m_robot_path;
-    if (x_min_search <= x_intersect) & (x_intersect <= x_max_search)
+    if (x_min_search <= x_intersect) & (x_intersect <= x_max_search) & (dir_y_component < 0)
        intersect_bottom=1; 
     else
         intersect_bottom=0;
@@ -36,7 +38,7 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     
     %test for intersection with the left
     y_intersect=  b_robot_path;
-    if (y_min_search <= y_intersect) & (y_intersect <= y_max_search)
+    if (y_min_search <= y_intersect) & (y_intersect <= y_max_search) & (dir_x_component < 0)
        intersect_left=1; 
     else
         intersect_left=0;
@@ -44,7 +46,7 @@ function [ intersect_left, intersect_right, intersect_bottom, intersect_top ] = 
     
     %test for intersection with the right
     y_intersect= m_robot_path * x_board_top_corner_EV3  +   b_robot_path;
-    if (y_min_search <= y_intersect) & (y_intersect <= y_max_search)
+    if (y_min_search <= y_intersect) & (y_intersect <= y_max_search) & (dir_x_component > 0)
        intersect_right=1; 
     else
         intersect_right=0;
