@@ -23,19 +23,20 @@ class OccupancyGrid:
                "\nCell Width: " + str( self.CellWidth )
 
     def UpdateProb( self, row, col, prob ):
-        if( prob > self.MAX_PROB ):
-            prob = self.MAX_PROB
+        if( not self.IsWall( row, col ) ):
+            if( prob > self.MAX_PROB ):
+                prob = self.MAX_PROB
 
-        if( prob < self.MIN_PROB ):
-            prob = self.MIN_PROB
+            if( prob < self.MIN_PROB ):
+                prob = self.MIN_PROB
 
-        self.Grid[ row, col ] = prob
+            self.Grid[ row, col ] = prob
 
     def IncProb( self, row = int( 0 ), col = int( 0 ) ):
         if( isinstance( row, list ) ):
             for cell in row:
                 self.IncProb( cell[ 0 ], cell[ 1 ] )
-        else:
+        elif( not self.IsWall( row, col ) ):
             self.Grid[ row, col ] += 1
             if( self.Grid[ row, col ] > self.MAX_PROB ):
                 self.Grid[ row, col ] = self.MAX_PROB
@@ -44,7 +45,7 @@ class OccupancyGrid:
         if( isinstance( row, list ) ):
             for cell in row:
                 self.IncProb( cell[ 0 ], cell[ 1 ] )
-        else:
+        elif( not self.IsWall( row, col ) ):
             self.Grid[ row, col ] -= 1
             if( self.Grid[ row, col ] < self.MIN_PROB ):
                 self.Grid[ row, col ] = self.MIN_PROB
@@ -54,4 +55,6 @@ class OccupancyGrid:
 
     def PointToCell( self, pt ):
         return ( int( pt.y / 3 ), int( pt.x / 3 ) )
-    
+   
+    def IsWall( self, row = 0, col = 0 ):
+        return row == 0 or row == self.Rows - 1 or col == 0 or col == self.Cols - 1
