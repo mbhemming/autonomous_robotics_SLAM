@@ -7,7 +7,7 @@ import OccupancyGrid as og
 import numpy as np
 
 
-def GetOccupationUpdate( robopose, sonarReturn, sonarRelAngleDeg , angularResDeg, sonarFOVDeg, dRes, PRINTSTUFF=False):
+def GetOccupancyUpdate( robopose, sonarReturn, sonarRelAngleDeg ,dRes=0.5, angularResDeg=1.0, sonarFOVDeg=60.0, PRINTSTUFF=False):
     
     roboPose = Pose(robopose)
     sonarCenterAngle = sonarRelAngleDeg +roboPose.Theta
