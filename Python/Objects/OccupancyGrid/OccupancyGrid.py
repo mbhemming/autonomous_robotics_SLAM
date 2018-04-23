@@ -31,20 +31,27 @@ class OccupancyGrid:
 
         self.Grid[ row, col ] = prob
 
-    def IncProb( self, row, col ):
-        self.Grid[ row, col ] += 1
-        if( self.Grid[ row, col ] > self.MAX_PROB ):
-            self.Grid[ row, col ] = self.MAX_PROB
+    def IncProb( self, row = int( 0 ), col = int( 0 ) ):
+        if( isinstance( row, list ) ):
+            for cell in row:
+                self.IncProb( cell[ 0 ], cell[ 1 ] )
+        else:
+            self.Grid[ row, col ] += 1
+            if( self.Grid[ row, col ] > self.MAX_PROB ):
+                self.Grid[ row, col ] = self.MAX_PROB
 
-    def DecProb( self, row, col ):
-        self.Grid[ row, col ] -= 1
-
-        if( self.Grid[ row, col ] < self.MIN_PROB ):
-            self.Grid[ row, col ] = self.MIN_PROB
+    def DecProb( self, row = int( 0 ), col = int( 0 ) ):
+        if( isinstance( row, list ) ):
+            for cell in row:
+                self.IncProb( cell[ 0 ], cell[ 1 ] )
+        else:
+            self.Grid[ row, col ] -= 1
+            if( self.Grid[ row, col ] < self.MIN_PROB ):
+                self.Grid[ row, col ] = self.MIN_PROB
     
     def CellToPoint( self, r, c ):
         return Point( self.CellWidth * ( c + 0.5 ), self.CellWidth * ( r + 0.5 ) )
 
     def PointToCell( self, pt ):
         return ( int( pt.y / 3 ), int( pt.x / 3 ) )
-
+    

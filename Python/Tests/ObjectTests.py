@@ -11,9 +11,13 @@ from OccupancyGrid import OccupancyGrid
 
 TEST_ALL = False
 TEST_POINT = False
-TEST_POSE = True
+TEST_POSE = False
 TEST_ROBOT = False
 TEST_OCC_GRID = True
+
+print( "*********************************" )
+print( "*     STARTING OBJECT TESTS     *" )
+print( "*********************************" )
 
 # POINT
 if( TEST_POINT or TEST_ALL ):
@@ -117,4 +121,14 @@ if( TEST_OCC_GRID or TEST_ALL ):
     c = o.PointToCell( Point( 34.1, 23.2 ) )
     print( " " + str( c ) )
     print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
+
+print( "*********************************" )
+print( "*     OBJECT TESTS COMPLETE     *" )
+print( "*********************************" )
+
+
+
+
+
+
 
