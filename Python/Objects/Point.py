@@ -4,5 +4,8 @@ class Point:
 		self.x = x
 		self.y = y
 	
-	def __str__(self):
+	def __str__( self ):
 		return "( " + str( self.x ) + ", " + str( self.y ) + " )"
+
+    def ToCell( self ):
+        return ( int( pt.y / 3 ), int( pt.x / 3 ) )
