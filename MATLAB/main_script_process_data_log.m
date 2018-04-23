@@ -4,7 +4,7 @@ x_init=convert_inches_to_EV3_units(35);
 y_init=convert_inches_to_EV3_units(35);
 
 sensor_reading_max_allowed=1.2;
-std_dev_sensor_reading_max_allowed=0.001;
+std_dev_sensor_reading_max_allowed=0.01;
 
 fileter_away_occupency_grid_below=1;
 
@@ -38,7 +38,7 @@ did_sensor_model_find_walls_col=9;
 does_heuristic_apply_col=10;  %the heuristic is used when the sensor model doesn't apply
 is_measurement_low_enough_that_its_not_a_wall_via_heuristic_col=11;
 
-data= csvread('20180422-194755_TestOutput.csv');
+data= csvread('20180422-233150_TestOutput.csv');
 [n_rows n_cols] = size(data);
 
 %convert
@@ -95,17 +95,17 @@ end
 
 %simple conditionals
 data(  ~(data(:, sensor_col) < sensor_reading_max_allowed) , :)= [];
-%data(data(:, 5)== 0, :)= []
+% %data(data(:, 5)== 0, :)= []
 data(~(data(:, std_dev_sensor_col) < std_dev_sensor_reading_max_allowed)  , :)= [];
 
-data(data(:, 5)== 0, :)= [];
+%data(data(:, 5)== 0, :)= [];
 
 
 %complex conditionals
-does_sensor_model_applies_col=8;
-did_sensor_model_find_walls_col=9;
-does_heuristic_apply_col=10;  %the heuristic is used when the sensor model doesn't apply
-is_measurement_low_enough_that_its_not_a_wall_via_heuristic_col=11;
+% does_sensor_model_applies_col=8;
+% did_sensor_model_find_walls_col=9;
+% does_heuristic_apply_col=10;  %the heuristic is used when the sensor model doesn't apply
+% is_measurement_low_enough_that_its_not_a_wall_via_heuristic_col=11;
 
 data( (     (data(:,does_sensor_model_applies_col ) == 1) &  (data(:,did_sensor_model_find_walls_col ) == 1)  )  , :)= [];
 data((     (data(:,does_heuristic_apply_col ) == 1) &  (data(:,is_measurement_low_enough_that_its_not_a_wall_via_heuristic_col ) == 0)  )  , :)= [];
@@ -148,6 +148,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cutoff=fileter_away_occupency_grid_below;
 board = filter_final_grid_for_squares_above_some_quantity( board, cutoff )
+
 
 
 %%%%%%%%%%%%    error checking
