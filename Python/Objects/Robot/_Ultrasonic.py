@@ -89,7 +89,7 @@ class Ultrasonic:
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
                     meanSensorReturns[countReturns] = np.mean(det)
                     grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement))
-                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
+#                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
                     stddevs[countReturns] = np.std(det)
                     countReturns = countReturns + 1
                     if meanSensorReturns.size <= countReturns:

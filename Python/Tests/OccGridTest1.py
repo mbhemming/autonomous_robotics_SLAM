@@ -13,14 +13,16 @@ import time
 ##################INITIALIZATION################
 
 grid = OccupancyGrid(24,28,3)
-bot = Robot( 0.0,0.0,90.0 )
+bot = Robot( 30.0,30.0,90.0 )
 print( bot )
 ev3.Sound.beep().wait()
 time.sleep(0.5)
 
 ##################################################
-timestr = time.strftime("%Y%m%d-%H%M%S")
-with open(timestr+'_TestOutput.csv', 'w') as csvfile:
-		data = np.array(bot.GatherSensorMeasurements(50,180,5, grid))	
-		printer.AppendToCsv(csvfile, bot, data)
-
+#timestr = time.strftime("%Y%m%d-%H%M%S")
+#with open(timestr+'_TestOutput.csv', 'w') as csvfile:
+for i in range(0,8):
+	print(str(i))
+	bot.GatherSensorMeasurements(10,180,15, grid)
+#		printer.AppendToCsv(csvfile, bot, data)
+printer.GridToCsv(grid)
