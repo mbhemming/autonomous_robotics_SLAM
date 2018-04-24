@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 import sys
 sys.path.append( '../Objects/' )
+sys.path.append( '../Functions/' )
 import Point 
 import Pose
 from Robot import Robot
 from Pose import Pose
 from Point import Point
 from OccupancyGrid import OccupancyGrid
+import FileOutputter as output
 
 n = False
 y = True
@@ -14,8 +16,8 @@ y = True
 TEST_ALL = n
 TEST_POINT = n
 TEST_POSE = n
-TEST_ROBOT = y
-TEST_OCC_GRID = n
+TEST_ROBOT =n 
+TEST_OCC_GRID = y
 
 print( "*********************************" )
 print( "*     STARTING OBJECT TESTS     *" )
@@ -53,8 +55,10 @@ if( TEST_POSE or TEST_ALL ):
 if( TEST_OCC_GRID or TEST_ALL ):
     print( "TESTING OCCUPANCY GRID" )
     print( "Default constructor" )
-    o = OccupancyGrid( 24, 28, 3 )
-    print( "  " + o.Specs() )
+    o = OccupancyGrid( 3 )
+    print( "  Rows: " + str( o.Rows ) + "\n  Cols: " + str( o.Cols ) +\
+           "\n  Cell Width: " + str( o.CellWidth ) )
+    output.GridToCsv( o ) 
 
     print( "UpdateProb > max" ) 
     o.UpdateProb( 5, 15, 110 )
@@ -99,6 +103,11 @@ if( TEST_OCC_GRID or TEST_ALL ):
     print( "PointToCell" )
     c = o.PointToCell( Point( 34.1, 23.2 ) )
     print( " " + str( c ) )
+    
+    print( "RoundPoint" )
+    c = o.RoundPoint( Point( 34.1, 23.2 ) )
+    print( " " + str( c ) )
+
     print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
 
 
@@ -125,7 +134,7 @@ if( TEST_ROBOT or TEST_ALL ):
     print( "ResetSensorAngle" )
     r.ResetSensorAngle()
     print( "GatherSensorMeasurements" )
-    og = OccupancyGrid( 24, 28, 3 )
+    og = OccupancyGrid( 3 )
     r.GatherSensorMeasurements( 50, 180, 5, og )
     print( "ROBOT TEST COMPLETE\n\n" )
 
