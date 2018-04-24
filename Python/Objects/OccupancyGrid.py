@@ -6,16 +6,25 @@ from _OccupancyGrid import _OccupancyGrid
 class OccupancyGrid( _OccupancyGrid ):
     MAX_PROB = 100
     MIN_PROB = 0
+    COURSE_Y_IN= 69.75
+    COURSE_X_IN= 81.5
+    DOOR_START_IN = 52.0
+    DOOR_END_IN = 70.25
 
-    def __init__( self, rows, cols, cellWidth ):
-        self.Rows = rows
-        self.Cols = cols
+    def __init__( self, cellWidth ):
+        self.Rows = int( self.COURSE_Y_IN / cellWidth ) + 1
+        self.Cols = int( self.COURSE_X_IN / cellWidth ) + 1
         self.CellWidth = cellWidth
-        self.Grid = np.zeros( ( rows, cols ), dtype = int )
+        # Define the walls as max probability of object (shouldnt be changed)
+        self.Grid = np.zeros( ( self.Rows, self.Cols ), dtype = int )
         self.Grid[ 0, : ] = self.MAX_PROB
         self.Grid[ :, 0 ] = self.MAX_PROB
-        self.Grid[ rows - 1, : ] = self.MAX_PROB
-        self.Grid[ :, cols - 1 ] = self.MAX_PROB
+        self.Grid[ self.Rows - 1, : ] = self.MAX_PROB
+        self.Grid[ :, self.Cols - 1 ] = self.MAX_PROB
+        # Remove the door from the wall grid.
+        for col in range( int( self.DOOR_START_IN / self.CellWidth ) + 1,\
+                          int( self.DOOR_END_IN / self.CellWidth ) ):
+            self.Grid[ 0, col ] = self.MIN_PROB
         
     def Specs( self ):
         return "Rows: " + str( self.Rows ) + "\nCols: " + str( self.Cols ) +\

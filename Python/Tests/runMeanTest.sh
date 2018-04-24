@@ -1,1 +1,1 @@
-nice -n -15 ./OccGridTest1.py
+time nice -n -15 ./OccGridTest1.py

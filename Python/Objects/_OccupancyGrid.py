@@ -49,7 +49,7 @@ class _OccupancyGrid:
                 endPoint = Point( x0 + sonarReturn * math.cos( np.deg2rad( theta ) ),\
                                   y0 + sonarReturn * math.sin( np.deg2rad( theta ) ) )
         
-                # INCHES 
+                # INCHES ** Potential Performance Improvement: generate the points once and move them ** 
                 pointsX = np.linspace( start = startX, stop = endPoint.x,num = int( (sonarReturn-6 )/ dRes ))
                 pointsY = np.linspace( start = startY, stop = endPoint.y,num = int( (sonarReturn-6) / dRes ) )
         
