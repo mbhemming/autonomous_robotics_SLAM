@@ -21,7 +21,8 @@ time.sleep(0.5)
 #timestr = time.strftime("%Y%m%d-%H%M%S")
 #with open(timestr+'_TestOutput.csv', 'w') as csvfile:
 for i in range(0,8):
-	print(str(i))
-	bot.GatherSensorMeasurements(10,180,15, grid)
+	ev3.Sound.beep().wait()
+	time.sleep(0.5)
+	bot.GatherSensorMeasurements(15,180,10, grid)
 #		printer.AppendToCsv(csvfile, bot, data)
 printer.GridToCsv(grid)
