@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append( '../Objects' )
-sys.path.append( '../Objects/Robot' )
-sys.path.append( '../Objects/OccupancyGrid' )
+sys.path.append( '../Objects/' )
 
 from Robot.Robot import Robot
+from Robot.Pose import Pose
 from Point import Point
-from Pose import Pose
-from OccupancyGrid import OccupancyGrid
+from OccupancyGrid.OccupancyGrid import OccupancyGrid
 
 TEST_ALL = False
 TEST_POINT = False
-TEST_POSE = False
+TEST_POSE = True
 TEST_ROBOT = False
-TEST_OCC_GRID = True
+TEST_OCC_GRID = False
 
 print( "*********************************" )
 print( "*     STARTING OBJECT TESTS     *" )
@@ -34,43 +32,18 @@ if( TEST_POSE or TEST_ALL ):
     print( "Default constructor" )
     ps = Pose( 7.9, 87, 32 )
     print( ps )
-    print( "List/tuple constructor" )
+    print( "\nList/tuple constructor" )
     t = 3.5, 6.7, 112
     pd = Pose( t )
     print( pd )
-    print( "Copy constructor" )
+    print( "\nCopy constructor" )
     pt = Pose( pd )
     print( pt ) 
-    print( "Point-theta constructor" )
-    pt = Pose( Point( 1.2, 1.1 ), 25 )
-    print( pt ) 
+    print( "\nPoint-theta constructor" )
+    x = Point( 1.2, 1.1 )
+    pot = Pose( x, 25 )
+    print( pot ) 
     print( "POSE TEST COMPLETE\n\n" )
-
-# ROBOT
-if( TEST_ROBOT or TEST_ALL ):
-    print( "TESTING ROBOT" )
-    r = Robot( 10.9, 8.7, 132 )
-    print( r )
-    print( "DriveToPoint" )
-    r.DriveToPoint( Point( 17, 3 ) )
-    print( "TurnOneWheelDeg" )
-    r.TurnOneWheelDeg( -150, 'right' )
-    r.TurnOneWheelDeg( 150, 'left' )
-    print( "TurnTwoWheelDeg" )
-    r.TurnTwoWheelDeg( 45 )
-    print( "StraightDistCM" )
-    r.StraightDistCM( -50 )
-    print( "StraightDistIN" )
-    r.StraightDistIN( 10 )
-    print( "CalculateTheta" )
-    r.CalculateTheta( Point( 4, 13 ) )
-    print( "SetSensorAngle" )
-    r.SetSensorAngle( 35 )
-    print( "ResetSensorAngle" )
-    r.ResetSensorAngle()
-    print( "GatherSensorMeasurements" )
-    r.GatherSensorMeasurements( 50, 180, 5 )
-    print( "ROBOT TEST COMPLETE\n\n" )
 
 # OCCUPANCY GRID
 if( TEST_OCC_GRID or TEST_ALL ):
@@ -122,6 +95,33 @@ if( TEST_OCC_GRID or TEST_ALL ):
     print( "PointToCell" )
     c = o.PointToCell( Point( 34.1, 23.2 ) )
     print( " " + str( c ) )
+
+
+# ROBOT
+if( TEST_ROBOT or TEST_ALL ):
+    print( "TESTING ROBOT" )
+    r = Robot( 10.9, 8.7, 132 )
+    print( r )
+    print( "DriveToPoint" )
+    r.DriveToPoint( Point( 17, 3 ) )
+    print( "TurnOneWheelDeg" )
+    r.TurnOneWheelDeg( -150, 'right' )
+    r.TurnOneWheelDeg( 150, 'left' )
+    print( "TurnTwoWheelDeg" )
+    r.TurnTwoWheelDeg( 45 )
+    print( "StraightDistCM" )
+    r.StraightDistCM( -50 )
+    print( "StraightDistIN" )
+    r.StraightDistIN( 10 )
+    print( "CalculateTheta" )
+    r.CalculateTheta( Point( 4, 13 ) )
+    print( "SetSensorAngle" )
+    r.SetSensorAngle( 35 )
+    print( "ResetSensorAngle" )
+    r.ResetSensorAngle()
+    print( "GatherSensorMeasurements" )
+    r.GatherSensorMeasurements( 50, 180, 5, o )
+    print( "ROBOT TEST COMPLETE\n\n" )
 
 
     print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
