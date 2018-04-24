@@ -1,4 +1,4 @@
-function [ board_out ] = board_update_for_how_many_times_a_sqaure_was_seen( x,y,dir,   r,theta_for_arc,  line_thickness, weight ,  board, grid_len_INCHES )
+function [ board_out ] = board_update_for_how_many_times_a_sqaure_was_seen( x,y,dir,   r,max_r,   theta_for_arc,  line_thickness, weight ,  board, grid_len_INCHES )
 %GET_CIRCULAR_ARC_FOR_DRAWING Summary of this function goes here
 %   Detailed explanation goes here
 %theta_sweep is the total sweep angle for the sensor between the most
@@ -10,6 +10,12 @@ function [ board_out ] = board_update_for_how_many_times_a_sqaure_was_seen( x,y,
 %%%***could later have an increased density of points at an outer radius
 
 %***add description of generatign the points outward
+
+%we only count that we could have seen something if it is actually with the
+%range that we could find a object
+if r > max_r
+   r=max_r; 
+end
 
 if (0 < dir) & (dir <60)
    test=1; 

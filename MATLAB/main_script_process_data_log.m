@@ -86,7 +86,10 @@ end
 
 
 
-%sensor_model_applies=
+%conditionals that apply to BOTH the object map and number of times a
+%square was seen
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [n_rows n_cols] = size(data); %must re-write the dims because we have subtracted rows
@@ -99,9 +102,9 @@ for i=1:n_rows
     weight_of_square=data(i,weight_col)
     
     %dir
+    max_r=sensor_reading_max_allowed;
     
-    
-    board_counting_num_times_squares_were_seen=board_update_for_how_many_times_a_sqaure_was_seen(x_EV3,y_EV3,dir,   r,theta_for_arc,  line_thickness, weight_of_square,   board_counting_num_times_squares_were_seen, grid_len_INCHES );
+    board_counting_num_times_squares_were_seen=board_update_for_how_many_times_a_sqaure_was_seen(x_EV3,y_EV3,dir,   r,max_r,  theta_for_arc,  line_thickness, weight_of_square,   board_counting_num_times_squares_were_seen, grid_len_INCHES );
     %board_counting_num_times_squares_were_seen=board_update_for_how_many_times_a_sqaure_was_seen(x_EV3,y_EV3,90,   r,theta_for_arc,  line_thickness, weight_of_square,   board_counting_num_times_squares_were_seen, grid_len_INCHES );
     %contourf(board_counting_num_times_squares_were_seen);
 end
@@ -115,9 +118,10 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% %simple conditionals
-data(  ~(data(:, sensor_col) < sensor_reading_max_allowed) , :)= [];
+
 % % %data(data(:, 5)== 0, :)= []
+
+data(  ~(data(:, sensor_col) < sensor_reading_max_allowed) , :)= [];
 data(~(data(:, std_dev_sensor_col) < std_dev_sensor_reading_max_allowed)  , :)= [];
 % 
 % %data(data(:, 5)== 0, :)= [];
@@ -135,10 +139,10 @@ data(~(data(:, std_dev_sensor_col) < std_dev_sensor_reading_max_allowed)  , :)= 
 %%%%%%%%%%%%    modify the weight of the reading based on heuristics
 
 %modify weight based on how far the measurement is away
-% [n_rows n_cols] = size(data);
-% for i=1:n_rows
-%     data(i,weight_col)=  data(i,weight_col)* ( (2.55 - data(i,sensor_col))  / 2.55);
-% end
+[n_rows n_cols] = size(data);
+for i=1:n_rows
+    data(i,weight_col)=  data(i,weight_col)* ( (2*sensor_reading_max_allowed - data(i,sensor_col))  / (2*sensor_reading_max_allowed));
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
