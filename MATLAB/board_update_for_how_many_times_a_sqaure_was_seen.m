@@ -1,4 +1,4 @@
-function [ board_out ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_arc,  line_thickness, weight ,  board, grid_len_INCHES )
+function [ board_out ] = board_update_for_how_many_times_a_sqaure_was_seen( x,y,dir,   r,max_r,   theta_for_arc,  line_thickness, weight ,  board, grid_len_INCHES )
 %GET_CIRCULAR_ARC_FOR_DRAWING Summary of this function goes here
 %   Detailed explanation goes here
 %theta_sweep is the total sweep angle for the sensor between the most
@@ -11,9 +11,19 @@ function [ board_out ] = get_circular_arc_for_drawing( x,y,dir,   r,theta_for_ar
 
 %***add description of generatign the points outward
 
+%we only count that we could have seen something if it is actually with the
+%range that we could find a object
+if r > max_r
+   r=max_r; 
+end
+
+if (0 < dir) & (dir <60)
+   test=1; 
+end
+
 %tuning
 theta_res=1;
-radius_res=0.01;  %used to draw points for the thickness of the bands
+radius_res=0.001/2;  %used to draw points for the thickness of the bands
 %r= int32(r);
 %x= int32(x);
 %y= int32(y);
@@ -37,9 +47,9 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
     %log(ii)=curr_theta;
     %ii=ii+1;
     
-    lower_radius=r-radius_res*line_thickness/2;
+    lower_radius=0;
     upper_radius=r+radius_res*line_thickness/2;
-    for curr_radius=lower_radius:line_thickness:upper_radius
+    for curr_radius=lower_radius:radius_res:upper_radius
         
         if curr_radius > .15
            breakpoint=1; 
@@ -55,6 +65,7 @@ for curr_theta=lower_theta:theta_res: int32((dir+theta_for_arc/2))  %for each an
         
         if(  is_point_outside_the_board( board, x_of_the_hit_square, y_of_the_hit_square )==1 )
             %do nothing
+            test=1;
         else
             %update grid
             board_based_on_what_sensor_sees(y_of_the_hit_square,x_of_the_hit_square)=weight;
