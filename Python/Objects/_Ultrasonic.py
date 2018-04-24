@@ -5,13 +5,15 @@ from Pose import Pose
 #####################GLOBALS######################
 GEAR_RATIO = 40/8
 ROTATION_SPEED = 200
+STALL_TIME_CONSTANT = 0.03
 ##################################################i
 
 class Ultrasonic:
 
     # Set the sensor angle to a theta relative to the forward facing position.
     def SetSensorAngle( self, angle ):
-        self.MUltra.wait_until_not_moving( timeout = 1000 )
+        tim = math.fabs( angle - self.MUltra.position / GEAR_RATIO ) / STALL_TIME_CONSTANT
+        self.MUltra.wait_until_not_moving( timeout = tim )
         self.MUltra.run_to_abs_pos( position_sp = angle * GEAR_RATIO,\
                                      speed_sp = ROTATION_SPEED )
 
@@ -19,7 +21,6 @@ class Ultrasonic:
     def ResetSensorAngle( self ):
         self.MUltra.wait_until_not_moving( timeout = 1000 )
         self.MUltra.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
-        self.MUltra.position_sp = 0
         return 0
 
     def DecomposeSensorReadings( self, allReadings, granularity ):
@@ -74,7 +75,8 @@ class Ultrasonic:
             # Start the sensor at range the sensor and assumes that it is at 0 
             # degrees relative to the robot.
             angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
-            self.SetSensorAngle( angles[j] )
+            #self.SetSensorAngle( angles[j] )
+            self.SetSensorAngle( maxSweepAngleDeg-(j*angleIncrement) )
             sensorReadings = np.zeros(numSensorReadingsForThisState)
             self.MUltra.wait_until_not_moving(timeout=1000)
             # Take some number of readings per pointing angle.
