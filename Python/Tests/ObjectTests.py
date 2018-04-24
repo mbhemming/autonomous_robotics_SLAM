@@ -13,7 +13,7 @@ import FileOutputter as output
 n = False
 y = True
 
-TEST_ALL = y
+TEST_ALL = n
 TEST_POINT = n
 TEST_POSE = n
 TEST_ROBOT =n 
@@ -102,6 +102,10 @@ if( TEST_OCC_GRID or TEST_ALL ):
 
     print( "PointToCell" )
     c = o.PointToCell( Point( 34.1, 23.2 ) )
+    print( " " + str( c ) )
+    
+    print( "RoundPoint" )
+    c = o.RoundPoint( Point( 34.1, 23.2 ) )
     print( " " + str( c ) )
 
     print( "OCCUPANCY GRID TEST COMPLETE\n\n" )

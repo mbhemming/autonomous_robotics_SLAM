@@ -68,3 +68,32 @@ class OccupancyGrid( _OccupancyGrid ):
    
     def IsWall( self, row = 0, col = 0 ):
         return row == 0 or row == self.Rows - 1 or col == 0 or col == self.Cols - 1
+
+    # Rounds a point to the center point of a cell 
+    def RoundPoint( self, pt ):
+        cell = self.PointToCell( pt )
+        return self.CellToPoint( cell[ 0 ], cell[ 1 ] )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
