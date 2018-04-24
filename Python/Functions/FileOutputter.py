@@ -1,8 +1,9 @@
 import csv
 import numpy
-from Robot.Pose import Pose
-from OccupancyGrid.OccupancyGrid import OccupancyGrid
+from Pose import Pose
+from OccupancyGrid import OccupancyGrid
 import time
+
 def AppendToCsv(csvFile, bot, data):
 	writer = csv.writer(csvFile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 	for row in data:

@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 import sys
 sys.path.append( '../Objects/' )
-
-from Robot.Robot import Robot
-from Robot.Pose import Pose
+import Point 
+import Pose
+from Robot import Robot
+from Pose import Pose
 from Point import Point
-from OccupancyGrid.OccupancyGrid import OccupancyGrid
+from OccupancyGrid import OccupancyGrid
 
-TEST_ALL = False
-TEST_POINT = False
-TEST_POSE = True
-TEST_ROBOT = False
-TEST_OCC_GRID = False
+n = False
+y = True
+
+TEST_ALL = n
+TEST_POINT = n
+TEST_POSE = n
+TEST_ROBOT = y
+TEST_OCC_GRID = n
 
 print( "*********************************" )
 print( "*     STARTING OBJECT TESTS     *" )
@@ -95,6 +99,7 @@ if( TEST_OCC_GRID or TEST_ALL ):
     print( "PointToCell" )
     c = o.PointToCell( Point( 34.1, 23.2 ) )
     print( " " + str( c ) )
+    print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
 
 
 # ROBOT
@@ -120,11 +125,11 @@ if( TEST_ROBOT or TEST_ALL ):
     print( "ResetSensorAngle" )
     r.ResetSensorAngle()
     print( "GatherSensorMeasurements" )
-    r.GatherSensorMeasurements( 50, 180, 5, o )
+    og = OccupancyGrid( 24, 28, 3 )
+    r.GatherSensorMeasurements( 50, 180, 5, og )
     print( "ROBOT TEST COMPLETE\n\n" )
 
 
-    print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
 
 print( "*********************************" )
 print( "*     OBJECT TESTS COMPLETE     *" )

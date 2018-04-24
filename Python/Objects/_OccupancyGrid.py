@@ -1,6 +1,6 @@
 import math
-from Robot.Pose import Pose 
-from Objects.Point import Point
+from Point import Point
+from Pose import Pose 
 import numpy as np
 class _OccupancyGrid:
     def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=1.5,\
@@ -9,7 +9,7 @@ class _OccupancyGrid:
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
         startAngle = sonarCenterAngle - (sonarFOVDeg/2.0)
-           lastcoord=(-1,-1) 
+        lastcoord=(-1,-1) 
         x0 = roboPose.x
         y0 = roboPose.y
     
@@ -72,4 +72,3 @@ class _OccupancyGrid:
     
         self.IncProbCells( plusOnes[ 0:nPones ] )
         self.DecProbCells( minOnes[ 0:nMones ] ) 
-

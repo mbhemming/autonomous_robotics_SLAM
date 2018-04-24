@@ -1,8 +1,7 @@
 import math
 import numpy as np
-from OccupancyGrid.OccupancyGrid import OccupancyGrid
-from Stats.SonarStatisticsFunctions import DecomposeSensorReadings
-from Robot.Pose import Pose
+#from OccupancyGrid import OccupancyGrid
+from Pose import Pose
 #####################GLOBALS######################
 GEAR_RATIO = 40/8
 ROTATION_SPEED = 200
@@ -22,6 +21,30 @@ class Ultrasonic:
         self.MUltra.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
         self.MUltra.position_sp = 0
         return 0
+
+    def DecomposeSensorReadings( self, allReadings, granularity ):
+
+        sortedReadings = np.sort( allReadings )
+        #print(sortedReadings)
+
+        bins =[]
+
+        category = 0
+        start = 0
+        i = 0
+        while i < sortedReadings.size:
+            category = sortedReadings[i]
+            #print("Category: " + str(category))
+            while i<sortedReadings.size and sortedReadings[i]-category < granularity:
+                i = i + 1
+            if start != i:
+                #print(sortedReadings[start:i])
+                bins.append(sortedReadings[start:i])
+                start = i
+            i = i + 1
+
+        #print(bins)
+        return bins
 
     def GatherSensorMeasurements( self, numSensorReadingsForThisState,\
                                   maxSweepAngleDeg, angleIncrement , grid):
@@ -83,7 +106,7 @@ class Ultrasonic:
                 ##print( "Mean: "+ str(np.mean(sensorReadings[0:goodReadings])))
                 ##print( "StdDev: " + str(np.std(sensorReadings[0:goodReadings])))
                 #print( str(goodReadings) + " good measurements")
-                ranges = DecomposeSensorReadings( sensorReadings[0:goodReadings], 3)
+                ranges = self.DecomposeSensorReadings( sensorReadings[0:goodReadings], 3)
                 for det in ranges:
                     #print("Detection: " + str(det))
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
@@ -101,8 +124,7 @@ class Ultrasonic:
 
         # return sensor to origin.
         self.ResetSensorAngle()
-		
+        
         return np.column_stack( ( angles[ 0:countReturns ],\
                                   meanSensorReturns[ 0:countReturns ],\
                                   stddevs[ 0:countReturns ] ) )
-
