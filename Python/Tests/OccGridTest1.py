@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 import sys
-sys.path.insert(0,'../Objects')
-sys.path.insert( 0, '../Functions/' )
+sys.path.append( '../Objects' )
+sys.path.append( '../Functions/' )
 
 import ev3dev.ev3 as ev3
-import numpy as np
 import csv
 import FileOutputter as printer
-from OccupancyGrid.OccupancyGrid import OccupancyGrid
-from Robot.Robot import Robot
+from OccupancyGrid import OccupancyGrid
+from Robot import Robot
 import time
 ##################INITIALIZATION################
 

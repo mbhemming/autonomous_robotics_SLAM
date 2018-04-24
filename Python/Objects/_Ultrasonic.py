@@ -106,7 +106,7 @@ class Ultrasonic:
                 ##print( "Mean: "+ str(np.mean(sensorReadings[0:goodReadings])))
                 ##print( "StdDev: " + str(np.std(sensorReadings[0:goodReadings])))
                 #print( str(goodReadings) + " good measurements")
-                ranges = DecomposeSensorReadings( sensorReadings[0:goodReadings], 3)
+                ranges = self.DecomposeSensorReadings( sensorReadings[0:goodReadings], 3)
                 for det in ranges:
                     #print("Detection: " + str(det))
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)

@@ -9,7 +9,7 @@ class _OccupancyGrid:
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
         startAngle = sonarCenterAngle - (sonarFOVDeg/2.0)
-           lastcoord=(-1,-1) 
+        lastcoord=(-1,-1) 
         x0 = roboPose.x
         y0 = roboPose.y
     
