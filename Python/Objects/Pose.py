@@ -1,9 +1,6 @@
-import sys
-sys.path.append( '../' )
-
-from Objects.Point import Point 
-    
-class Pose( Point ):
+import Point
+ 
+class Pose( Point.Point ):
     
     def __init__( self, x=float('nan'), y=float('nan'), theta=float('nan') ):
         if isinstance( x, list ) or  isinstance( x, tuple ):
@@ -12,7 +9,7 @@ class Pose( Point ):
         elif isinstance( x, Pose ):
             self.Theta = x.Theta
             super().__init__( x.x, x.y )
-        elif isinstance( x, Point ):
+        elif isinstance( x, Point.Point ):
             self.Theta = y
             super().__init__( x.x, x.y )
         else:
