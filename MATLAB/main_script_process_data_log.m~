@@ -1,5 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%    SETUP     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %add properites params
 smart_wall_detection=0;   % given that we know where the walls are setting this property allow us 
 x_init=convert_inches_to_EV3_units(35);
@@ -22,9 +20,8 @@ board_counting_num_times_squares_were_seen= init_board( x_len_INCHES,y_len_INCHE
 tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(4);
 
 %load the data and append extra parameters%%%%%%%%%%%%%%
-%get data
-data= csvread('20180422-185458_TestOutput.csv');
-[n_rows n_cols] = size(data);
+% A= [ 5 3 3 1 4; 6 6 3 1 0; 6 2 2 2 0; 4 2 3 2 0; 1 1 1 1 2 ]
+% A(A(:, 5)== 0, :)= []
 
 %cols
 x_col=1;
@@ -42,8 +39,8 @@ did_sensor_model_find_walls_col=9;
 does_heuristic_apply_col=10;  %the heuristic is used when the sensor model doesn't apply
 is_measurement_low_enough_that_its_not_a_wall_via_heuristic_col=11;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+data= csvread('20180422-185458_TestOutput.csv');
+[n_rows n_cols] = size(data);
 
 %convert
 data = convert_data_log_from_inches_to_meters( data, x_col,y_col,sensor_col,std_dev_sensor_col )
@@ -193,11 +190,11 @@ board=board_object_localization - board_counting_num_times_squares_were_seen;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cutoff=fileter_away_occupency_grid_below;
-board = filter_final_grid_for_squares_above_some_quantity( board_object_localization, cutoff );
+board = filter_final_grid_for_squares_above_some_quantity( board_object_localization, cutoff )
 
 %squares above 100 percent hits shouldn't occur
 cutoff=1.01;
-board = filter_for_squares_below_some_quantity( board, cutoff );
+%board = filter_for_squares_below_some_quantity( board, cutoff )
 
 
 %%%%%%%%%%%%    error checking
