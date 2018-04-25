@@ -19,6 +19,7 @@ class Robot( Pose, Ultrasonic, Driving ):
         self.MUltra = ev3.MediumMotor()
         self.SUltra = ev3.UltrasonicSensor()
         self.STouch = ev3.TouchSensor()
+        self.ScanCount = 0
 
         assert self.MLeft.connected, "Left motor not connected"
         assert self.MRight.connected, "Right motor not connected" 

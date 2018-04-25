@@ -59,6 +59,7 @@ class Ultrasonic:
         [sonarAngleDegrees ,  meanSensorReturns] this is a table of two columns.
     
         """
+        self.ScanCount += 1
 
         if angleIncrement < 3:
             angleIncrement = 3
