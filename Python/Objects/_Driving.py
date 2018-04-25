@@ -113,54 +113,65 @@ class Driving:
         back = np.array([ -half_len * cos_theta + self.x,\
                           -half_len * sin_theta + self.y ])
 
-        cos_theta = math.cos( thetaRad - math.pi / 2.0 )
-        sin_theta = math.sin( thetaRad - math.pi / 2.0 )
+        xy = np.array([ math.cos( thetaRad - math.pi / 2.0 ),\
+                        math.sin( thetaRad - math.pi / 2.0 ) ])
        
-        fl = np.array([ -half_wid * cos_theta + front[0],\
-                        -half_wid * sin_theta + front[1] ])
-        bl = np.array([ -half_wid * cos_theta + back[0],\
-                        -half_wid * sin_theta + back[1] ])
-        fr = np.array([ half_wid * cos_theta + front[0],\
-                        half_wid * sin_theta + front[1] ])
-        br = np.array([ half_wid * cos_theta + back[0],\
-                        half_wid * sin_theta + back[1] ])
-        return np.array([ fl, fr, br, bl ])
+        fl = np.add( -half_wid * xy, front )
+        bl = np.add( -half_wid * xy, back )
+        fr = np.add( half_wid * xy, front )
+        br = np.add( half_wid * xy, back )
+        
+        return np.array([ fl, fr, bl, br ])
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
-    def PathIsClear( self, grid, dist ): 
-        thresh = 50
-        corners = self.GetCorners()
+    def PathIsClear( self, grid, dist, debug = False ): 
+        thresh = ( 1 + self.ScanCount ) * 8
+#        print( "thresh: " + str( thresh ) )
         thetaRad = np.deg2rad( self.Theta )
-        cosTheta = np.cos( thetaRad )
-        sinTheta = np.sin( thetaRad )
-        fl = corners[ 0 ]
-        fr = corners[ 1 ]
-        direc = np.subtract( fr, fl )
+        botDir = np.array([ np.cos( thetaRad ), np.sin( thetaRad ) ])
+
+        if( dist > 0 ):
+            # moving forward, get front corners.
+            left, right = self.GetCorners()[ 0:2 ]
+            limit = dist + grid.CellWidth
+        else:
+            # moving backward, get rear corners.
+            left, right = self.GetCorners()[ 2:4 ]
+            limit = dist - grid.CellWidth
+
+        rowVec = np.subtract( right, left )
         scalars = np.linspace( 0, 1,\
-                               2 + int( self.WIDTH_IN / grid.CellWidth ) )
-        offsets = np.array([ direc[0] * scalars, direc[1] * scalars ])
+                               2 + self.WIDTH_IN / ( grid.CellWidth * 1.5 ) ) 
+        offsets = np.array([ rowVec[0] * scalars, rowVec[1] * scalars ])
         # get next vector,
-        left_end_x = fl[0] + grid.CellWidth + dist * cosTheta
-        left_end_y = fl[1] + grid.CellWidth + dist * sinTheta
-        left_pts = np.array([ np.arange( fl[0], left_end_x,\
-                              grid.CellWidth * cosTheta ),\
-                              np.arange( fl[1], left_end_y,\
-                              grid.CellWidth * cosTheta ) ])
-        
-        for i in range( np.size( left_pts, 1 ) ):
+        end = np.add( left, limit * botDir )
+        res = abs( limit / grid.CellWidth )
+        pts = np.array([ np.linspace( left[0], end[0], res ),\
+                         np.linspace( left[1], end[1], res ) ])
+        if( debug ):
+            print( "left: " + str( left ) + "\nright: " + str( right ) )
+            print( "rowVec: " + str( rowVec ) )
+            print( "sc: " + str( scalars ) )
+            print( "off: " + str( offsets ) )
+            print( "end: " + str( end ) )
+            print( "res: " + str( res ) )
+            print( "pts: " + str( pts ) )
+
+        for i in range( 1, np.size( pts, 1 ) ):
             points = np.add( offsets,\
-                             [ [ left_pts[0][i] ], [ left_pts[1][i] ] ] )
-            print( points ) 
+                             [ [ pts[0][i] ], [ pts[1][i] ] ] )
+#            for p in points.T:
+#                print( ','.join( map( str, p ) ) ) 
             for j in range( np.size( scalars ) ):
                 c = grid.PointToCell( points[0][j], points[1][j] )
-                print( c )
-                if( grid.Grid[ c[0], c[1] ] >= thresh ):
-                    return False
+#                print( "cell: " + str( c ) ) 
+#                print( "val: " + str( grid.Grid[ c ] ) )
+                if( grid.Grid[ c ] >= thresh ):
+                    return np.sign( dist ) *\
+                           np.linalg.norm( left - [ pts[0][i], pts[1][i] ] )
         
-        return True
-        # generate points
-        # check points
+        return dist
             
 
 

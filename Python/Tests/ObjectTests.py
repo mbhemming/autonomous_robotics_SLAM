@@ -26,8 +26,10 @@ print( "*********************************" )
 
 
 o = OccupancyGrid( 3 )
-r = Robot( 15, 15, 45 )
+r = Robot( 40, 30, 15 )
 print( r.PathIsClear( o, 10 ))
+print( "\n" )
+print( r.PathIsClear( o, -10 ))
 
 # POINT
 if( TEST_POINT or TEST_ALL ):
