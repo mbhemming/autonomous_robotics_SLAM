@@ -10,7 +10,8 @@ class OccupancyGrid( _OccupancyGrid ):
     COURSE_X_IN= 81.5
     DOOR_START_IN = 52.0
     DOOR_END_IN = 70.25
-
+    DECR_AMOUNT = 12
+    INCR_AMOUNT = 8
     def __init__( self, cellWidth ):
         self.Rows = int( self.COURSE_Y_IN / cellWidth ) + 1
         self.Cols = int( self.COURSE_X_IN / cellWidth ) + 1
@@ -42,7 +43,7 @@ class OccupancyGrid( _OccupancyGrid ):
 
     def IncProbCell(self, row, col):
         if( not self.IsWall( row, col ) ):
-            self.Grid[ row, col ] += 5
+            self.Grid[ row, col ] += self.INCR_AMOUNT
             if( self.Grid[ row, col ] > self.MAX_PROB ):
                 self.Grid[ row, col ] = self.MAX_PROB
 
@@ -52,7 +53,7 @@ class OccupancyGrid( _OccupancyGrid ):
 
     def DecProbCell(self, row, col):
         if( not self.IsWall( row, col ) ):
-            self.Grid[ row, col ] -= 8
+            self.Grid[ row, col ] -= self.DECR_AMOUNT
             if( self.Grid[ row, col ] < self.MIN_PROB ):
                 self.Grid[ row, col ] = self.MIN_PROB
 
