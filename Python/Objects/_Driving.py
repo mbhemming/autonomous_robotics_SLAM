@@ -113,23 +113,21 @@ class Driving:
         back = np.array([ -half_len * cos_theta + self.x,\
                           -half_len * sin_theta + self.y ])
 
-        cos_theta = math.cos( thetaRad - math.pi / 2.0 )
-        sin_theta = math.sin( thetaRad - math.pi / 2.0 )
+        xy = np.array([ math.cos( thetaRad - math.pi / 2.0 ),\
+                        math.sin( thetaRad - math.pi / 2.0 ) ])
        
-        fl = np.array([ -half_wid * cos_theta + front[0],\
-                        -half_wid * sin_theta + front[1] ])
-        bl = np.array([ -half_wid * cos_theta + back[0],\
-                        -half_wid * sin_theta + back[1] ])
-        fr = np.array([ half_wid * cos_theta + front[0],\
-                        half_wid * sin_theta + front[1] ])
-        br = np.array([ half_wid * cos_theta + back[0],\
-                        half_wid * sin_theta + back[1] ])
+        fl = np.add( -half_wid * xy, front )
+        bl = np.add( -half_wid * xy, back )
+        fr = np.add( half_wid * xy, front )
+        br = np.add( half_wid * xy, back )
+        
         return np.array([ fl, fr, bl, br ])
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
     def PathIsClear( self, grid, dist, debug = False ): 
-        thresh = 50
+        thresh = ( 1 + self.ScanCount ) * 8
+#        print( "thresh: " + str( thresh ) )
         thetaRad = np.deg2rad( self.Theta )
         botDir = np.array([ np.cos( thetaRad ), np.sin( thetaRad ) ])
 
@@ -163,12 +161,16 @@ class Driving:
         for i in range( 1, np.size( pts, 1 ) ):
             points = np.add( offsets,\
                              [ [ pts[0][i] ], [ pts[1][i] ] ] )
-            for p in points.T:
-                print( ','.join( map( str, p ) ) ) 
+#            for p in points.T:
+#                print( ','.join( map( str, p ) ) ) 
             for j in range( np.size( scalars ) ):
                 c = grid.PointToCell( points[0][j], points[1][j] )
-                if( grid.Grid[ c[0], c[1] ] >= thresh ):
-                    return np.linalg.norm( end - left )
+#                print( "cell: " + str( c ) ) 
+#                print( "val: " + str( grid.Grid[ c ] ) )
+                if( grid.Grid[ c ] >= thresh ):
+                    return np.sign( dist ) *\
+                           np.linalg.norm( left - [ pts[0][i], pts[1][i] ] )
+        
         return dist
             
 
