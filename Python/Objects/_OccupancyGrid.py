@@ -3,12 +3,23 @@ from Point import Point
 from Pose import Pose 
 import numpy as np
 class _OccupancyGrid:
-    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=1.5,\
-                            angularResDeg=15.0, sonarFOVDeg=60.0, PRINTSTUFF=False):
+    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.75,\
+        angularResDeg=10.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
+
+        # If we only need to do the right side
+        sonarFOVDeg = sonarFOVDeg - 2.0*angleStep
         startAngle = sonarCenterAngle - (sonarFOVDeg/2.0)
+        if raySide == 1:
+            startAngle = sonarCenterAngle - (sonarFOVDeg/2.0) - (angleStep)
+            sonarFOVDeg = angleStep
+        elif raySide == -1:
+            startAngle = startAngle + sonarFOVDeg/2.0
+            sonarFOVDeg = angleStep
+            
+
         lastcoord=(-1,-1) 
         x0 = roboPose.x
         y0 = roboPose.y
@@ -17,6 +28,9 @@ class _OccupancyGrid:
             print ("robopose: " + str(robopose))
             print ("Sonar Return:  " + str(sonarReturn))
             print ("Sonar Rel: " + str(sonarRelAngleDeg))
+            print ("Direction: " + str(raySide))
+            print ("FOV: " + str(sonarFOVDeg))
+            print ("Start Angle: " + str(startAngle))
 
         # we will have at most the number of ray angles of plus ones. 
         plusOnes = np.zeros( ( math.floor( sonarFOVDeg / angularResDeg ) + 1, 2 ),\
@@ -25,7 +39,7 @@ class _OccupancyGrid:
     
         # it's a bit harder to determine how many minus ones, but it is approximately
         # triple.the array can be resized if needed.
-        initNumMOnes = math.floor(sonarFOVDeg/angularResDeg)*10
+        initNumMOnes = (plusOnes.shape[0]) *10
         minOnes = np.zeros((initNumMOnes,2), dtype=float) 
         nMones = 0
         if sonarReturn <= 24: 
