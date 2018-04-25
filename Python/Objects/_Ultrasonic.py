@@ -12,16 +12,17 @@ class Ultrasonic:
 
     # Set the sensor angle to a theta relative to the forward facing position.
     def SetSensorAngle( self, angle ):
-        tim = math.fabs( angle - self.MUltra.position / GEAR_RATIO ) / STALL_TIME_CONSTANT
-        self.MUltra.wait_until_not_moving( timeout = tim )
+        tim = math.fabs( angle - self.MUltra.position / GEAR_RATIO )\
+                         / STALL_TIME_CONSTANT
         self.MUltra.run_to_abs_pos( position_sp = angle * GEAR_RATIO,\
                                      speed_sp = ROTATION_SPEED )
+        self.MUltra.wait_until_not_moving( timeout = tim )
 
     # Return sensor to forward facing position and reset position_sp variable
     def ResetSensorAngle( self ):
-        self.MUltra.wait_until_not_moving( timeout = 1000 )
+        tim = math.fabs( self.MUltra.position / GEAR_RATIO ) / STALL_TIME_CONSTANT
         self.MUltra.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
-        return 0
+        self.MUltra.wait_until_not_moving( timeout = tim )
 
     def DecomposeSensorReadings( self, allReadings, granularity ):
 
