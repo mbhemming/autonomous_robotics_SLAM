@@ -17,11 +17,17 @@ TEST_ALL = n
 TEST_POINT = n
 TEST_POSE = n
 TEST_ROBOT =n 
-TEST_OCC_GRID = y
+TEST_OCC_GRID = n
 
 print( "*********************************" )
 print( "*     STARTING OBJECT TESTS     *" )
 print( "*********************************" )
+
+
+
+o = OccupancyGrid( 3 )
+r = Robot( 15, 15, 45 )
+print( r.PathIsClear( o, 10 ))
 
 # POINT
 if( TEST_POINT or TEST_ALL ):
@@ -100,8 +106,12 @@ if( TEST_OCC_GRID or TEST_ALL ):
     p = o.CellToPoint( 15, 12 )
     print( " " + str( p ) )
 
-    print( "PointToCell" )
+    print( "PointToCell - Point" )
     c = o.PointToCell( Point( 34.1, 23.2 ) )
+    print( " " + str( c ) )
+
+    print( "PointToCell - xy" )
+    c = o.PointToCell( 34.1, 23.2 )
     print( " " + str( c ) )
     
     print( "RoundPoint" )
@@ -109,7 +119,6 @@ if( TEST_OCC_GRID or TEST_ALL ):
     print( " " + str( c ) )
 
     print( "OCCUPANCY GRID TEST COMPLETE\n\n" )
-
 
 # ROBOT
 if( TEST_ROBOT or TEST_ALL ):
