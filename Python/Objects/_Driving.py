@@ -108,42 +108,56 @@ class Driving:
         half_wid = self.WIDTH_IN / 2
         cos_theta = math.cos( thetaRad )
         sin_theta = math.sin( thetaRad )
-        front = [ half_len * cos_theta + self.x, half_len * sin_theta + self.y ]
-        back = [ -half_len * cos_theta + self.x, -half_len * sin_theta + self.y ]
+        front = np.array([ half_len * cos_theta + self.x,\
+                           half_len * sin_theta + self.y ])
+        back = np.array([ -half_len * cos_theta + self.x,\
+                          -half_len * sin_theta + self.y ])
 
         cos_theta = math.cos( thetaRad - math.pi / 2.0 )
         sin_theta = math.sin( thetaRad - math.pi / 2.0 )
        
-        fl = [ -half_wid * cos_theta + front[0], -half_wid * sin_theta + front[1] ]
-        bl = [ -half_wid * cos_theta + back[0], -half_wid * sin_theta + back[1] ]
-        fr = [ half_wid * cos_theta + front[0], half_wid * sin_theta + front[1] ]
-        br = [ half_wid * cos_theta + back[0], half_wid * sin_theta + back[1] ]
-        return [ fl, fr, br, bl ]
+        fl = np.array([ -half_wid * cos_theta + front[0],\
+                        -half_wid * sin_theta + front[1] ])
+        bl = np.array([ -half_wid * cos_theta + back[0],\
+                        -half_wid * sin_theta + back[1] ])
+        fr = np.array([ half_wid * cos_theta + front[0],\
+                        half_wid * sin_theta + front[1] ])
+        br = np.array([ half_wid * cos_theta + back[0],\
+                        half_wid * sin_theta + back[1] ])
+        return np.array([ fl, fr, br, bl ])
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
     def PathIsClear( self, grid, dist ): 
+        thresh = 50
         corners = self.GetCorners()
         thetaRad = np.deg2rad( self.Theta )
         cosTheta = np.cos( thetaRad )
         sinTheta = np.sin( thetaRad )
         fl = corners[ 0 ]
         fr = corners[ 1 ]
+        direc = np.subtract( fr, fl )
+        scalars = np.linspace( 0, 1,\
+                               2 + int( self.WIDTH_IN / grid.CellWidth ) )
+        offsets = np.array([ direc[0] * scalars, direc[1] * scalars ])
         # get next vector,
         left_end_x = fl[0] + grid.CellWidth + dist * cosTheta
         left_end_y = fl[1] + grid.CellWidth + dist * sinTheta
-  #      print( "left: " )
-        left_pts = [ np.arange( fl[0], left_end_x, grid.CellWidth * cosTheta ),\
-                     np.arange( fl[1], left_end_y, grid.CellWidth * cosTheta ) ]
- #       print( left_pts )
-#        print("right")
-        right_end_x = fr[0] + grid.CellWidth + dist * cosTheta
-        right_end_y = fr[1] + grid.CellWidth + dist * sinTheta 
-        right_pts = [ np.arange( fr[0], right_end_x, grid.CellWidth * cosTheta ),\
-                      np.arange( fr[1], right_end_y, grid.CellWidth * cosTheta ) ]
-#        print( right_pts )
-        vectors = [ left_pts, np.subtract( right_pts, left_pts ) ]
-        print( vectors )
+        left_pts = np.array([ np.arange( fl[0], left_end_x,\
+                              grid.CellWidth * cosTheta ),\
+                              np.arange( fl[1], left_end_y,\
+                              grid.CellWidth * cosTheta ) ])
+        
+        for i in range( np.size( left_pts, 1 ) ):
+            points = np.add( offsets,\
+                             [ [ left_pts[0][i] ], [ left_pts[1][i] ] ] )
+            print( points ) 
+            for j in range( np.size( scalars ) ):
+                c = grid.PointToCell( points[0][j], points[1][j] )
+                print( c )
+                if( grid.Grid[ c[0], c[1] ] >= thresh ):
+                    return False
+        
         return True
         # generate points
         # check points
