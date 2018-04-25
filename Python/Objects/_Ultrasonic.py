@@ -99,11 +99,9 @@ class Ultrasonic:
 
             # If we didnt get any 'in range' returns, flag this as inf.
             if goodReadings == 0:
-                #meanSensorReturns[j] = np.inf
-                ##print("Nothing Detected")
                 # Sensor range max value.
                 meanSensorReturns[countReturns] = 100.3937007874
-                stddevs[countReturns] = 0.0
+                #stddevs[countReturns] = 0.0
                 countReturns = countReturns + 1
             else:
                 # The mean is now calculated from the valid sensor measurements
@@ -129,14 +127,14 @@ class Ultrasonic:
 
                     prevReturn = meanSensorReturns[countReturns]
 
-                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, sonarFOVDeg = 60.0, angleStep = angleIncrement, PRINTSTUFF=True)
+                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, sonarFOVDeg = 60.0, angleStep = angleIncrement)
 #                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
-                    stddevs[countReturns] = np.std(det)
+                    #stddevs[countReturns] = np.std(det)
                     countReturns = countReturns + 1
                     if meanSensorReturns.size <= countReturns:
                         #print("Resizing")
                         meanSensorReturns.resize(countReturns + 10)
-                        stddevs.resize(countReturns + 10)
+                        #stddevs.resize(countReturns + 10)
                         angles.resize(countReturns + 10)
 
 
