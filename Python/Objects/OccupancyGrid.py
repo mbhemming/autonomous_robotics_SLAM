@@ -42,7 +42,7 @@ class OccupancyGrid( _OccupancyGrid ):
 
     def IncProbCell(self, row, col):
         if( not self.IsWall( row, col ) ):
-            self.Grid[ row, col ] += 1
+            self.Grid[ row, col ] += 5
             if( self.Grid[ row, col ] > self.MAX_PROB ):
                 self.Grid[ row, col ] = self.MAX_PROB
 
@@ -52,7 +52,7 @@ class OccupancyGrid( _OccupancyGrid ):
 
     def DecProbCell(self, row, col):
         if( not self.IsWall( row, col ) ):
-            self.Grid[ row, col ] -= 1
+            self.Grid[ row, col ] -= 8
             if( self.Grid[ row, col ] < self.MIN_PROB ):
                 self.Grid[ row, col ] = self.MIN_PROB
 
