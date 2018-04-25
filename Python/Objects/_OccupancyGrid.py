@@ -3,7 +3,7 @@ from Point import Point
 from Pose import Pose 
 import numpy as np
 class _OccupancyGrid:
-    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=1,\
+    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
         angularResDeg=6.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
@@ -70,9 +70,13 @@ class _OccupancyGrid:
                                                                   int( (sonarReturn-6) / dRes ) )
         
                 for j in range(0, pointsX.size):
+                    if pointsX[j] < 0 or pointsY [ j ] < 0:
+                        break
+
                     coord = self.PointToCell( Point( pointsX[ j ],pointsY[ j ] ) )
-                    if coord != lastcoord:
-                        lastcoord=coord            
+                    lastcoord = coord
+                    if coord != lastcoord and (self.Grid[coord[0], coord[1]] != 0):
+            
                         if (not any( np.equal( plusOnes, coord ).all( 1 ) )) and (not any( np.equal( minOnes, coord ).all( 1 ) )):
                             minOnes[nMones] = coord
                             nMones = nMones + 1
