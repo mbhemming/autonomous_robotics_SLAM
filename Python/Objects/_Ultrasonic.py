@@ -12,16 +12,17 @@ class Ultrasonic:
 
     # Set the sensor angle to a theta relative to the forward facing position.
     def SetSensorAngle( self, angle ):
-        tim = math.fabs( angle - self.MUltra.position / GEAR_RATIO ) / STALL_TIME_CONSTANT
-        self.MUltra.wait_until_not_moving( timeout = tim )
+        tim = math.fabs( angle - self.MUltra.position / GEAR_RATIO )\
+                         / STALL_TIME_CONSTANT
         self.MUltra.run_to_abs_pos( position_sp = angle * GEAR_RATIO,\
                                      speed_sp = ROTATION_SPEED )
+        self.MUltra.wait_until_not_moving( timeout = tim )
 
     # Return sensor to forward facing position and reset position_sp variable
     def ResetSensorAngle( self ):
-        self.MUltra.wait_until_not_moving( timeout = 1000 )
+        tim = math.fabs( self.MUltra.position / GEAR_RATIO ) / STALL_TIME_CONSTANT
         self.MUltra.run_to_abs_pos( position_sp = 0, speed_sp = ROTATION_SPEED )
-        return 0
+        self.MUltra.wait_until_not_moving( timeout = tim )
 
     def DecomposeSensorReadings( self, allReadings, granularity ):
 
@@ -68,9 +69,12 @@ class Ultrasonic:
 
         angleBeforeSweep = 0
         countReturns = 0
+        side = 0 #center
+        detectionRange = 60.0 #deg
         meanSensorReturns = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
         stddevs = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
         angles = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
+        prevReturn = -1
         for j in range(0, numSensorSteps):
             # Start the sensor at range the sensor and assumes that it is at 0 
             # degrees relative to the robot.
@@ -103,17 +107,29 @@ class Ultrasonic:
                 countReturns = countReturns + 1
             else:
                 # The mean is now calculated from the valid sensor measurements
-                #meanSensorReturns[j] = (np.mean(sensorReadings[0:goodReadings]))
-                #stddevs[j] = np.std(sensorReadings[0:goodReadings])
-                ##print( "Mean: "+ str(np.mean(sensorReadings[0:goodReadings])))
-                ##print( "StdDev: " + str(np.std(sensorReadings[0:goodReadings])))
-                #print( str(goodReadings) + " good measurements")
                 ranges = self.DecomposeSensorReadings( sensorReadings[0:goodReadings], 3)
                 for det in ranges:
                     #print("Detection: " + str(det))
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
                     meanSensorReturns[countReturns] = np.mean(det)
-                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement))
+                    if prevReturn < 0:
+                        side = 0
+                        #detectionRange = 0.0
+                    elif (prevReturn - meanSensorReturns[countReturns])>12.0:
+                        print("Found an object CW at: " + str(angles[countReturns]))
+                        #detectionRange = angleIncrement
+                        side = 1
+                    elif (prevReturn - meanSensorReturns[countReturns])<-12.0:
+                        print("Left an object CW at: " + str(angles[countReturns]))
+                        #detectionRange = angleIncrement
+                        side = -1
+                    else: 
+                        #detectionRange = 0.0
+                        side = 0
+
+                    prevReturn = meanSensorReturns[countReturns]
+
+                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, sonarFOVDeg = 60.0, angleStep = angleIncrement, PRINTSTUFF=True)
 #                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
                     stddevs[countReturns] = np.std(det)
                     countReturns = countReturns + 1
