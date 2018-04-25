@@ -4,7 +4,7 @@ from Pose import Pose
 import numpy as np
 class _OccupancyGrid:
     def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=1.5,\
-                            angularResDeg=6, sonarFOVDeg=60.0, PRINTSTUFF=False):
+                            angularResDeg=15.0, sonarFOVDeg=60.0, PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
@@ -25,14 +25,14 @@ class _OccupancyGrid:
     
         # it's a bit harder to determine how many minus ones, but it is approximately
         # triple.the array can be resized if needed.
-        initNumMOnes = math.floor(sonarFOVDeg/angularResDeg)*5
+        initNumMOnes = math.floor(sonarFOVDeg/angularResDeg)*10
         minOnes = np.zeros((initNumMOnes,2), dtype=float) 
         nMones = 0
         if sonarReturn <= 24: 
             for i in range(0, math.floor(sonarFOVDeg/angularResDeg) + 1):
-                theta =  startAngle + (i*angularResDeg)
-                endPoint = Point( x0 + sonarReturn * math.cos( np.deg2rad( theta ) ),\
-                                  y0 + sonarReturn * math.sin( np.deg2rad( theta ) ) )
+                thetaRad = np.deg2rad( startAngle + (i*angularResDeg))
+                endPoint = Point( x0 + sonarReturn * math.cos( thetaRad ),\
+                                  y0 + sonarReturn * math.sin( thetaRad ) )
         
                 endCell =  self.PointToCell( endPoint )
         
@@ -43,15 +43,17 @@ class _OccupancyGrid:
             sonarReturn = 24 # Still lower some cells.
         if sonarReturn > 6:    
             for i in range(0, math.floor( sonarFOVDeg / angularResDeg ) + 1):
-                theta =  startAngle + (i*angularResDeg)
-                startX = x0+5*math.cos( np.deg2rad( theta ))
-                startY = y0+5*math.sin(np.deg2rad( theta ))
-                endPoint = Point( x0 + sonarReturn * math.cos( np.deg2rad( theta ) ),\
-                                  y0 + sonarReturn * math.sin( np.deg2rad( theta ) ) )
+                thetaRad =  np.deg2rad(startAngle + (i*angularResDeg))
+                startX = x0+5*math.cos( thetaRad)
+                startY = y0+5*math.sin(thetaRad)
+                endPoint = Point( x0 + sonarReturn * math.cos( thetaRad ),\
+                                  y0 + sonarReturn * math.sin( thetaRad ) )
         
-                # INCHES ** Potential Performance Improvement: generate the points once and move them ** 
-                pointsX = np.linspace( start = startX, stop = endPoint.x,num = int( (sonarReturn-6 )/ dRes ))
-                pointsY = np.linspace( start = startY, stop = endPoint.y,num = int( (sonarReturn-6) / dRes ) )
+                # INCHES ** Potential Performance: generate the points once and move them ** 
+                pointsX = np.linspace( start = startX, stop = endPoint.x,num = \
+                                                                  int( (sonarReturn-6 )/ dRes ))
+                pointsY = np.linspace( start = startY, stop = endPoint.y,num = \
+                                                                  int( (sonarReturn-6) / dRes ) )
         
                 for j in range(0, pointsX.size):
                     coord = self.PointToCell( Point( pointsX[ j ],pointsY[ j ] ) )
@@ -60,11 +62,13 @@ class _OccupancyGrid:
                         if (not any( np.equal( plusOnes, coord ).all( 1 ) )) and (not any( np.equal( minOnes, coord ).all( 1 ) )):
                             minOnes[nMones] = coord
                             nMones = nMones + 1
-                            if nMones == initNumMOnes:
-                                if PRINTSTUFF:
-                                    print("Resizing Minus Ones to: " + str(2*initNumMOnes))
-                                initNumMOnes = initNumMOnes + initNumMOnes
-                                minOnes.reshape(initNumMOnes,2)
+                            if nMones == minOnes.shape[0]:
+                                #initNumMOnes = initNumMOnes + initNumMOnes
+                                z = np.zeros((initNumMOnes,2), dtype=float)
+                                print("Before resize: " + str(minOnes))
+                                minOnes = np.concatenate((minOnes,z), axis=0)
+                                print("After: " + str(minOnes))
+                                print("Resizing Minus Ones: " + str(minOnes.shape[0]))
     
         if PRINTSTUFF:
             print("Plus Ones: " + str( plusOnes[0:nPones]))
