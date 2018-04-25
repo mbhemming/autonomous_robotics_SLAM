@@ -110,19 +110,40 @@ class Ultrasonic:
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
                     meanSensorReturns[countReturns] = np.mean(det)
                     if prevReturn < 0:
-                        side = 0
+                        side = 0 # init.
                         #detectionRange = 0.0
-                    elif (prevReturn - meanSensorReturns[countReturns])>12.0:
+                    elif (prevReturn - meanSensorReturns[countReturns])>6.0:
                         print("Found an object CW at: " + str(angles[countReturns]))
                         #detectionRange = angleIncrement
                         side = 1
-                    elif (prevReturn - meanSensorReturns[countReturns])<-12.0:
+                        # Possibly Wall = true
+                    elif (prevReturn - meanSensorReturns[countReturns])<-6.0:
                         print("Left an object CW at: " + str(angles[countReturns]))
                         #detectionRange = angleIncrement
                         side = -1
                     else: 
                         #detectionRange = 0.0
                         side = 0
+                        # Kalman Filter if wall minima
+                        # if possibly wall:
+                        #     Check if Wall:
+                        #    startKalman = true/false
+                        # if startKalman:
+                        #     if prev < this 
+                        #        dir = getting further
+                        #    else 
+                        #        dir = getting closer
+                        #    startKalman = false
+                        #    kalman started = true
+                        # if kalman started
+                        #    if dir = getting closer:
+                        #        if got farther:
+                        #            last was perpandicular. call kalman with angle&dist
+                        #            possibly wall = false
+                        #    else
+                        #        if got closer:
+                        #            last was perpandicular to wall call kalman w/angle&d
+                        #            possibly wall = false
 
                     prevReturn = meanSensorReturns[countReturns]
 
