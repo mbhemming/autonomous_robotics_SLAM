@@ -147,7 +147,7 @@ class Driving:
                                2 + self.WIDTH_IN / ( grid.CellWidth * 1.5 ) ) 
         offsets = np.array([ rowVec[0] * scalars, rowVec[1] * scalars ])
         # get next vector,
-        end = np.add( left, dist * botDir )
+        end = np.add( left, limit * botDir )
         res = abs( limit / grid.CellWidth )
         pts = np.array([ np.linspace( left[0], end[0], res ),\
                          np.linspace( left[1], end[1], res ) ])
