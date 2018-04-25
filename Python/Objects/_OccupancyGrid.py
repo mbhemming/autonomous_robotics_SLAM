@@ -3,8 +3,8 @@ from Point import Point
 from Pose import Pose 
 import numpy as np
 class _OccupancyGrid:
-    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
-        angularResDeg=6.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
+    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.25,\
+        angularResDeg=2.0, raySide = 0, sonarFOVDeg=40.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta

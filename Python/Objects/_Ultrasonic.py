@@ -70,7 +70,6 @@ class Ultrasonic:
         angleBeforeSweep = 0
         countReturns = 0
         side = 0 #center
-        detectionRange = 60.0 #deg
         meanSensorReturns = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
         stddevs = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
         angles = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
@@ -127,7 +126,7 @@ class Ultrasonic:
 
                     prevReturn = meanSensorReturns[countReturns]
 
-                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, sonarFOVDeg = 60.0, angleStep = angleIncrement)
+                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, angleStep = angleIncrement)
 #                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
                     #stddevs[countReturns] = np.std(det)
                     countReturns = countReturns + 1
