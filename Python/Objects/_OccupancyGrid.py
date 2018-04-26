@@ -121,7 +121,7 @@ class _OccupancyGrid:
             stopAngle = startAngle + angleStep
             
         coveredDegrees = stopAngle - startAngle
-        numberRays = ( math.floor( coveredDegrees / angularResDeg ) + 1)
+        numberRays = ( math.floor( coveredDegrees / angularResDeg ) + 1 )
         
         lastcoord=(-1,-1) 
         x0 = roboPose.x

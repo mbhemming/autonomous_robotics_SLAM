@@ -166,6 +166,7 @@ class Ultrasonic:
         return np.column_stack( ( angles[ 0:countReturns ],\
                                   meanSensorReturns[ 0:countReturns ],\
                                   stddevs[ 0:countReturns ] ) )
+                                      
                                   
     def GatherSensorMeasurements2( self, numSensorReadingsForThisState, maxSweepAngleDeg, angleIncrement , grid):
         """
