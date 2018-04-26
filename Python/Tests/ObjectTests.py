@@ -23,13 +23,9 @@ print( "*********************************" )
 print( "*     STARTING OBJECT TESTS     *" )
 print( "*********************************" )
 
-
-
 o = OccupancyGrid( 3 )
-r = Robot( 40, 30, 15 )
-print( r.PathIsClear( o, 10 ))
-print( "\n" )
-print( r.PathIsClear( o, -10 ))
+r = Robot( 50, 10, 143 )
+print( r.OccupiedCells( o ) )
 
 # POINT
 if( TEST_POINT or TEST_ALL ):
@@ -147,6 +143,12 @@ if( TEST_ROBOT or TEST_ALL ):
     print( "GatherSensorMeasurements" )
     og = OccupancyGrid( 3 )
     r.GatherSensorMeasurements( 50, 180, 5, og )
+    r.x = 40
+    r.y = 30
+    r.Theta = 15
+    print( r.PathIsClear( og, 10 ) )
+    print( r.PathIsClear( og, -10 ) )
+
     print( "ROBOT TEST COMPLETE\n\n" )
 
 
