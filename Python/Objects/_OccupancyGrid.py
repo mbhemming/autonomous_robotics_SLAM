@@ -105,8 +105,8 @@ class _OccupancyGrid:
 
         
         
-    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
-        angularResDeg=6.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
+    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.15,\
+        angularResDeg=10.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
@@ -121,19 +121,18 @@ class _OccupancyGrid:
             stopAngle = startAngle + angleStep
             
         coveredDegrees = stopAngle - startAngle
-        numberRays = ( math.floor( coveredDegrees / angularResDeg ) + 1
+        numberRays = ( math.floor( coveredDegrees / angularResDeg ) + 1)
         
         lastcoord=(-1,-1) 
         x0 = roboPose.x
         y0 = roboPose.y
-		
-		if PRINTSTUFF:
-			print("StartAngle: " + str(startAngle))
-			print("StopAngle: " + str(stopAngle))
+        
+        if PRINTSTUFF:
+            print("StartAngle: " + str(startAngle))
+            print("StopAngle: " + str(stopAngle))
 
         # we will have at most the number of ray angles of plus ones. 
-        plusOnes = np.zeros( numberRays, 2 ),\
-                   dtype=float)
+        plusOnes = np.zeros( (numberRays, 2 ), dtype=float)
         nPones = 0
     
         # it's a bit harder to determine how many minus ones, but it is approximately
@@ -165,11 +164,11 @@ class _OccupancyGrid:
             sonarReturn = 24 # Still lower some cells.
             
             
-        if sonarReturn > 6:    
+        if sonarReturn > 4:    
             for i in range(0, numberRays):
                 thetaRad =  np.deg2rad(startAngle + (i*angularResDeg))
-                startX = x0+5*math.cos( thetaRad)
-                startY = y0+5*math.sin(thetaRad)
+                startX = x0+2*math.cos( thetaRad)
+                startY = y0+2*math.sin(thetaRad)
                 endPoint = Point( x0 + sonarReturn * math.cos( thetaRad ),\
                                   y0 + sonarReturn * math.sin( thetaRad ) )
         
