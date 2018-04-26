@@ -105,8 +105,8 @@ class _OccupancyGrid:
 
         
         
-    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.15,\
-        angularResDeg=10.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
+    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
+        angularResDeg=5.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
