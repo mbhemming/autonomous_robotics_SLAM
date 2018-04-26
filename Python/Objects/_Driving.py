@@ -96,13 +96,21 @@ class Driving:
             print( "  dist: " + str( dist ) )
             print( "  dt: " + str( dtMilli ) )
 
+    # Returns the row and column of bottom left and top right cells to 
+    # indicate the rectangle of occupied cells. The return type is a 2x2 numpy array
     def OccupiedCells( self, grid ):
-        cen = grid.PointToCell( self.x, self.y )
-        len_cells = int( self.LENGTH / ( 2 * grid.CellWidth ) ) + 1
-        wid_cells = int( self.WIDTH / ( 2 * grid.CellWidth ) ) + 1
-#        bl = ( cen[ 0 ] - 
+        corners = self.GetCorners( 'cells', grid )
+#        for c in corners:
+#            print( ','.join( map( str, c ) ) ) 
+#        print( type(corners ))
+        rmin = np.min( corners[:,0] )
+        rmax = np.max( corners[:,0] )
+        cmin = np.min( corners[:,1] )
+        cmax = np.max( corners[:,1] )
+        
+        return np.array( [ [ rmin, cmin ], [ rmax, cmax ] ] )
 
-    def GetCorners( self ):
+    def GetCorners( self, tp = 'points', grid = [] ):
         thetaRad = math.radians( self.Theta ) 
         half_len = self.LENGTH_IN / 2
         half_wid = self.WIDTH_IN / 2
@@ -120,8 +128,17 @@ class Driving:
         bl = np.add( -half_wid * xy, back )
         fr = np.add( half_wid * xy, front )
         br = np.add( half_wid * xy, back )
-        
-        return np.array([ fl, fr, bl, br ])
+        pts = [ fl, fr, bl, br ]
+
+#        for p in pts:
+#            print( ','.join( map( str, p ) ) ) 
+       
+        if( tp == 'points' ):
+            return pts
+        elif( tp == 'cells' ):
+            return np.array([ grid.PointToCell( n[0], n[1] ) for n in pts ])
+        else:
+            return []
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
