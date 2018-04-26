@@ -168,7 +168,7 @@ class Ultrasonic:
 
                             prevReturn = meanSensorReturns[countReturns]
 
-                            grid.GetOccupancyUpdate2(Pose(self.SonarX(),self.SonarY(),self.Theta), meanSensorReturns[countReturns], currAngle, raySide = signDir*signAng*side, sonarFOVDeg = 10.0, angleStep = angleIncrement, PRINTSTUFF=True)
+                            grid.GetOccupancyUpdate2(Pose(self.SonarX(),self.SonarY(),self.Theta), meanSensorReturns[countReturns], currAngle, raySide = signDir*signAng*side, sonarFOVDeg = 10.0, angleStep = angleIncrement, PRINTSTUFF=False)
 
                             countReturns = countReturns + 1
                             if meanSensorReturns.size <= countReturns:

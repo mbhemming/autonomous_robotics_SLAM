@@ -20,18 +20,17 @@ class Driving:
         # calculate new theta:
         delta_theta = self.CalculateTheta( dest )
         if( abs(delta_theta) > 45 and not self.TurnIsClear( grid ) ):
-            return
+            return 1 # couldn't turn
 
         self.TurnTwoWheelDeg( delta_theta )
 
         #   calculate delta d = sqrt(dX^2 + dY^2)
         #   straight(d)
         dist = np.linalg.norm( [self.x - dest.x, self.y-dest.y] )
-        if( abs(self.PathIsClear( grid, dist )) < abs(dist) ):
-            # TODO need to do something here. 
-            return
-        self.StraightDistIN( dist )
-        return
+        if( abs(self.PathIsClear( grid, dist, self.Theta ) ) < abs(dist) ):
+            return 2 # path not clear
+
+        return self.StraightDistIN( dist )
 
     def TurnOneWheelDeg( self, angle, wheel ):
         assert False
@@ -99,7 +98,7 @@ class Driving:
                 self.y += delta * np.sin( np.rad2deg( self.Theta ) )
 
                 self.StraightDistIN( -self.LENGTH_IN/2 )
-                return False
+                return 3 # bumped into something and backe up
 
         # sanity
         self.MLeft.stop()
@@ -108,7 +107,7 @@ class Driving:
         delta = ( self.MLeft.position + self.MRight.position ) / ( 2 * TICKS_PER_INCH )
         self.x += delta * np.cos( np.deg2rad( self.Theta ) )
         self.y += delta * np.sin( np.deg2rad( self.Theta ) )
-        return True
+        return 0 # made it to waypoint
 
     # Returns the row and column of bottom left and top right cells to 
     # indicate the rectangle of occupied cells. The return type is a 2x2 numpy array
@@ -156,10 +155,8 @@ class Driving:
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
-    def PathIsClear( self, grid, dist, debug = False ): 
-        thresh = ( 1 + self.ScanCount ) * 8
-#        print( "thresh: " + str( thresh ) )
-        thetaRad = np.deg2rad( self.Theta )
+    def PathIsClear( self, grid, dist, theta, thresh = 40, debug = False ): 
+        thetaRad = np.deg2rad( theta )
         botDir = np.array([ np.cos( thetaRad ), np.sin( thetaRad ) ])
 
         if( dist > 0 ):
