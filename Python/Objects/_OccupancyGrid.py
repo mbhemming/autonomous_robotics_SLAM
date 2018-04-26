@@ -11,6 +11,9 @@ class _OccupancyGrid:
 
         # If we only need to do the right side
         sonarFOVDeg = sonarFOVDeg - 2.0*angleStep
+        
+        #TODO:
+#        raySide = 0
         startAngle = sonarCenterAngle - (sonarFOVDeg/2.0)
         if raySide == 1:
             startAngle = sonarCenterAngle - (sonarFOVDeg/2.0) - (angleStep)
@@ -105,7 +108,7 @@ class _OccupancyGrid:
 
         
         
-    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
+    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.75,\
         angularResDeg=5.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
@@ -131,8 +134,8 @@ class _OccupancyGrid:
             print("StartAngle: " + str(startAngle))
             print("StopAngle: " + str(stopAngle))
 
-        # we will have at most the number of ray angles of plus ones. 
-        plusOnes = np.zeros( (numberRays, 2 ), dtype=float)
+        # we will have at most twice the number of ray angles of plus ones. 
+        plusOnes = np.zeros( (2*numberRays, 2 ), dtype=float)
         nPones = 0
     
         # it's a bit harder to determine how many minus ones, but it is approximately
@@ -153,10 +156,18 @@ class _OccupancyGrid:
                     continue
                     
                 endCell =  self.PointToCell( endPoint )
+
+                if endCell == lastcoord:
+                    continue
+
+                lastcoord = endCell
                     
                 if not any( np.equal( plusOnes, endCell ).all( 1 ) ):
                     plusOnes[nPones] = endCell
                     nPones = nPones + 1
+                    if raySide != 0:
+                        plusOnes[nPones] = endCell # double up.
+                        nPones = nPones + 1
         else:
             sonarReturn = 24 # Still lower some cells.
             
@@ -176,7 +187,7 @@ class _OccupancyGrid:
                                                                   int( (sonarReturn-6) / dRes ) )
         
                 for j in range(0, pointsX.size):
-                    if self.IsWallInches(Point(pointsX[j],pointsY [ j ])):
+                    if self.IsWallInches(pointsX[j],pointsY [ j ]):
                         continue
 
                     coord = self.PointToCell( Point( pointsX[ j ],pointsY[ j ] ) )
@@ -184,9 +195,7 @@ class _OccupancyGrid:
                     if coord != lastcoord and (self.Grid[coord[0], coord[1]] != 0):
             
                         if (not any( np.equal( plusOnes, coord ).all( 1 ) )) and (not any( np.equal( minOnes, coord ).all( 1 ) )):
-                            minOnes[nMones] = coord
-                            nMones = nMones + 1
-                            if nMones == minOnes.shape[0]:
+                            if nMones == minOnes.shape[0] -1:
                                 #initNumMOnes = initNumMOnes + initNumMOnes
                                 z = np.zeros((initNumMOnes,2), dtype=float)
                                 print("Before resize: " + str(minOnes))
@@ -194,6 +203,12 @@ class _OccupancyGrid:
                                 print("After: " + str(minOnes))
                                 print("Resizing Minus Ones: " + str(minOnes.shape[0]))
     
+                            minOnes[nMones] = coord
+                            nMones = nMones + 1
+                            if raySide != 0:
+                                minOnes[nMones] = coord
+                                nMones = nMones + 1 # double up on edges.
+
         if PRINTSTUFF:
             print("Plus Ones: " + str( plusOnes[0:nPones]))
             print("Min Ones: " + str( minOnes[0:nMones]))

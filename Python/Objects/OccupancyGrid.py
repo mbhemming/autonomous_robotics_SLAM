@@ -71,7 +71,7 @@ class OccupancyGrid( _OccupancyGrid ):
             return ( int( y / self.CellWidth ), int( pt / self.CellWidth ) )
             
     def IsWallInches(self, x, y):
-        return (x >=  (self.COURSE_X_IN - self.CellWidth) ) or (y >=  (self.COURSE_Y_IN - self.CellWidth) ) or x < self.CellWidth or y < self.CellWidth
+        return (x >=  (self.COURSE_X_IN - 3.5) ) or (y >=  (self.COURSE_Y_IN - 3.5) ) or x < 3.5 or y < 3.5
 
     def IsWall( self, row = 0, col = 0 ):
         return row == 0 or row == self.Rows - 1 or col == 0 or col == self.Cols - 1
