@@ -2,6 +2,10 @@ function [ out ] = is_measurement_low_enough_that_we_are_sure_its_not_a_wall_FUN
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
+    if approximately_equal(x_EV3, 1.5494) & approximately_equal(y_EV3, 1.778) & approximately_equal(dir_DEGREES-30, 170)
+       breakpoint=1; 
+    end
+
     %get the minimum distance a wall could be based on the sensors cone
     [ distance_to_wall_CCW_EDGE_OF_CONE ] = get_distance_to_a_wall( x_EV3, y_EV3, dir_DEGREES-30, board, grid_len_in_inches );
     [ distance_to_wall_DIRECTION_OF_BOT ] = get_distance_to_a_wall( x_EV3, y_EV3, dir_DEGREES, board, grid_len_in_inches );
