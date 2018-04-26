@@ -3,13 +3,13 @@ import math
 from Pose import Pose
 from _Driving import Driving
 from _Ultrasonic import Ultrasonic
-
+from _Localizer import Localizer
 #####################GLOBALS######################
 GEAR_RATIO = 40/8
 ROTATION_SPEED = 200
 ##################################################
 
-class Robot( Pose, Ultrasonic, Driving ):
+class Robot( Pose, Ultrasonic, Driving , Localizer):
 #class Robot( Pose, Driving, Ultrasonic ):
         
     def __init__( self, x, y, theta ):
