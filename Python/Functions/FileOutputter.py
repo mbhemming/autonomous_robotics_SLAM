@@ -1,6 +1,6 @@
 import csv
 import numpy
-from Pose import Pose
+#from Pose import Pose
 from OccupancyGrid import OccupancyGrid
 import time
 
@@ -8,12 +8,12 @@ def AppendToCsv(csvFile, bot, data):
 	writer = csv.writer(csvFile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 	for row in data:
 		#print(row)
-		writer.writerow([str(bot.Pose.Pt.x), str(bot.Pose.Pt.y), str(bot.Pose.Theta),\
+		writer.writerow([str(bot.x), str(bot.y), str(bot.Theta),\
                                  str(row[0]), str(row[1]), str(row[2])])
 
-def GridToCsv(grid):
-	timestr = time.strftime("%Y%m%d-%H%M%S")
-	with open(timestr+'_GridOutput.csv', 'w') as csvFile:
+def GridToCsv(grid, appendy="_noname_"):
+	timestr = time.strftime("%H%M%S")
+	with open(timestr+appendy+'_GridOutput.csv', 'w') as csvFile:
 		writer = csv.writer(csvFile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		for i in range(0, grid.Grid.shape[0]):
 		

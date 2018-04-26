@@ -71,7 +71,6 @@ class Ultrasonic:
         angleBeforeSweep = 0
         countReturns = 0
         side = 0 #center
-        detectionRange = 60.0 #deg
         meanSensorReturns = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
         stddevs = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
         angles = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
@@ -112,24 +111,46 @@ class Ultrasonic:
                     angles[countReturns] = maxSweepAngleDeg-(j*angleIncrement)
                     meanSensorReturns[countReturns] = np.mean(det)
                     if prevReturn < 0:
-                        side = 0
+                        side = 0 # init.
                         #detectionRange = 0.0
-                    elif (prevReturn - meanSensorReturns[countReturns])>12.0:
+                    elif (prevReturn - meanSensorReturns[countReturns])>6.0:
                         print("Found an object CW at: " + str(angles[countReturns]))
                         #detectionRange = angleIncrement
                         side = 1
-                    elif (prevReturn - meanSensorReturns[countReturns])<-12.0:
+                        # Possibly Wall = true
+                    elif (prevReturn - meanSensorReturns[countReturns])<-6.0:
                         print("Left an object CW at: " + str(angles[countReturns]))
                         #detectionRange = angleIncrement
                         side = -1
                     else: 
                         #detectionRange = 0.0
                         side = 0
+                        # Kalman Filter if wall minima
+                        # if possibly wall:
+                        #     Check if Wall:
+                        #    startKalman = true/false
+                        # if startKalman:
+                        #     if prev < this 
+                        #        dir = getting further
+                        #    else 
+                        #        dir = getting closer
+                        #    startKalman = false
+                        #    kalman started = true
+                        # if kalman started
+                        #    if dir = getting closer:
+                        #        if got farther:
+                        #            last was perpandicular. call kalman with angle&dist
+                        #            possibly wall = false
+                        #    else
+                        #        if got closer:
+                        #            last was perpandicular to wall call kalman w/angle&d
+                        #            possibly wall = false
 
                     prevReturn = meanSensorReturns[countReturns]
 
-                    grid.GetOccupancyUpdate2(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, sonarFOVDeg = 60.0, angleStep = angleIncrement, PRINTSTUFF=True)
-#                    print("Finished Range: " + str(meanSensorReturns[countReturns]))
+                    grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns],maxSweepAngleDeg-(j*angleIncrement), raySide = side, angleStep = angleIncrement)
+
+#                   print("Finished Range: " + str(meanSensorReturns[countReturns]))
                     #stddevs[countReturns] = np.std(det)
                     countReturns = countReturns + 1
                     if meanSensorReturns.size <= countReturns:
@@ -139,15 +160,15 @@ class Ultrasonic:
                         angles.resize(countReturns + 10)
 
 
-        # return sensor to origin.
+         # return sensor to origin.
         self.ResetSensorAngle()
         
         return np.column_stack( ( angles[ 0:countReturns ],\
                                   meanSensorReturns[ 0:countReturns ],\
                                   stddevs[ 0:countReturns ] ) )
                                       
-    def GatherSensorMeasurements2( self, numSensorReadingsForThisState,\
-                                  maxSweepAngleDeg, angleIncrement , grid):
+                                  
+    def GatherSensorMeasurements2( self, numSensorReadingsForThisState, maxSweepAngleDeg, angleIncrement , grid):
         """
         ** X&Y cord need to be in fine resolution map co-ordinates.
         This function will scan the ultrasonic sensor through a sweep angle\
@@ -169,24 +190,30 @@ class Ultrasonic:
         countReturns = 0
         side = 0 #center
         detectionRange = 60.0 #deg
-        meanSensorReturns = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
-        stddevs = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
-        angles = np.zeros(numSensorSteps+math.floor(numSensorSteps/2))
-        
+        meanSensorReturns = np.zeros(8*numSensorSteps)
+        stddevs = np.zeros(8*numSensorSteps)
+        angles = np.zeros(8*numSensorSteps)
+         
         prevReturn = -1
         currAngle = 0.0
         signs = (1,-1)
-        for k in range(0,1):
+        for k in range(0,2):
+        #    print("k: " + str(k))
             signDir = signs[k]
-            for i in range(0,1):
-                signAng = signs[i]
+            for halfDir in range(0,2):
+        #        print("halfdir: " + str(halfDir))
+                signAng = signs[halfDir]
                 for j in range(0, numSensorSteps):
+        #            print("j: " + str(j))
+                    if j > 0:
+                        currAngle = currAngle + signDir*signAng*angleIncrement
                     # Start the sensor at range the sensor and assumes that it is at 0 
                     # degrees relative to the robot.
-                    nextAngle = currAngle + signDir*signAng*(j*angleIncrement)
-                    angles[countReturns] = nextAngle
+                    angles[countReturns] = currAngle
+                    #print("CurrAngle: " + str(currAngle))
+                    #print("NextAngle: " + str(nextAngle))
                     #self.SetSensorAngle( angles[j] )
-                    self.SetSensorAngle( nextAngle ) 
+                    self.SetSensorAngle( currAngle ) 
                     
                     sensorReadings = np.zeros(numSensorReadingsForThisState)
                     # Take some number of readings per pointing angle.
@@ -214,17 +241,17 @@ class Ultrasonic:
                         ranges = self.DecomposeSensorReadings( sensorReadings[0:goodReadings], 3)
                         for det in ranges:
                             #print("Detection: " + str(det))
-                            angles[countReturns] = nextAngle
+                            angles[countReturns] = currAngle
                             meanSensorReturns[countReturns] = np.mean(det)
                             if prevReturn < 0:
                                 side = 0
                                 #detectionRange = 0.0
-                            elif (prevReturn - meanSensorReturns[countReturns])>12.0:
-                                print("Found an object CW at: " + str(angles[countReturns]))
+                            elif (prevReturn - meanSensorReturns[countReturns])>4.0:
+ #                               print("Found an object CW at: " + str(angles[countReturns]))
                                 #detectionRange = angleIncrement
                                 side = 1
-                            elif (prevReturn - meanSensorReturns[countReturns])<-12.0:
-                                print("Left an object CW at: " + str(angles[countReturns]))
+                            elif (prevReturn - meanSensorReturns[countReturns])<-4.0:
+#                                print("Left an object CW at: " + str(angles[countReturns]))
                                 #detectionRange = angleIncrement
                                 side = -1
                             else: 
@@ -233,7 +260,7 @@ class Ultrasonic:
 
                             prevReturn = meanSensorReturns[countReturns]
 
-                            grid.GetOccupancyUpdate(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns], nextAngle, raySide = signDir*signAng*side, sonarFOVDeg = 60.0, angleStep = angleIncrement)
+                            grid.GetOccupancyUpdate2(Pose(self.x,self.y,self.Theta), meanSensorReturns[countReturns], currAngle, raySide = signDir*signAng*side, sonarFOVDeg = 40.0, angleStep = angleIncrement)
 
                             countReturns = countReturns + 1
                             if meanSensorReturns.size <= countReturns:
@@ -241,9 +268,9 @@ class Ultrasonic:
                                 meanSensorReturns.resize(countReturns + 10)
                                 #stddevs.resize(countReturns + 10)
                                 angles.resize(countReturns + 10)
+    
 
-
-        
+        self.ResetSensorAngle() 
         return np.column_stack( ( angles[ 0:countReturns ],\
                                   meanSensorReturns[ 0:countReturns ],\
                                   stddevs[ 0:countReturns ] ) )

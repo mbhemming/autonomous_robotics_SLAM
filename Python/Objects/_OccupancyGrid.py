@@ -3,8 +3,8 @@ from Point import Point
 from Pose import Pose 
 import numpy as np
 class _OccupancyGrid:
-    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
-        angularResDeg=6.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
+    def GetOccupancyUpdate( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.25,\
+        angularResDeg=2.0, raySide = 0, sonarFOVDeg=40.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
@@ -42,7 +42,7 @@ class _OccupancyGrid:
         initNumMOnes = (plusOnes.shape[0]) *10
         minOnes = np.zeros((initNumMOnes,2), dtype=float) 
         nMones = 0
-        if sonarReturn <= 24: 
+        if sonarReturn <= 36: 
             for i in range(0, math.floor(sonarFOVDeg/angularResDeg) + 1):
                 thetaRad = np.deg2rad( startAngle + (i*angularResDeg))
                 endPoint = Point( x0 + sonarReturn * math.cos( thetaRad ),\
@@ -51,18 +51,18 @@ class _OccupancyGrid:
                 endCell =  self.PointToCell( endPoint )
                 
                 # Don't smear from walls. if any point was a wall point, ignore this return.
-                if self.IsWall(endCell[0],endCell[1]):
-                    plusOnes = np.zeros( ( math.floor( sonarFOVDeg / angularResDeg ) + 1, 2 ),\
-                    dtype=float)
-                    nPones = 0
-                    break
+                #if self.IsWall(endCell[0],endCell[1]):
+                #    plusOnes = np.zeros( ( math.floor( sonarFOVDeg / angularResDeg ) + 1, 2 ),\
+                #    dtype=float)
+                #    nPones = 0
+                #    break
                     
                     
                 if not any( np.equal( plusOnes, endCell ).all( 1 ) ):
                     plusOnes[nPones] = endCell
                     nPones = nPones + 1
         else:
-            sonarReturn = 24 # Still lower some cells.
+            sonarReturn = 36 # Still lower some cells.
         if sonarReturn > 6:    
             for i in range(0, math.floor( sonarFOVDeg / angularResDeg ) + 1):
                 thetaRad =  np.deg2rad(startAngle + (i*angularResDeg))
@@ -83,7 +83,7 @@ class _OccupancyGrid:
 
                     coord = self.PointToCell( Point( pointsX[ j ],pointsY[ j ] ) )
                     lastcoord = coord
-                    if coord != lastcoord and (self.Grid[coord[0], coord[1]] != 0):
+                    if coord != lastcoord and (self.Grid[coord[0], coord[1]] != 0) and (not self.IsWall(coord[0],coord[1])):
             
                         if (not any( np.equal( plusOnes, coord ).all( 1 ) )) and (not any( np.equal( minOnes, coord ).all( 1 ) )):
                             minOnes[nMones] = coord
@@ -105,8 +105,8 @@ class _OccupancyGrid:
 
         
         
-    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.5,\
-        angularResDeg=6.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
+    def GetOccupancyUpdate2( self, robopose, sonarReturn, sonarRelAngleDeg, dRes=0.15,\
+        angularResDeg=10.0, raySide = 0, sonarFOVDeg=60.0, angleStep = 0.0,  PRINTSTUFF=False):
     
         roboPose = Pose( robopose )
         sonarCenterAngle = sonarRelAngleDeg + roboPose.Theta
@@ -132,8 +132,7 @@ class _OccupancyGrid:
             print("StopAngle: " + str(stopAngle))
 
         # we will have at most the number of ray angles of plus ones. 
-        plusOnes = np.zeros( numberRays, 2 )
-#                   dtype=float)
+        plusOnes = np.zeros( (numberRays, 2 ), dtype=float)
         nPones = 0
     
         # it's a bit harder to determine how many minus ones, but it is approximately
@@ -165,11 +164,11 @@ class _OccupancyGrid:
             sonarReturn = 24 # Still lower some cells.
             
             
-        if sonarReturn > 6:    
+        if sonarReturn > 4:    
             for i in range(0, numberRays):
                 thetaRad =  np.deg2rad(startAngle + (i*angularResDeg))
-                startX = x0+5*math.cos( thetaRad)
-                startY = y0+5*math.sin(thetaRad)
+                startX = x0+2*math.cos( thetaRad)
+                startY = y0+2*math.sin(thetaRad)
                 endPoint = Point( x0 + sonarReturn * math.cos( thetaRad ),\
                                   y0 + sonarReturn * math.sin( thetaRad ) )
         
