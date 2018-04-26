@@ -3,7 +3,7 @@ import math
 import time
 
 #####################GLOBALS######################
-DRIVE_SPEED = 200
+DRIVE_SPEED = 150
 SPEED_CONSTANT_CM = 0.007958 # (cm/ms)
 SPEED_CONSTANT_IN = 0.003 # (in/ms)
 #TICKS_PER_INCH = 20.83 * 2.54
@@ -19,7 +19,8 @@ class Driving:
     def DriveToPoint( self, dest, grid, force = False ):
         # calculate new theta:
         delta_theta = self.CalculateTheta( dest )
-        if( abs(delta_theta) > 45 and not self.TurnIsClear( grid ) ):
+        if( not force and ( abs(delta_theta) > 45 and not self.TurnIsClear( grid ) ) ):
+            print ("Couldnt Turn.")
             return 1 # couldn't turn
 
         self.TurnTwoWheelDeg( delta_theta )
@@ -27,10 +28,12 @@ class Driving:
         #   calculate delta d = sqrt(dX^2 + dY^2)
         #   straight(d)
         dist = np.linalg.norm( [self.x - dest.x, self.y-dest.y] )
-        if( abs(self.PathIsClear( grid, dist, self.Theta ) ) < abs(dist) ):
+        if( not force and\
+            ( abs(self.PathIsClear( grid, dist, self.Theta ) ) < abs(dist) ) ):
+            print("Path Not Clear") 
             return 2 # path not clear
 
-        return self.StraightDistIN( dist )
+        return self.StraightDistIN( dist, grid )
 
     def TurnOneWheelDeg( self, angle, wheel ):
         assert False
@@ -73,12 +76,12 @@ class Driving:
         self.Theta += angle
 
     # Travel straight for a distance measured in IN.
-    def StraightDistIN( self, dist ):
-        dtMilli =  dist / ( SPEED_CONSTANT_IN )
+    def StraightDistIN( self, dist, grid ):
+        dtMilli =  math.fabs( dist / SPEED_CONSTANT_IN )
 
         self.MLeft.reset()
         self.MRight.reset()
-
+        print( "go straight: " + str( dist ) )
         self.MLeft.run_to_rel_pos( position_sp = dist * TICKS_PER_INCH,\
                                    speed_sp = DRIVE_SPEED, stop_action = "hold" )
         self.MRight.run_to_rel_pos( position_sp = dist * TICKS_PER_INCH,\
@@ -88,16 +91,29 @@ class Driving:
 
         while( ( self.MLeft.is_running or self.MRight.is_running ) and\
                ( not ( round(time.time()*1000) - st > dtMilli ) ) ):
+
             if( dist > 0 and self.STouch.value() ):
                 self.MLeft.stop()
                 self.MRight.stop()
-
+                print( "bumped!!" )
                 delta = ( self.MLeft.position + self.MLeft.position )\
                         / ( 2 * TICKS_PER_INCH )
                 self.x += delta * np.cos( np.rad2deg( self.Theta ) )
                 self.y += delta * np.sin( np.rad2deg( self.Theta ) )
+                # Update grid cells to indicate presence of object
+                left, right = self.GetCorners()[ 0:2 ]
+                rowVec = np.subtract( right, left )
+                scalars = np.linspace( 0, 1,\
+                               2 + self.WIDTH_IN / ( grid.CellWidth * 1.5 ) ) 
+                offsets = np.array([ rowVec[0] * scalars, rowVec[1] * scalars ])
+                points = np.add( offsets,\
+                             [ [ left[0] ], [ left[1] ] ] )
+                for j in range( np.size( scalars ) ):
+                    c = grid.PointToCell( points[0][j], points[1][j] )
+                    grid.Grid[ c ] = 100
 
-                self.StraightDistIN( -self.LENGTH_IN/2 )
+                self.StraightDistIN( -self.LENGTH_IN/2, grid )
+                
                 return 3 # bumped into something and backe up
 
         # sanity
@@ -155,7 +171,8 @@ class Driving:
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
-    def PathIsClear( self, grid, dist, theta, thresh = 40, debug = False ): 
+    def PathIsClear( self, grid, dist, theta, thresh = 35, debug = False ): 
+        print( "checking path: " )
         thetaRad = np.deg2rad( theta )
         botDir = np.array([ np.cos( thetaRad ), np.sin( thetaRad ) ])
 
