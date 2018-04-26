@@ -1,10 +1,13 @@
 import numpy as np
 import math
+import time
 
 #####################GLOBALS######################
-DRIVE_SPEED = 125
+DRIVE_SPEED = 200
 SPEED_CONSTANT_CM = 0.007958 # (cm/ms)
-SPEED_CONSTANT_IN = 0.00313307086 # (in/ms)
+SPEED_CONSTANT_IN = 0.003 # (in/ms)
+#TICKS_PER_INCH = 20.83 * 2.54
+TICKS_PER_INCH = 52.8627977995
 
 doprint = 0
 ##################################################
@@ -13,20 +16,25 @@ class Driving:
     LENGTH_IN = 12
     WIDTH_IN = 6
 
-    def DriveToPoint( self, dest ):
+    def DriveToPoint( self, dest, grid, force = False ):
         # calculate new theta:
         delta_theta = self.CalculateTheta( dest )
+        if( abs(delta_theta) > 45 and not self.TurnIsClear( grid ) ):
+            return
+
         self.TurnTwoWheelDeg( delta_theta )
 
         #   calculate delta d = sqrt(dX^2 + dY^2)
         #   straight(d)
-        self.StraightDistIN( self.CalculateDist( dest ) )
-        self.x = dest.x
-        self.y = dest.y
-        self.Theta += delta_theta
+        dist = np.linalg.norm( [self.x - dest.x, self.y-dest.y] )
+        if( abs(self.PathIsClear( grid, dist )) < abs(dist) ):
+            # TODO need to do something here. 
+            return
+        self.StraightDistIN( dist )
+        return
 
     def TurnOneWheelDeg( self, angle, wheel ):
-
+        assert False
         # 2.1818 is the ratio of the wheel radius to the robot radius.
         # The formula is the arc length formula. old = 2.1818
         position = 2.22357 * 2 * angle
@@ -63,38 +71,44 @@ class Driving:
                                    stop_action = "hold" )
         self.MRight.wait_until_not_moving( timeout = 2000 )
         self.MLeft.wait_until_not_moving( timeout = 2000 )
-
-    # Travel straight for a distance measured in CM.
-    def StraightDistCM( self, dist ):
-        dtMilli =  dist / ( SPEED_CONSTANT_CM )
-        self.MLeft.run_to_rel_pos( position_sp = dist * 20.83,\
-                                   speed_sp = DRIVE_SPEED, stop_action = "hold" )
-        self.MRight.run_to_rel_pos( position_sp = dist * 20.83,\
-                                    speed_sp = DRIVE_SPEED, stop_action="hold" )
-
-        self.MLeft.wait_until_not_moving( timeout = dtMilli + 500 )
-        self.MRight.wait_until_not_moving( timeout = dtMilli + 500 )
-        if( doprint == 1 ):
-            print( "Straight:" )
-            print( "  dist: " + str( dist ) )
-            print( "  dt: " + str( dtMilli ) )
+        self.Theta += angle
 
     # Travel straight for a distance measured in IN.
     def StraightDistIN( self, dist ):
         dtMilli =  dist / ( SPEED_CONSTANT_IN )
 
-        self.MLeft.run_to_rel_pos( position_sp = dist * 20.83 * 2.54,\
+        self.MLeft.reset()
+        self.MRight.reset()
+
+        self.MLeft.run_to_rel_pos( position_sp = dist * TICKS_PER_INCH,\
                                    speed_sp = DRIVE_SPEED, stop_action = "hold" )
-        self.MRight.run_to_rel_pos( position_sp = dist * 20.83 * 2.54,\
+        self.MRight.run_to_rel_pos( position_sp = dist * TICKS_PER_INCH,\
                                     speed_sp = DRIVE_SPEED, stop_action = "hold" )
 
-        self.MLeft.wait_until_not_moving( timeout = dtMilli + 500 )
-        self.MRight.wait_until_not_moving( timeout = dtMilli + 500 )
+        st = round(time.time()*1000)
 
-        if( doprint == 1 ):
-            print( "Straight:" )
-            print( "  dist: " + str( dist ) )
-            print( "  dt: " + str( dtMilli ) )
+        while( ( self.MLeft.is_running or self.MRight.is_running ) and\
+               ( not ( round(time.time()*1000) - st > dtMilli ) ) ):
+            if( dist > 0 and self.STouch.value() ):
+                self.MLeft.stop()
+                self.MRight.stop()
+
+                delta = ( self.MLeft.position + self.MLeft.position )\
+                        / ( 2 * TICKS_PER_INCH )
+                self.x += delta * np.cos( np.rad2deg( self.Theta ) )
+                self.y += delta * np.sin( np.rad2deg( self.Theta ) )
+
+                self.StraightDistIN( -self.LENGTH_IN/2 )
+                return False
+
+        # sanity
+        self.MLeft.stop()
+        self.MRight.stop()
+        
+        delta = ( self.MLeft.position + self.MRight.position ) / ( 2 * TICKS_PER_INCH )
+        self.x += delta * np.cos( np.deg2rad( self.Theta ) )
+        self.y += delta * np.sin( np.deg2rad( self.Theta ) )
+        return True
 
     # Returns the row and column of bottom left and top right cells to 
     # indicate the rectangle of occupied cells. The return type is a 2x2 numpy array

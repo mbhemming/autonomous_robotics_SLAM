@@ -25,7 +25,8 @@ print( "*********************************" )
 
 o = OccupancyGrid( 3 )
 r = Robot( 50, 10, 90 )
-print( r.TurnIsClear( o ) )
+#print( r.DriveToPoint( Point(25, 15), o ) )
+r.StraightDistIN( 30 )
 
 # POINT
 if( TEST_POINT or TEST_ALL ):
