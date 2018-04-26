@@ -81,5 +81,15 @@ class OccupancyGrid( _OccupancyGrid ):
         cell = self.PointToCell( pt )
         return self.CellToPoint( cell[ 0 ], cell[ 1 ] )
 
+    def CheckCells( self, cells, thresh = 25 ):
+        for r in range( cells[0][0], cells[1][0] ): 
+            for c in range( cells[0][1], cells[1][1] ): 
+                if( self.Grid[r][c] > thresh ):
+                    return False
+        return True
+
+
+
+
 
 

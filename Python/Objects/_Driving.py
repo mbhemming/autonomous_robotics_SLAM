@@ -196,8 +196,7 @@ class Driving:
         bl = np.subtract([ self.x, self.y ], radius )
         tr = np.add([ self.x, self.y ], radius )
         cells = np.array([grid.PointToCell( p[0], p[1] ) for p in [ bl, tr ] ])
-        print( cells )
-#        return grid.CheckCells( cells )
+        return grid.CheckCells( cells )
 
 
 
