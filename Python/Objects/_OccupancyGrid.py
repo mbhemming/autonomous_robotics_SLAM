@@ -147,15 +147,12 @@ class _OccupancyGrid:
                 endPoint = Point( x0 + sonarReturn * math.cos( thetaRad ),\
                                   y0 + sonarReturn * math.sin( thetaRad ) )
         
-                endCell =  self.PointToCell( endPoint )
                 
                 # Don't smear from walls. if any point was a wall point, ignore this return.
-                if self.IsWall(endCell[0],endCell[1]):
-                    plusOnes = np.zeros( ( math.floor( sonarFOVDeg / angularResDeg ) + 1, 2 ),\
-                    dtype=float)
-                    nPones = 0
-                    break
+                if self.IsWallInches(endPoint.x,endPoint.y):
+                    continue
                     
+                endCell =  self.PointToCell( endPoint )
                     
                 if not any( np.equal( plusOnes, endCell ).all( 1 ) ):
                     plusOnes[nPones] = endCell
@@ -179,8 +176,8 @@ class _OccupancyGrid:
                                                                   int( (sonarReturn-6) / dRes ) )
         
                 for j in range(0, pointsX.size):
-                    if pointsX[j] < 0 or pointsY [ j ] < 0:
-                        break
+                    if self.IsWallInches(Point(pointsX[j],pointsY [ j ])):
+                        continue
 
                     coord = self.PointToCell( Point( pointsX[ j ],pointsY[ j ] ) )
                     lastcoord = coord
