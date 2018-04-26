@@ -121,19 +121,19 @@ class _OccupancyGrid:
             stopAngle = startAngle + angleStep
             
         coveredDegrees = stopAngle - startAngle
-        numberRays = ( math.floor( coveredDegrees / angularResDeg ) + 1
+        numberRays = ( math.floor( coveredDegrees / angularResDeg ) + 1 )
         
         lastcoord=(-1,-1) 
         x0 = roboPose.x
         y0 = roboPose.y
-		
-		if PRINTSTUFF:
-			print("StartAngle: " + str(startAngle))
-			print("StopAngle: " + str(stopAngle))
+        
+        if PRINTSTUFF:
+            print("StartAngle: " + str(startAngle))
+            print("StopAngle: " + str(stopAngle))
 
         # we will have at most the number of ray angles of plus ones. 
-        plusOnes = np.zeros( numberRays, 2 ),\
-                   dtype=float)
+        plusOnes = np.zeros( numberRays, 2 )
+#                   dtype=float)
         nPones = 0
     
         # it's a bit harder to determine how many minus ones, but it is approximately

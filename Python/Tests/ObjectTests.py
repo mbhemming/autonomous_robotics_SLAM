@@ -24,8 +24,8 @@ print( "*     STARTING OBJECT TESTS     *" )
 print( "*********************************" )
 
 o = OccupancyGrid( 3 )
-r = Robot( 50, 10, 143 )
-print( r.OccupiedCells( o ) )
+r = Robot( 50, 10, 90 )
+print( r.TurnIsClear( o ) )
 
 # POINT
 if( TEST_POINT or TEST_ALL ):

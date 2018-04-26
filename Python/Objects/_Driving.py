@@ -190,8 +190,14 @@ class Driving:
         
         return dist
             
-
-
+    def TurnIsClear( self, grid ):
+        thresh = 25
+        radius = np.linalg.norm( [self.WIDTH_IN/2, self.LENGTH_IN/2] )
+        bl = np.subtract([ self.x, self.y ], radius )
+        tr = np.add([ self.x, self.y ], radius )
+        cells = np.array([grid.PointToCell( p[0], p[1] ) for p in [ bl, tr ] ])
+        print( cells )
+#        return grid.CheckCells( cells )
 
 
 
