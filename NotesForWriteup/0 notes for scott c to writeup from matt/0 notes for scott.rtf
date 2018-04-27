@@ -1,0 +1,29 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww19480\viewh14180\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs38 \cf0 -stuff that should be in the report\
+	-sensor model\
+		-talk about how you interpolated between 4 value	-large sensor cone => large arcs => big problem\
+		- three solutions with pros and cons\
+			1) get close to an object and only draw them\
+			2) swing to the right and when you get a discontinuity then an object is inferred on the right edge\
+			3) draw lots of arcs and clean up the mess afterwards \
+		*I jotted down some notes in a file called Appendix A\
+			*Note: I called this \'91appendix\'92 but I think it should be in the main narrative\
+	-object localization filters are found in a file called \'91filtering map notes\'92\
+	-object localization has it\'92s entry point in a file called \'91main_script_data_processing_log.m\'92 that is found in the MATLAB directory. This has a README section at the top.\
+	-for the tests that are in the report. They could be referenced by their script in directory \'91MATLAB/test experiment scripts\'92\
+	-in the section on our experiments with the cone. You could include that a parabolic cone with the sensor 1/(4a) from the vertex(where \'91a\'92 is the stretch fact)\
+\
+	-kallman filter( Scott B may correct me or add parts)\
+		-sensor model gives altitude => this is one linear dimension => can only speak about either x or y at one time\
+			-when you are aimed at the top or bottom wall, then you get data on \'91y\'92. And when you are aimed at right or left wall then you can get data on x.\
+		*we can get away with a one dim Kal filter\
+		-incuring error in the dimension that we don\'92t have info about is no problem since it will get normalized on the next wall since it will be able to correct for the other dimension.\
+		-the sensor is taken to be perpendicular when the range shrinks then grow.\
+		-the sensor itself has a really low variance but that doesn\'92t mean it\'92s Q(or R, i forget) should be super low. Instead, we found the encoder on the medium motor increments angles with some uncertainty. This leads to the incrementation being a could degrees off. This makes the Q(or R) value to be larger because the angle being off will translate into more uncertainty in the se\'f1or model\
+		-since we are taking the measurement at 90 degrees. This means that we only use the  first column of the sensor model. This is advantageous since the model is linear down columns but not across rows. So we can linearly interpolate  down the single column. The function also has to be inverted to put in the sensor reading and get distance out. And linear equations are easily arithmetically investable.}

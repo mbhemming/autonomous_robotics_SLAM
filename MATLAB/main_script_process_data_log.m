@@ -5,12 +5,12 @@
 %   2) INFORMATION: Comput properties for each tuple. An example of a property
 %   is....is_a_wall_detected. 
 %   3) GRID#1: Compute a grid for accounting how many times a grid square was
-%   obserserved
+%   obserserved. Increment the whole cone
 %   4) Filter data for certain properties.
         % example of simple filter: Filter for senor ranges less than about 3 ft. 
         %complex filter: Ignore measurements when the sensor model applie and the sensor has detectd a wall.
 %   5) optinal: update a wight paramter. For instance, you could penalize
-%   further away measmrements
+%   further away measmrements.
 %   6) GRID#2: Compute occupency grid for obejcts based on arcs
 %   7) OCCUPENCY GRID: Combine GRID#1 and GRID#2 to leverage both positive and negative
 %   information.
@@ -40,7 +40,7 @@ y_len_INCHES=69.75;
 x_len_INCHES=81.5;
 board_object_localization= init_board( x_len_INCHES,y_len_INCHES, grid_len_INCHES );
 board_counting_num_times_squares_were_seen= init_board( x_len_INCHES,y_len_INCHES, grid_len_INCHES );
-tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(5);
+tolerance_to_call_distances_the_same=convert_inches_to_EV3_units(9);
 
 %%%%%%%%      load the data and append extra parameters for database properties   %%%%%%%%%%%%%%
 
