@@ -2,6 +2,13 @@ function [ x_out,y_out ] = x_y_of_trejectorys_collision_with_wall(x_bot_EV3,y_bo
 %WILL_THE_BOT_COLLIDE_WITH_TOP_OR_BOTTOM Summary of this function goes here
 %   Detailed explanation goes here
 
+    if approximately_equal(x_bot_EV3, 1.5494) & approximately_equal(y_bot_EV3, 1.778) & approximately_equal(dir_x_component, -.9848) & approximately_equal(dir_y_component, 0.1736)
+       breakpoint=1; 
+    end
+
+    x_out=9999;
+    y_out=9999;
+    
     %get 'm' and 'b' for robots path
     x_next=x_bot_EV3 + dir_x_component;
     y_next=y_bot_EV3 + dir_y_component;
@@ -46,5 +53,8 @@ function [ x_out,y_out ] = x_y_of_trejectorys_collision_with_wall(x_bot_EV3,y_bo
        y_out= y_intersect;
     end
     
+    if (x_out==9999) | (y_out==9999)
+        error('shouldnt occur');
+    end
 end
 

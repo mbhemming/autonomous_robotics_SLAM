@@ -37,7 +37,7 @@ end
 
 
 
-lower_theta=dir-theta_for_arc/2;
+lower_theta=int32(dir-theta_for_arc/2);
 dummy=9999;
 x_curr=dummy;   
 y_curr=dummy;

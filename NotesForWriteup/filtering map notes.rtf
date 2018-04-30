@@ -5,14 +5,16 @@
 \margl1440\margr1440\vieww19480\viewh14180\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs38 \cf0 *DON\'92T WRITE THIS UP YET, IT WILL LIKELY CHANGE\
-\
+\f0\fs38 \cf0 \
 -filters used\
 	-throw out sensor measurements too far\
-	-throw out measurements with too high of standard dev for the 100 samples\
+	-throw out measurements with too high of standard dev for the 50 samples\
 	-throw out measurements when the measurement model applies and the measurement mode is saying we are reading a wall\
-		-if the sensor model isn\'92t available, then we keep measumrents when the heuristic (Appendix B) shows that the object sensed is too close to be a wall.\
+		-if the sensor model isn\'92t available, then we keep measuemrents when the heuristic (Appendix B) shows that the object sensed is too close to be a wall.\
 	-weighing the lines: linearly so that the weight goes from 1 to a minimum of 0.5 as we go to our max range\
-	-normalizing based on number of times the cells were possibly observed\
+	-negative information: normalizing based on number of times the cells were possibly observed\
+	-in 50 samples, if multiple ranges are coming back then they are all processed. This is done by a clustering algorithm\
+\
+*The result is a grid of probabilities that objects are in the location\
 \
 	}

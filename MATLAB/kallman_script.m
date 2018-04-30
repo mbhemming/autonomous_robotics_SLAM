@@ -5,8 +5,8 @@
 
 %variance
 %original Q and R
-Q=0.00005; %*100000;
-R=0.006;
+%Q=0.00005; %*100000;
+%R=0.006;
 
 n_data_points=4
 %keeping both components seperate. This is unlike sample code we have seen
