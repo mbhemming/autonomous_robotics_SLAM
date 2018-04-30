@@ -20,7 +20,7 @@ class Localizer:
             s = math.sin( thetaRad )
             endPoint = Point( x0 + (reading * c), y0 + (reading * s) )
 
-            print("Angle: " + str(angle) + "Reading: " + str(reading))
+  #          print("Angle: " + str(angle) + "Reading: " + str(reading))
             if reading >= 100.3 or not grid.IsWallInches(endPoint.x, endPoint.y):
                 state = 'scanning'
             elif state == 'scanning':
@@ -34,8 +34,8 @@ class Localizer:
                 if prevReading < reading:
                     minima = prevReading
                     minAngle = self.Theta + angle - 2
-                    print("Minimum distance: " + str(minima))
-                    print("at angle: " + str(minAngle))
+ #                   print("Minimum distance: " + str(minima))
+#                    print("at angle: " + str(minAngle))
                                         
                     if prevEndPoint.x < 3 or prevEndPoint.x >  (grid.COURSE_X_IN -3):
                         if prevEndPoint.x > 0.5*grid.COURSE_X_IN:
@@ -44,6 +44,7 @@ class Localizer:
                         else:
                             estimatedX =  prevReading
                             estimatedY = prevEndPoint.y 
+                        self.DoUpdateY(estimatedY)
                     else:
                         if prevEndPoint.y > 0.5*grid.COURSE_Y_IN:
                             estimatedY = grid.COURSE_Y_IN - prevReading
@@ -51,6 +52,7 @@ class Localizer:
                         else:
                             estimatedY = prevReading
                             estimatedX = prevEndPoint.x
+                        self.DoUpdateX(estimatedX)
                             
                     print ("Estimate: " + str((estimatedX,estimatedY)))
                     state = 'scanning'
@@ -62,4 +64,3 @@ class Localizer:
             
 
         self.ResetSensorAngle()
-        #return (minima, prevEndPoint,minAngle)

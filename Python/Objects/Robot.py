@@ -4,12 +4,13 @@ from Pose import Pose
 from _Driving import Driving
 from _Ultrasonic import Ultrasonic
 from _Localizer import Localizer
+from _KalmanFilter import KalmanFilter
 #####################GLOBALS######################
 GEAR_RATIO = 40/8
 ROTATION_SPEED = 200
 ##################################################
 
-class Robot( Pose, Ultrasonic, Driving , Localizer):
+class Robot( Pose, Ultrasonic, Driving , Localizer, KalmanFilter):
 #class Robot( Pose, Driving, Ultrasonic ):
         
     def __init__( self, x, y, theta ):
@@ -38,7 +39,9 @@ class Robot( Pose, Ultrasonic, Driving , Localizer):
         
         # Zero the ultrasonic sensor angle
         self.ResetSensorAngle()
-    
+
+        self.InitKalman(self.x, self.y)        
+ 
     def __str__( self ):
         return Pose.__str__( self )
  

@@ -1,0 +1,1483 @@
+STARTING
+Pos: ( 62.0, 0.0 )
+Theta: 90.0
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 95.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 115.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 115.0
+StopAngle: 125.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 145.0
+StopAngle: 155.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 170.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 190.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 220.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 200.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 170.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 175.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 175.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 155.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 115.0
+StopAngle: 125.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 100.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 70.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 65.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 40.0
+StopAngle: 50.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 35.0
+StopAngle: 50.0
+Plus Ones: [[ 12.  38.]
+ [ 12.  38.]
+ [ 13.  38.]
+ [ 13.  38.]
+ [ 13.  37.]
+ [ 13.  37.]]
+Min Ones: []
+StartAngle: 25.0
+StopAngle: 40.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 20.0
+StopAngle: 35.0
+Plus Ones: [[ 10.  38.]
+ [ 10.  38.]]
+Min Ones: []
+StartAngle: -5.0
+StopAngle: 5.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -20.0
+StopAngle: -10.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -35.0
+StopAngle: -25.0
+Plus Ones: [[  2.  38.]]
+Min Ones: []
+StartAngle: -50.0
+StopAngle: -40.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -65.0
+StopAngle: -55.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -80.0
+StopAngle: -70.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -80.0
+StopAngle: -70.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -65.0
+StopAngle: -55.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -50.0
+StopAngle: -40.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -35.0
+StopAngle: -25.0
+Plus Ones: [[  2.  38.]]
+Min Ones: []
+StartAngle: -20.0
+StopAngle: -10.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -5.0
+StopAngle: 5.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 10.0
+StopAngle: 20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 25.0
+StopAngle: 35.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 50.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 55.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 70.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 95.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+time 1inch: 30294
+StartAngle: 32.56859202882749
+StopAngle: 42.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 47.56859202882749
+StopAngle: 57.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 62.56859202882748
+StopAngle: 72.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 77.56859202882748
+StopAngle: 87.56859202882748
+Plus Ones: [[ 17.  38.]]
+Min Ones: []
+StartAngle: 92.56859202882748
+StopAngle: 102.56859202882748
+Plus Ones: [[ 17.  37.]
+ [ 17.  36.]]
+Min Ones: []
+StartAngle: 102.56859202882748
+StopAngle: 117.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 107.56859202882748
+StopAngle: 117.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 132.56859202882748
+StopAngle: 147.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 137.56859202882748
+StopAngle: 152.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 152.56859202882748
+StopAngle: 162.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 162.56859202882748
+StopAngle: 177.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 167.56859202882748
+StopAngle: 177.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 182.56859202882748
+StopAngle: 197.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 197.56859202882748
+StopAngle: 207.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 222.56859202882748
+StopAngle: 237.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 212.56859202882748
+StopAngle: 222.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 207.56859202882748
+StopAngle: 222.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 192.56859202882748
+StopAngle: 207.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 167.56859202882748
+StopAngle: 182.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 162.56859202882748
+StopAngle: 177.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 152.56859202882748
+StopAngle: 167.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 147.56859202882748
+StopAngle: 162.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 122.56859202882748
+StopAngle: 137.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 107.56859202882748
+StopAngle: 117.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 92.56859202882748
+StopAngle: 102.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 87.56859202882748
+StopAngle: 102.56859202882748
+Plus Ones: [[ 16.  38.]
+ [ 16.  38.]
+ [ 16.  37.]
+ [ 16.  37.]
+ [ 16.  36.]
+ [ 16.  36.]]
+Min Ones: []
+StartAngle: 62.56859202882748
+StopAngle: 72.56859202882748
+Plus Ones: []
+Min Ones: []
+StartAngle: 47.56859202882749
+StopAngle: 57.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 32.56859202882749
+StopAngle: 42.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 32.56859202882749
+StopAngle: 42.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 17.56859202882749
+StopAngle: 27.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 12.568592028827489
+StopAngle: 27.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: -12.431407971172511
+StopAngle: -2.4314079711725114
+Plus Ones: []
+Min Ones: []
+StartAngle: -27.43140797117251
+StopAngle: -17.43140797117251
+Plus Ones: []
+Min Ones: []
+StartAngle: -42.43140797117251
+StopAngle: -32.43140797117251
+Plus Ones: []
+Min Ones: []
+StartAngle: -57.43140797117251
+StopAngle: -42.43140797117251
+Plus Ones: []
+Min Ones: []
+StartAngle: -62.43140797117252
+StopAngle: -47.43140797117252
+Plus Ones: []
+Min Ones: []
+StartAngle: -87.43140797117252
+StopAngle: -77.43140797117252
+Plus Ones: [[  1.  38.]]
+Min Ones: []
+StartAngle: -102.43140797117252
+StopAngle: -92.43140797117252
+Plus Ones: []
+Min Ones: []
+StartAngle: -117.43140797117252
+StopAngle: -107.43140797117252
+Plus Ones: [[  2.  33.]
+ [  1.  34.]]
+Min Ones: []
+StartAngle: -132.43140797117252
+StopAngle: -122.43140797117252
+Plus Ones: [[  3.  31.]
+ [  3.  32.]
+ [  2.  33.]]
+Min Ones: []
+StartAngle: -147.43140797117252
+StopAngle: -137.43140797117252
+Plus Ones: [[  4.  29.]
+ [  3.  30.]]
+Min Ones: []
+StartAngle: -147.43140797117252
+StopAngle: -137.43140797117252
+Plus Ones: [[  4.  29.]
+ [  3.  30.]]
+Min Ones: []
+StartAngle: -132.43140797117252
+StopAngle: -122.43140797117252
+Plus Ones: [[  3.  31.]
+ [  2.  32.]]
+Min Ones: []
+StartAngle: -117.43140797117252
+StopAngle: -107.43140797117252
+Plus Ones: [[  2.  33.]
+ [  1.  34.]]
+Min Ones: []
+StartAngle: -102.43140797117252
+StopAngle: -92.43140797117252
+Plus Ones: []
+Min Ones: []
+StartAngle: -87.43140797117252
+StopAngle: -77.43140797117252
+Plus Ones: []
+Min Ones: []
+StartAngle: -72.43140797117252
+StopAngle: -62.43140797117252
+Plus Ones: []
+Min Ones: []
+StartAngle: -57.43140797117251
+StopAngle: -47.43140797117251
+Plus Ones: []
+Min Ones: []
+StartAngle: -42.43140797117251
+StopAngle: -27.43140797117251
+Plus Ones: []
+Min Ones: []
+StartAngle: -27.43140797117251
+StopAngle: -12.431407971172511
+Plus Ones: []
+Min Ones: []
+StartAngle: -12.431407971172511
+StopAngle: -2.4314079711725114
+Plus Ones: []
+Min Ones: []
+StartAngle: 2.5685920288274886
+StopAngle: 12.568592028827489
+Plus Ones: []
+Min Ones: []
+StartAngle: 17.56859202882749
+StopAngle: 27.56859202882749
+Plus Ones: []
+Min Ones: []
+StartAngle: 42.56859202882749
+StopAngle: 57.56859202882749
+Plus Ones: []
+Min Ones: []
+time 1inch: 30132
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 115.0
+StopAngle: 125.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: [[ 33.  31.]
+ [ 32.  30.]
+ [ 31.  30.]]
+Min Ones: []
+StartAngle: 155.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 230.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 245.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 265.0
+Plus Ones: [[ 22.  36.]
+ [ 22.  36.]
+ [ 22.  37.]
+ [ 22.  37.]]
+Min Ones: []
+StartAngle: 275.0
+StopAngle: 290.0
+Plus Ones: [[ 19.  38.]
+ [ 19.  38.]]
+Min Ones: []
+StartAngle: 265.0
+StopAngle: 275.0
+Plus Ones: [[ 19.  36.]
+ [ 19.  37.]
+ [ 19.  38.]]
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 265.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 245.0
+StopAngle: 260.0
+Plus Ones: [[ 20.  34.]
+ [ 20.  34.]
+ [ 19.  35.]
+ [ 19.  35.]
+ [ 19.  36.]
+ [ 19.  36.]]
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 235.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 215.0
+StopAngle: 230.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 175.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 155.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 145.0
+StopAngle: 155.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 125.0
+StopAngle: 140.0
+Plus Ones: [[ 32.  31.]
+ [ 32.  31.]
+ [ 31.  30.]
+ [ 31.  30.]]
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 70.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 55.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 40.0
+StopAngle: 50.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 35.0
+StopAngle: 50.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 20.0
+StopAngle: 35.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -5.0
+StopAngle: 5.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -20.0
+StopAngle: -10.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -35.0
+StopAngle: -25.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -50.0
+StopAngle: -40.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -65.0
+StopAngle: -50.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -80.0
+StopAngle: -70.0
+Plus Ones: [[ 20.  38.]]
+Min Ones: []
+StartAngle: -95.0
+StopAngle: -85.0
+Plus Ones: [[ 19.  36.]
+ [ 19.  37.]
+ [ 19.  38.]]
+Min Ones: []
+StartAngle: -95.0
+StopAngle: -85.0
+Plus Ones: [[ 19.  36.]
+ [ 19.  37.]
+ [ 19.  38.]]
+Min Ones: []
+StartAngle: -80.0
+StopAngle: -70.0
+Plus Ones: [[ 20.  38.]]
+Min Ones: []
+StartAngle: -65.0
+StopAngle: -55.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -50.0
+StopAngle: -40.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -35.0
+StopAngle: -20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -20.0
+StopAngle: -10.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -5.0
+StopAngle: 5.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 10.0
+StopAngle: 20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 35.0
+StopAngle: 50.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 50.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 55.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 70.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+time 1inch: 29530
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 215.0
+StopAngle: 230.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 235.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 230.0
+StopAngle: 245.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 230.0
+StopAngle: 245.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 250.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 260.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 265.0
+StopAngle: 275.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 280.0
+StopAngle: 290.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 295.0
+StopAngle: 305.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 320.0
+StopAngle: 335.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 325.0
+StopAngle: 340.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 340.0
+StopAngle: 355.0
+Plus Ones: [[ 22.  11.]
+ [ 22.  11.]
+ [ 23.  11.]
+ [ 23.  11.]
+ [ 24.  11.]
+ [ 24.  11.]]
+Min Ones: []
+StartAngle: 355.0
+StopAngle: 365.0
+Plus Ones: [[ 24.  11.]
+ [ 25.  11.]]
+Min Ones: []
+StartAngle: 355.0
+StopAngle: 365.0
+Plus Ones: [[ 24.  11.]
+ [ 25.  11.]]
+Min Ones: []
+StartAngle: 340.0
+StopAngle: 350.0
+Plus Ones: [[ 22.  11.]
+ [ 23.  11.]]
+Min Ones: []
+StartAngle: 325.0
+StopAngle: 335.0
+Plus Ones: [[ 21.  10.]
+ [ 22.  11.]]
+Min Ones: []
+StartAngle: 325.0
+StopAngle: 340.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 310.0
+StopAngle: 320.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 310.0
+StopAngle: 325.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 305.0
+StopAngle: 320.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 280.0
+StopAngle: 290.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 280.0
+StopAngle: 290.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 265.0
+StopAngle: 275.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 260.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 245.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 230.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 200.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 145.0
+StopAngle: 155.0
+Plus Ones: [[ 27.   1.]]
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: [[ 28.   2.]
+ [ 27.   1.]]
+Min Ones: []
+StartAngle: 115.0
+StopAngle: 125.0
+Plus Ones: [[ 30.   2.]]
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 115.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 70.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 55.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 40.0
+StopAngle: 50.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 25.0
+StopAngle: 35.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 10.0
+StopAngle: 25.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 5.0
+StopAngle: 20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -5.0
+StopAngle: 10.0
+Plus Ones: []
+Min Ones: []
+StartAngle: -5.0
+StopAngle: 10.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 5.0
+StopAngle: 20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 10.0
+StopAngle: 20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 10.0
+StopAngle: 20.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 25.0
+StopAngle: 35.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 40.0
+StopAngle: 55.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 55.0
+StopAngle: 65.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 70.0
+StopAngle: 80.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 115.0
+StopAngle: 125.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 125.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 125.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 145.0
+Plus Ones: [[ 28.   2.]
+ [ 28.   2.]
+ [ 28.   1.]
+ [ 28.   1.]]
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 145.0
+StopAngle: 160.0
+Plus Ones: [[ 27.   1.]
+ [ 27.   1.]]
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+time 1inch: 32313
+StartAngle: 265.0
+StopAngle: 275.0
+Plus Ones: [[ 4.  5.]
+ [ 4.  6.]]
+Min Ones: []
+StartAngle: 280.0
+StopAngle: 290.0
+Plus Ones: [[ 3.  6.]]
+Min Ones: []
+StartAngle: 290.0
+StopAngle: 305.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 295.0
+StopAngle: 310.0
+Plus Ones: [[ 2.  7.]
+ [ 2.  7.]
+ [ 3.  8.]
+ [ 3.  8.]]
+Min Ones: []
+StartAngle: 310.0
+StopAngle: 320.0
+Plus Ones: [[ 3.  8.]
+ [ 3.  9.]]
+Min Ones: []
+StartAngle: 320.0
+StopAngle: 335.0
+Plus Ones: [[  2.  10.]
+ [  2.  10.]
+ [  2.  11.]
+ [  2.  11.]
+ [  3.  11.]
+ [  3.  11.]]
+Min Ones: []
+StartAngle: 320.0
+StopAngle: 335.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 325.0
+StopAngle: 340.0
+Plus Ones: [[  2.  11.]
+ [  2.  11.]
+ [  3.  11.]
+ [  3.  11.]
+ [  4.  12.]
+ [  4.  12.]]
+Min Ones: []
+StartAngle: 335.0
+StopAngle: 350.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 340.0
+StopAngle: 350.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 355.0
+StopAngle: 365.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 370.0
+StopAngle: 385.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 380.0
+StopAngle: 395.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 385.0
+StopAngle: 400.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 400.0
+StopAngle: 410.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 415.0
+StopAngle: 425.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 415.0
+StopAngle: 425.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 440.0
+StopAngle: 455.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 445.0
+StopAngle: 455.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 455.0
+StopAngle: 470.0
+Plus Ones: [[ 12.   5.]
+ [ 12.   5.]
+ [ 12.   4.]
+ [ 12.   4.]
+ [ 12.   3.]
+ [ 12.   3.]]
+Min Ones: []
+StartAngle: 445.0
+StopAngle: 460.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 440.0
+StopAngle: 455.0
+Plus Ones: [[ 12.   7.]
+ [ 12.   7.]
+ [ 12.   6.]
+ [ 12.   6.]
+ [ 12.   5.]
+ [ 12.   5.]]
+Min Ones: []
+StartAngle: 415.0
+StopAngle: 425.0
+Plus Ones: [[ 11.   9.]
+ [ 11.   8.]]
+Min Ones: []
+StartAngle: 415.0
+StopAngle: 430.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 410.0
+StopAngle: 425.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 385.0
+StopAngle: 395.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 370.0
+StopAngle: 385.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 355.0
+StopAngle: 365.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 340.0
+StopAngle: 350.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 335.0
+StopAngle: 350.0
+Plus Ones: [[  3.  11.]
+ [  3.  11.]
+ [  4.  11.]
+ [  4.  11.]
+ [  4.  12.]
+ [  4.  12.]
+ [  5.  12.]
+ [  5.  12.]]
+Min Ones: []
+StartAngle: 325.0
+StopAngle: 340.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 320.0
+StopAngle: 335.0
+Plus Ones: [[ 3.  9.]
+ [ 3.  9.]
+ [ 4.  9.]
+ [ 4.  9.]]
+Min Ones: []
+StartAngle: 310.0
+StopAngle: 325.0
+Plus Ones: [[  1.  10.]
+ [  1.  10.]
+ [  2.  10.]
+ [  2.  10.]
+ [  2.  11.]
+ [  2.  11.]]
+Min Ones: []
+StartAngle: 295.0
+StopAngle: 305.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 275.0
+StopAngle: 290.0
+Plus Ones: [[ 4.  6.]
+ [ 4.  6.]]
+Min Ones: []
+StartAngle: 265.0
+StopAngle: 280.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 275.0
+StopAngle: 290.0
+Plus Ones: [[ 4.  6.]
+ [ 4.  6.]]
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 260.0
+Plus Ones: [[ 4.  5.]]
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 245.0
+Plus Ones: [[ 4.  5.]]
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 230.0
+Plus Ones: [[ 4.  4.]]
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 215.0
+Plus Ones: [[ 5.  4.]]
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 205.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 145.0
+StopAngle: 155.0
+Plus Ones: [[ 9.  1.]
+ [ 8.  1.]]
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 140.0
+Plus Ones: [[ 10.   2.]
+ [  9.   2.]]
+Min Ones: []
+StartAngle: 115.0
+StopAngle: 125.0
+Plus Ones: [[ 12.   3.]
+ [ 11.   2.]]
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 100.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 85.0
+StopAngle: 95.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 100.0
+StopAngle: 110.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 125.0
+StopAngle: 140.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 130.0
+StopAngle: 145.0
+Plus Ones: [[ 10.   2.]
+ [ 10.   2.]
+ [  9.   2.]
+ [  9.   2.]
+ [  9.   1.]
+ [  9.   1.]]
+Min Ones: []
+StartAngle: 145.0
+StopAngle: 155.0
+Plus Ones: [[ 9.  2.]
+ [ 8.  1.]]
+Min Ones: []
+StartAngle: 160.0
+StopAngle: 170.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 235.0
+Plus Ones: [[ 4.  4.]
+ [ 4.  4.]]
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 245.0
+Plus Ones: [[ 4.  5.]]
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 260.0
+Plus Ones: [[ 4.  5.]]
+Min Ones: []
+StartAngle: 265.0
+StopAngle: 275.0
+Plus Ones: [[ 4.  5.]
+ [ 4.  6.]]
+Min Ones: []
+time 1inch: 32994
+StartAngle: 355.0
+StopAngle: 365.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 370.0
+StopAngle: 380.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 385.0
+StopAngle: 395.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 410.0
+StopAngle: 425.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 415.0
+StopAngle: 430.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 430.0
+StopAngle: 440.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 445.0
+StopAngle: 455.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 455.0
+StopAngle: 470.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 460.0
+StopAngle: 475.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 475.0
+StopAngle: 485.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 485.0
+StopAngle: 500.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 490.0
+StopAngle: 505.0
+Plus Ones: [[ 11.  30.]
+ [ 11.  30.]
+ [ 11.  29.]
+ [ 11.  29.]
+ [ 10.  29.]
+ [ 10.  29.]]
+Min Ones: []
+StartAngle: 505.0
+StopAngle: 520.0
+Plus Ones: [[  8.  33.]
+ [  8.  33.]
+ [  7.  33.]
+ [  7.  33.]
+ [  7.  32.]
+ [  7.  32.]]
+Min Ones: []
+StartAngle: 530.0
+StopAngle: 545.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 535.0
+StopAngle: 550.0
+Plus Ones: [[  7.  28.]
+ [  7.  28.]
+ [  6.  28.]
+ [  6.  28.]
+ [  5.  28.]
+ [  5.  28.]]
+Min Ones: []
+StartAngle: 535.0
+StopAngle: 545.0
+Plus Ones: [[  7.  28.]
+ [  6.  28.]]
+Min Ones: []
+StartAngle: 520.0
+StopAngle: 530.0
+Plus Ones: [[  9.  27.]
+ [  8.  27.]]
+Min Ones: []
+StartAngle: 520.0
+StopAngle: 530.0
+Plus Ones: [[ 10.  26.]
+ [  9.  25.]
+ [  8.  25.]]
+Min Ones: []
+StartAngle: 515.0
+StopAngle: 530.0
+Plus Ones: [[  7.  33.]
+ [  7.  33.]]
+Min Ones: []
+StartAngle: 505.0
+StopAngle: 520.0
+Plus Ones: [[ 11.  27.]
+ [ 11.  27.]
+ [ 10.  26.]
+ [ 10.  26.]
+ [  9.  26.]
+ [  9.  26.]]
+Min Ones: []
+StartAngle: 500.0
+StopAngle: 515.0
+Plus Ones: [[  8.  33.]
+ [  8.  33.]
+ [  7.  32.]
+ [  7.  32.]]
+Min Ones: []
+StartAngle: 475.0
+StopAngle: 485.0
+Plus Ones: [[  8.  33.]]
+Min Ones: []
+StartAngle: 475.0
+StopAngle: 490.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 470.0
+StopAngle: 485.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 460.0
+StopAngle: 475.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 455.0
+StopAngle: 470.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 445.0
+StopAngle: 455.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 430.0
+StopAngle: 440.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 415.0
+StopAngle: 425.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 400.0
+StopAngle: 415.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 400.0
+StopAngle: 415.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 395.0
+StopAngle: 410.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 370.0
+StopAngle: 380.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 355.0
+StopAngle: 370.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 355.0
+StopAngle: 365.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 340.0
+StopAngle: 350.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 325.0
+StopAngle: 335.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 320.0
+StopAngle: 335.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 305.0
+StopAngle: 320.0
+Plus Ones: [[  2.  38.]
+ [  2.  38.]]
+Min Ones: []
+StartAngle: 265.0
+StopAngle: 280.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 260.0
+StopAngle: 275.0
+Plus Ones: [[  6.  34.]
+ [  6.  34.]]
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 250.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 230.0
+StopAngle: 245.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 215.0
+StopAngle: 230.0
+Plus Ones: [[  5.  33.]
+ [  5.  33.]]
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 205.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 185.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 175.0
+StopAngle: 185.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 190.0
+StopAngle: 200.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 205.0
+StopAngle: 215.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 220.0
+StopAngle: 230.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 235.0
+StopAngle: 250.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 250.0
+StopAngle: 260.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 290.0
+StopAngle: 305.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 320.0
+StopAngle: 335.0
+Plus Ones: []
+Min Ones: []
+StartAngle: 340.0
+StopAngle: 350.0
+Plus Ones: []
+Min Ones: []
+time 1inch: 31564

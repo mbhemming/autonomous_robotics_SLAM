@@ -35,9 +35,8 @@ sleep( 5 )
 #printer.AppendToCsv( csvfile, bot, data )
 
 for p in waypoints:
-    while( math.hypot( p.x-bot.x, p.y-bot.y ) > 6 ):
 #        res = bot.DriveToPoint( p, occGrid ) 
-        sleep(2) 
+    sleep(2) 
        #print( bot )
         #print( res )
         #if( res == 1 ):
@@ -70,7 +69,7 @@ for p in waypoints:
             
             # path not clear or bumped something.    
         #data = bot.GatherSensorMeasurements2( 30, 180, 5, occGrid )
-        bot.TryLocalizing(occGrid)
+    bot.TryLocalizing(occGrid)
 
 #bot.TurnTwoWheelDeg( bot.CalculateTheta( Point (61.1, 0)) )
 #bot.StraightDistIN( 30, occGrid )

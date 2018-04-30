@@ -8,7 +8,7 @@ SPEED_CONSTANT_CM = 0.007958 # (cm/ms)
 SPEED_CONSTANT_IN = 0.003 # (in/ms)
 #TICKS_PER_INCH = 20.83 * 2.54
 TICKS_PER_INCH = 52.8627977995
-
+DEFAULT_THRESH = 35
 doprint = 0
 ##################################################
 
@@ -171,7 +171,7 @@ class Driving:
 
     # takes in the occupancy grid and the amount of distance (inches) ahead (+) or 
     # behind (-) and checks if the path is clear to move forward or backward
-    def PathIsClear( self, grid, dist, theta, thresh = 35, debug = False ): 
+    def PathIsClear( self, grid, dist, theta, thresh = DEFAULT_THRESH, debug = False ): 
         print( "checking path: " )
         thetaRad = np.deg2rad( theta )
         botDir = np.array([ np.cos( thetaRad ), np.sin( thetaRad ) ])
@@ -218,8 +218,7 @@ class Driving:
         
         return dist
             
-    def TurnIsClear( self, grid ):
-        thresh = 25
+    def TurnIsClear( self, grid, thresh = DEFAULT_THRESH ):
         radius = np.linalg.norm( [self.WIDTH_IN/2, self.LENGTH_IN/2] )
         bl = np.subtract([ self.x, self.y ], radius )
         tr = np.add([ self.x, self.y ], radius )

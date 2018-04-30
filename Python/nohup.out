@@ -1,0 +1,54 @@
+Pos: ( 61.1, 53.7829537643 )
+Theta: 90.0
+Pos: ( 15.9832172604, 53.7499877372 )
+Theta: 180.04186499507006
+Pos: ( 16.0000036149, 15.9918688741 )
+Theta: 270.0254723284304
+Couldnt Turn.
+Path Not Clear
+Pos: ( 61.1073392177, 16.0000013232 )
+Theta: 360.01032991639846
+go straight: 21.5
+checking path: 
+go straight: 37.7225733905
+Pos: ( 61.1, 53.7950076515 )
+Theta: 90.0
+0
+Traceback (most recent call last):
+  File "./Main.py", line 85, in <module>
+    data = bot.GatherSensorMeasurements2( 30.0, 180.0, 5.0, occGrid )
+  File "./Objects/_Ultrasonic.py", line 109, in GatherSensorMeasurements2
+    for i in range(0,numSensorReadingsForThisState):
+TypeError: 'float' object cannot be interpreted as an integer
+go straight: 21.5
+checking path: 
+go straight: 37.7036564954
+Pos: ( 61.1, 53.7855492039 )
+Theta: 90.0
+0
+checking path: 
+Path Not Clear
+Pos: ( 61.1, 53.7855492039 )
+Theta: 180.04516228223454
+2
+path not clear
+checking path: 
+checking path: 
+checking path: 
+go straight: 16
+checking path: 
+go straight: 32.228639154
+Pos: ( 15.9761033754, 53.756116432 )
+Theta: 165.64314757014273
+0
+checking path: 
+go straight: 37.7561239943
+Pos: ( 16.0000132378, 15.9790845089 )
+Theta: 270.036263675468
+0
+checking path: 
+go straight: 45.099991612
+Pos: ( 61.1357200627, 16.0000165655 )
+Theta: 360.02657138871064
+0
+go straight: 30
